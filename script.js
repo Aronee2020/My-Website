@@ -288,13 +288,33 @@ document.getElementById("advanceReceived").addEventListener("input", calculateBa
 // Booking ID
 // ------------------------
 
-function generateBookingID(){
+async function generateBookingID() {
 
-    let year=new Date().getFullYear().toString().slice(-2);
+    const counterRef = doc(db, "counters", "bookingCounter");
 
-    document.getElementById("bookingId").value=
-    "HB"+year+bookingNo.toString().padStart(4,"0");
+    const bookingId = await runTransaction(db, async (transaction) => {
 
+        const counterDoc = await transaction.get(counterRef);
+
+        if (!counterDoc.exists()) {
+            throw new Error("Booking counter not found.");
+        }
+
+        let lastBookingNumber = counterDoc.data().lastBookingNumber;
+
+        lastBookingNumber++;
+
+        transaction.update(counterRef, {
+            lastBookingNumber: lastBookingNumber
+        });
+
+        const year = new Date().getFullYear().toString().slice(-2);
+
+        return "HB" + year + lastBookingNumber.toString().padStart(4, "0");
+
+    });
+
+    return bookingId;
 }
 
 // ------------------------
