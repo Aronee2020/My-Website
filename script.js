@@ -292,29 +292,28 @@ async function generateBookingID() {
 
     const counterRef = doc(db, "counters", "bookingCounter");
 
-    const bookingId = await runTransaction(db, async (transaction) => {
+    const bookingNumber = await runTransaction(db, async (transaction) => {
 
         const counterDoc = await transaction.get(counterRef);
 
-        if (!counterDoc.exists()) {
-            throw new Error("Booking counter not found.");
+        let lastNumber = 260000;
+
+        if (counterDoc.exists()) {
+            lastNumber = counterDoc.data().lastBookingNumber;
         }
 
-        let lastBookingNumber = counterDoc.data().lastBookingNumber;
+        const newNumber = lastNumber + 1;
 
-        lastBookingNumber++;
-
-        transaction.update(counterRef, {
-            lastBookingNumber: lastBookingNumber
+        transaction.set(counterRef, {
+            lastBookingNumber: newNumber
         });
 
-        const year = new Date().getFullYear().toString().slice(-2);
-
-        return "HB" + year + lastBookingNumber.toString().padStart(4, "0");
-
+        return newNumber;
     });
 
-    return bookingId;
+    const year = new Date().getFullYear().toString().slice(-2);
+
+    return "HB" + year + bookingNumber.toString().padStart(4, "0");
 }
 
 // ------------------------
