@@ -97,18 +97,22 @@ async function loadBookings() {
 // Update Next Auto Numbers
 // ======================================
 
-async function updateNextNumbers(){
+async function updateNextNumbers() {
 
     let bookings = await getBookings();
 
-    bookingNo = bookings.length + 1;
+    // Customer ID and Receipt No can still use the count
     customerNo = bookings.length + 1;
     receiptNo = bookings.length + 1;
 
-    generateBookingID();
+    // DO NOT generate Booking ID here anymore
+    // generateBookingID();
+
     generateCustomerID();
     generateReceiptNo();
 
+    // Optional: show that the booking ID will be generated on save
+    document.getElementById("bookingId").value = "Generating...";
 }// ======================================
 // Convert 12-hour time to minutes
 // Example: 5:30 PM -> 1050
@@ -487,7 +491,9 @@ if(!checkAvailability()){
     return;
 
 }
-  
+  // Generate unique Booking ID from Firebase
+const bookingId = await generateBookingID();
+document.getElementById("bookingId").value = bookingId;
 // Save current booking for Guest Voucher
 
 let bookingObject = {
