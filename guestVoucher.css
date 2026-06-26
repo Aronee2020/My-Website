@@ -1,0 +1,269 @@
+/* ===========================================
+   ARONEE GUEST VOUCHER
+=========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+
+    background:#ececec;
+    padding:25px;
+
+}
+
+.voucher{
+
+    width:210mm;
+    min-height:297mm;
+
+    background:#fff;
+
+    margin:auto;
+
+    padding:25px;
+
+    box-shadow:0 0 10px rgba(0,0,0,.15);
+
+}
+
+/* ================= HEADER ================= */
+
+.topHeader{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+}
+
+.logo img{
+
+    width:120px;
+
+}
+
+.services{
+
+    width:30%;
+
+    font-size:14px;
+
+    line-height:1.7;
+
+}
+
+.services ul{
+
+    margin-top:8px;
+
+    padding-left:18px;
+
+}
+
+.office{
+
+    width:35%;
+
+    text-align:right;
+
+    font-size:13px;
+
+    line-height:1.6;
+
+}
+
+.yellowLine{
+
+    height:5px;
+
+    background:#ffc107;
+
+    margin:20px 0;
+
+}
+
+/* ================= CONFIRM ================= */
+
+.confirmBox{
+
+    background:#e7f7ea;
+
+    border:2px solid #1b8a3e;
+
+    color:#1b8a3e;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    text-align:center;
+
+    padding:12px;
+
+    border-radius:8px;
+
+    margin-bottom:25px;
+
+}
+
+/* ================= HEADINGS ================= */
+
+h3{
+
+    color:#0b3d91;
+
+    margin-top:22px;
+
+    margin-bottom:10px;
+
+}
+
+/* ================= TABLE ================= */
+
+.detailsTable{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-bottom:20px;
+
+}
+
+.detailsTable td{
+
+    border:1px solid #888;
+
+    padding:10px;
+
+    font-size:14px;
+
+}
+
+.detailsTable td:nth-child(odd){
+
+    background:#edf4ff;
+
+    font-weight:bold;
+
+    width:20%;
+
+}
+
+/* ================= FOOD BOX ================= */
+
+.foodBox{
+
+    border:1px solid #999;
+
+    min-height:150px;
+
+    padding:15px;
+
+    margin-bottom:20px;
+
+    white-space:pre-wrap;
+
+}
+
+/* ================= TERMS ================= */
+
+.terms{
+
+    margin-left:18px;
+
+    line-height:1.8;
+
+    font-size:14px;
+
+}
+
+.terms li{
+
+    margin-bottom:8px;
+
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+
+    margin-top:40px;
+
+    text-align:center;
+
+    font-size:14px;
+
+    border-top:2px solid #ccc;
+
+    padding-top:20px;
+
+}
+
+/* ================= PRINT ================= */
+
+@media print{
+
+body{
+
+    background:white;
+
+    padding:0;
+
+}
+
+.voucher{
+
+    width:100%;
+
+    min-height:auto;
+
+    box-shadow:none;
+
+    margin:0;
+
+}
+
+}
+.buttonArea{
+
+    margin-top:30px;
+    text-align:center;
+
+}
+
+.buttonArea button{
+
+    padding:10px 25px;
+    margin:10px;
+    font-size:16px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    background:#0d6efd;
+    color:white;
+
+}
+
+.buttonArea button:hover{
+
+    background:#084298;
+
+}
+
+@media print{
+
+.buttonArea{
+
+display:none;
+
+}
+
+}

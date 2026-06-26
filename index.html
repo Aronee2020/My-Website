@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aronee Houseboat Booking Management System</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container-fluid">
+
+<!-- ================= HEADER ================= -->
+
+<div class="header">
+
+<div class="logo">
+<img src="logo.png" alt="Logo">
+</div>
+
+<div class="title">
+<h2>ARONEE TOURS & TRAVELS PVT. LTD.</h2>
+<p>Houseboat Booking Management System</p>
+</div>
+
+</div>
+<!-- ================= DASHBOARD ================= -->
+
+<div class="dashboard">
+
+    <div class="dashCard blue">
+
+        <div class="dashIcon">📅</div>
+
+        <div class="dashText">
+            <span>Today's Bookings</span>
+            <h2 id="todayBookings">0</h2>
+        </div>
+
+    </div>
+
+    <div class="dashCard purple">
+
+        <div class="dashIcon">🌅</div>
+
+        <div class="dashText">
+            <span>Tomorrow's Bookings</span>
+            <h2 id="tomorrowBookings">0</h2>
+        </div>
+
+    </div>
+
+    <div class="dashCard indigo">
+
+        <div class="dashIcon">📖</div>
+
+        <div class="dashText">
+            <span>Total Bookings</span>
+            <h2 id="totalBookings">0</h2>
+        </div>
+
+    </div>
+
+    <div class="dashCard orange">
+
+        <div class="dashIcon">⏳</div>
+
+        <div class="dashText">
+            <span>Postponed</span>
+            <h2 id="postponedBookings">0</h2>
+        </div>
+
+    </div>
+
+    <div class="dashCard green">
+
+        <div class="dashIcon">✅</div>
+
+        <div class="dashText">
+            <span>Confirmed</span>
+            <h2 id="confirmedBookings">0</h2>
+        </div>
+
+    </div>
+
+    <div class="dashCard red">
+
+        <div class="dashIcon">❌</div>
+
+        <div class="dashText">
+            <span>Cancelled</span>
+            <h2 id="cancelledBookings">0</h2>
+        </div>
+
+    </div>
+
+</div>
+<!-- ================= BOOKING CARD ================= -->
+
+<div class="card booking-card">
+
+<div class="card-header">
+<i class="fa-solid fa-ship"></i>
+New Booking
+</div>
+
+<div class="card-body">
+
+<form id="bookingForm">
+
+<!-- Booking Details -->
+
+<div class="row">
+
+<div class="col-md-6">
+
+<label>Booking ID</label>
+
+<input
+type="text"
+id="bookingId"
+class="form-control"
+readonly>
+
+</div>
+
+<div class="col-md-6">
+
+<label>Customer ID</label>
+
+<input
+type="text"
+id="customerId"
+class="form-control"
+readonly>
+
+</div>
+
+</div>
+
+<!-- Dates -->
+
+<div class="row mt-3">
+
+<div class="col-md-3">
+
+<label>Booking Date</label>
+
+<input
+type="date"
+id="bookingDate"
+class="form-control">
+
+</div>
+
+<div class="col-md-3">
+
+<label>Cruise Date</label>
+
+<input
+type="date"
+id="cruiseDate"
+class="form-control">
+
+</div>
+
+<div class="col-md-3">
+
+<label>Check In</label>
+
+<input
+type="text"
+id="checkIn"
+class="form-control"
+placeholder="Example: 5:00 PM">
+
+</div>
+
+<div class="col-md-3">
+
+<label>Check Out</label>
+
+<input
+type="text"
+id="checkOut"
+class="form-control"
+placeholder="Example: 8:30 AM">
+
+</div>
+
+</div>
+
+<!-- Guest -->
+
+<div class="row mt-3">
+
+<div class="col-md-4">
+
+<label>Guest Name</label>
+
+<input
+type="text"
+id="guestName"
+class="form-control">
+
+</div>
+
+<div class="col-md-4">
+
+<label>Mobile Number</label>
+
+<input
+type="tel"
+id="mobile"
+class="form-control"
+maxlength="11"
+placeholder="10-digit Mobile Number"
+oninput="validateMobile()">
+
+</div>
+
+<div class="col-md-4">
+
+<label>Address</label>
+
+<input
+type="text"
+id="address"
+class="form-control">
+
+</div>
+
+</div>
+
+<!-- Pax -->
+
+<div class="row mt-3">
+
+<div class="col-md-3">
+
+<label>Adults</label>
+
+<input
+type="number"
+id="adults"
+class="form-control"
+value="0">
+
+</div>
+
+<div class="col-md-3">
+
+<label>Children</label>
+
+<input
+type="number"
+id="children"
+class="form-control"
+value="0">
+
+</div>
+
+<div class="col-md-3">
+
+<label>Kids</label>
+
+<input
+type="number"
+id="kids"
+class="form-control"
+value="0">
+
+</div>
+
+<div class="col-md-3">
+
+<label>Total Pax</label>
+
+<input
+type="number"
+id="totalPax"
+class="form-control"
+readonly>
+
+</div>
+
+</div>
+
+<!-- Package -->
+
+<div class="row mt-3">
+
+<div class="col-md-12">
+
+<label>Package</label>
+
+<select
+id="package"
+class="form-select">
+
+<option value="">Select Package</option>
+<option>Day Cruise</option>
+<option>Sunset Cruise</option>
+<option>Overnight Cruise</option>
+
+</select>
+
+</div>
+
+</div>
+
+<!-- Houseboat -->
+
+<div class="row mt-3">
+
+<div class="col-md-6">
+
+<label>Houseboat Name</label>
+
+<select
+id="houseboatName"
+class="form-select">
+
+<option value="">Select Houseboat</option>
+<option>Dreampalace</option>
+<option>Madhuwahini</option>
+<option>Arabian palace</option>
+<option>Lakepalace</option>
+</select>
+
+</div>
+
+<div class="col-md-6">
+
+<label>Houseboat Type</label>
+
+<select
+id="houseboatType"
+class="form-select">
+
+<option value="">Select Type</option>
+
+<option>1 Bedroom</option>
+
+<option>2 Bedroom</option>
+
+<option>3 Bedroom</option>
+
+<option>4 Bedroom</option>
+
+<option>5 Bedroom</option>
+
+<option>6 Bedroom</option>
+
+<option>7 Bedroom</option>
+
+<option>8 Bedroom</option>
+
+<option>9 Bedroom</option>
+
+<option>10 Bedroom</option>
+
+</select>
+
+</div>
+
+</div>
+
+<!-- PART 2 CONTINUES -->
+<!-- ================= PAYMENT DETAILS ================= -->
+
+<div class="row mt-3">
+
+    <div class="col-md-3">
+
+        <label>Package Amount (₹)</label>
+
+        <input
+        type="number"
+        id="packageAmount"
+        class="form-control"
+        value="0">
+
+    </div>
+
+    <div class="col-md-3">
+
+        <label>Advance Received (₹)</label>
+
+        <input
+        type="number"
+        id="advanceReceived"
+        class="form-control"
+        value="0">
+
+    </div>
+
+    <div class="col-md-3">
+
+        <label>Advance Mode</label>
+
+        <select
+        id="advanceMode"
+        class="form-select">
+
+            <option value="">Select</option>
+            <option>Cash</option>
+            <option>Bank Transfer</option>
+            <option>Google Pay</option>
+            <option>PhonePe</option>
+            <option>Paytm</option>
+            <option>UPI</option>
+            <option>Cheque</option>
+
+        </select>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <label>Receipt No.</label>
+
+        <input
+        type="text"
+        id="receiptNo"
+        class="form-control">
+
+    </div>
+
+</div>
+
+
+<!-- ================= BALANCE ================= -->
+
+<div class="row mt-3">
+
+    <div class="col-md-6">
+
+        <label>Balance Amount (₹)</label>
+
+        <input
+        type="number"
+        id="balanceAmount"
+        class="form-control"
+        readonly>
+
+    </div>
+
+    <div class="col-md-6">
+
+        <label>Transaction Ref. No.</label>
+
+        <input
+        type="text"
+        id="transactionRef"
+        class="form-control">
+
+    </div>
+
+</div>
+
+
+<!-- ================= BOOKING STATUS ================= -->
+
+
+
+
+
+
+<div class="row mt-3">
+
+    <div class="col-md-4">
+
+        <label>Booking Status</label>
+
+        <select
+        id="bookingStatus"
+        class="form-select">
+
+            <option>Confirmed</option>
+            <option>Cancelled</option>
+            <option>Postponed</option>
+
+        </select>
+
+    </div>
+
+</div>
+
+
+<!-- ================= CANCELLED DETAILS ================= -->
+
+<div
+class="row mt-3"
+id="cancelSection"
+style="display:none;">
+
+    <div class="col-md-4">
+
+        <label>Cancelled Date</label>
+
+        <input
+        type="date"
+        id="cancelDate"
+        class="form-control">
+
+    </div>
+
+    <div class="col-md-4">
+
+        <label>Refund Amount (₹)</label>
+
+        <input
+        type="number"
+        id="refundAmount"
+        class="form-control">
+
+    </div>
+
+    <div class="col-md-4">
+
+        <label>Cancellation Reason</label>
+
+        <input
+        type="text"
+        id="cancelReason"
+        class="form-control">
+
+    </div>
+
+</div>
+
+
+<!-- ================= POSTPONED DETAILS ================= -->
+
+<div
+class="row mt-3"
+id="postponeSection"
+style="display:none;">
+
+    <div class="col-md-4">
+
+        <label>New Cruise Date</label>
+
+        <input
+        type="date"
+        id="newCruiseDate"
+        class="form-control">
+
+    </div>
+
+    <div class="col-md-8">
+
+        <label>Postponement Reason</label>
+
+        <input
+        type="text"
+        id="postponeReason"
+        class="form-control">
+
+    </div>
+
+</div>
+<!-- ================= FOOD MENU ================= -->
+
+<div class="row mt-3">
+
+    <div class="col-md-12">
+
+        <label><b>Food Menu</b></label>
+
+        <textarea
+            id="foodMenu"
+            class="form-control"
+            rows="8"
+            placeholder="Type the complete food menu here..."></textarea>
+
+    </div>
+
+</div>
+<!-- ================= SPECIAL INSTRUCTIONS ================= -->
+
+<div class="row mt-3">
+
+    <div class="col-md-12">
+
+        <label><b>Special Instructions</b></label>
+
+        <textarea
+            id="specialInstruction"
+            class="form-control"
+            rows="5"
+            placeholder="Type any special instructions here..."></textarea>
+
+    </div>
+
+</div>
+<!-- PART 3 CONTINUES -->
+<!-- ================= BUTTONS ================= -->
+
+<div class="button-area">
+
+<button
+type="button"
+class="btn btn-save"
+onclick="saveBooking()">
+
+💾 Save Booking
+
+</button>
+<button
+type="button"
+class="btn btn-primary"
+onclick="openGuestVoucher()">
+
+📄 Guest Voucher
+
+</button>
+
+<button type="button" class="btn btn-update" onclick="updateBooking()">
+✏️ Update
+</button>
+
+<button type="button" class="btn btn-delete" onclick="deleteBooking()">
+🗑 Delete
+</button>
+
+<button type="button" class="btn btn-export" onclick="exportToExcel()">
+📊 Export Excel
+</button>
+
+
+<button
+type="reset"
+class="btn btn-clear">
+
+🧹 Clear
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+<!-- ================= BOOKING LIST ================= -->
+
+<div class="card booking-card mt-4">
+
+<div class="card-header">
+
+<i class="fa-solid fa-table"></i>
+
+Booking List
+
+</div>
+
+<div class="card-body">
+<!-- ================= SEARCH AREA ================= -->
+
+<div class="row mb-3">
+
+    <div class="col-md-3">
+        <input
+            type="text"
+            id="searchText"
+            class="form-control"
+            placeholder="Search Booking / Guest / Mobile"
+            onkeyup="searchBookings()">
+    </div>
+
+    <div class="col-md-2">
+        <input
+            type="date"
+            id="searchDate"
+            class="form-control"
+            onchange="searchBookings()">
+    </div>
+
+    <div class="col-md-2">
+        <select
+            id="searchStatus"
+            class="form-select"
+            onchange="searchBookings()">
+
+            <option value="">All Status</option>
+            <option>Confirmed</option>
+            <option>Cancelled</option>
+            <option>Postponed</option>
+
+        </select>
+    </div>
+
+    <div class="col-md-2">
+        <select
+            id="searchBoat"
+            class="form-select"
+            onchange="searchBookings()">
+
+            <option value="">All Houseboats</option>
+            <option>Dreampalace</option>
+            <option>Madhuwahini</option>
+            <option>Arabian palace</option>
+            <option>Lakepalace</option>
+
+        </select>
+    </div>
+
+    <div class="col-md-3">
+
+        <button
+            class="btn btn-secondary w-100"
+            onclick="clearSearch()">
+
+            Clear Search
+
+        </button>
+
+    </div>
+
+</div>
+<div class="table-responsive">
+
+<table
+class="table table-bordered table-hover"
+id="bookingTable">
+
+<thead class="table-primary">
+<tr>
+    <th>Booking ID</th>
+    <th>Booking Date</th>
+    <th>Guest Name</th>
+    <th>Mobile</th>
+    <th>Cruise Date</th>
+    <th>Package</th>
+    <th>Houseboat</th>
+    <th>Check In</th>
+    <th>Check Out</th>
+    <th>Total Pax</th>
+    <th>Package Amount</th>
+    <th>Advance</th>
+    <th>Balance</th>
+    <th>Advance Mode</th>
+    <th>Status</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+© 2026 Aronee Tours & Travels Pvt. Ltd.<br>
+
+Houseboat Booking Management System
+
+</div>
+
+</div>
+
+<script type="module" src="script.js"></script>
+</body>
+
+</html>

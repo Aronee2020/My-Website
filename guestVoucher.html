@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Guest Voucher</title>
+
+<link rel="stylesheet" href="guestVoucher.css">
+
+</head>
+
+<body>
+
+<div class="voucher">
+
+<!-- ================= HEADER ================= -->
+
+<div class="topHeader">
+
+<div class="logo">
+
+<img src="logo.png">
+
+</div>
+
+<div class="services">
+
+<b>Our Services</b>
+
+<ul>
+
+<li>Houseboat Service</li>
+
+<li>Transportation</li>
+
+<li>Accommodation</li>
+
+<li>Tour Packages</li>
+
+<li>Corporate Events</li>
+
+</ul>
+
+</div>
+
+<div class="office">
+
+<b>ARONEE TOURS & TRAVELS PVT. LTD.</b>
+
+<br><br>
+
+Ansariya Complex
+
+<br>
+
+Mini Bazar
+
+<br>
+
+Nileshwar
+
+<br>
+
+Kasaragod
+
+<br>
+
+Kerala - 671314
+<br><br>
+☎ +91 9072219555
+<br>
+✉ info@aronee.com
+</div>
+
+</div>
+
+<div class="yellowLine"></div>
+
+<!-- ================= CONFIRMATION ================= -->
+
+<div class="confirmBox">
+
+YOUR BOOKING IS CONFIRMED
+
+</div>
+
+<!-- ================= INTRO ================= -->
+
+<p>
+
+Dear <span id="guestName"></span>,
+
+<br><br>
+
+Thank you for choosing
+
+<b>Aronee Tours & Travels Pvt. Ltd.</b>
+
+for your Houseboat experience.
+
+We are delighted to welcome you.
+
+</p>
+
+<!-- ================= BOOKING DETAILS ================= -->
+
+<h3>
+
+Booking Details
+
+</h3>
+
+<table class="detailsTable">
+
+<tr>
+
+<td>Booking ID</td>
+
+<td id="bookingId"></td>
+
+<td>Customer ID</td>
+
+<td id="customerId"></td>
+
+</tr>
+
+<tr>
+
+<td>Booking Date</td>
+
+<td id="bookingDate"></td>
+
+<td>Cruise Date</td>
+
+<td id="cruiseDate"></td>
+
+</tr>
+
+<tr>
+
+<td>Package</td>
+
+<td id="package"></td>
+
+<td>Houseboat</td>
+
+<td id="houseboat"></td>
+
+</tr>
+
+<tr>
+
+<td>Houseboat Type</td>
+
+<td id="houseboatType"></td>
+
+<td>Total Pax</td>
+
+<td id="totalPax"></td>
+
+</tr>
+
+<tr>
+
+<td>Check In</td>
+
+<td id="checkIn"></td>
+
+<td>Check Out</td>
+
+<td id="checkOut"></td>
+
+</tr>
+
+</table>
+
+<!-- ================= PAYMENT ================= -->
+
+<h3>
+
+Payment Details
+
+</h3>
+
+<table class="detailsTable">
+
+<tr>
+
+<td>Package Amount</td>
+
+<td id="packageAmount"></td>
+
+<td>Advance Received</td>
+
+<td id="advance"></td>
+
+</tr>
+
+<tr>
+
+<td>Balance Amount</td>
+
+<td id="balance"></td>
+
+<td>Advance Mode</td>
+
+<td id="advanceMode"></td>
+
+</tr>
+
+</table>
+
+<!-- ================= FOOD MENU ================= -->
+
+<h3>
+
+Food Menu
+
+</h3>
+
+<div class="foodBox">
+
+<pre id="foodMenu"></pre>
+
+</div>
+
+<!-- ================= SPECIAL ================= -->
+
+<h3>
+
+Special Instructions
+
+</h3>
+
+<div class="foodBox">
+
+<pre id="specialInstruction"></pre>
+
+</div>
+
+<!-- ================= TERMS ================= -->
+
+<h3>
+
+Guest Guidelines & Important Notes
+
+</h3>
+
+<ul class="terms">
+
+<li>Houseboats have limited facilities and resources. Please do not compare them with hotels or homes.</li>
+
+<li>Cruise running is subject to weather conditions and local regulations.</li>
+
+<li>In case of cancellation due to bad weather, the booking amount will be refunded as per company policy.</li>
+
+<li>Television is not available. Music system with microphone is provided.</li>
+
+<li>Smoking is strictly prohibited inside the houseboat.</li>
+
+<li>Please carry a valid Government ID.</li>
+
+<li>Guests should report 15 minutes before boarding.</li>
+
+</ul>
+
+<!-- ================= FOOTER ================= -->
+
+<div class="footer">
+
+<b>
+
+ARONEE TOURS & TRAVELS PVT. LTD.
+
+</b>
+
+<br>
+
+Thank you for choosing us.
+
+We wish you a memorable cruise.
+
+</div>
+
+</div>
+
+<script type="module" src="guestVoucher.js"></script>
+<div class="buttonArea">
+
+<button onclick="printVoucher()">
+
+🖨 Print Voucher
+
+</button>
+
+<button onclick="closeVoucher()">
+
+❌ Close
+
+</button>
+
+</div>
+</body>
+
+</html>
