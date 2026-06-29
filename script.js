@@ -112,7 +112,7 @@ async function updateNextNumbers() {
     generateReceiptNo();
 
     // Optional: show that the booking ID will be generated on save
-    document.getElementById("bookingId").value = "Generating...";
+    document.getElementById("bookingId").value = "Auto Generated on Save";
 }// ======================================
 // Convert 12-hour time to minutes
 // Example: 5:30 PM -> 1050
