@@ -513,6 +513,8 @@ if(!checkAvailability()){
   // Generate unique Booking ID from Firebase
 const bookingId = await generateBookingID();
 document.getElementById("bookingId").value = bookingId;
+    console.log("Generated Booking ID:", bookingId);
+console.log("Textbox Booking ID:", document.getElementById("bookingId").value);
 // Save current booking for Guest Voucher
 
 let bookingObject = {
@@ -585,6 +587,7 @@ try {
     console.log("Saving...", bookingObject);
 
     await addDoc(collection(db, "bookings"), bookingObject);
+    console.log("Booking Object:", bookingObject);
 
     console.log("Saved Successfully");
 
