@@ -536,6 +536,7 @@ let bookingObject = {
     cruiseDate: document.getElementById("cruiseDate").value,
 
     package: document.getElementById("package").value,
+    checkInPoint: document.getElementById("checkInPoint").value,
 
     houseboatName: document.getElementById("houseboatName").value,
 
