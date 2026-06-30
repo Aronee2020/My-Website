@@ -81,15 +81,15 @@ async function loadBookings() {
         row.insertCell(4).innerHTML = b.cruiseDate || "";
         row.insertCell(5).innerHTML = b.package || "";
         row.insertCell(6).innerHTML = b.checkInPoint || "";
-        row.insertCell(6).innerHTML = b.houseboatName || "";
-        row.insertCell(7).innerHTML = b.checkIn || "";
-        row.insertCell(8).innerHTML = b.checkOut || "";
-        row.insertCell(9).innerHTML = b.totalPax || "";
-        row.insertCell(10).innerHTML = "₹ " + (b.packageAmount || 0);
-        row.insertCell(11).innerHTML = "₹ " + (b.advanceReceived || 0);
-        row.insertCell(12).innerHTML = "₹ " + (b.balanceAmount || 0);
-        row.insertCell(13).innerHTML = b.advanceMode || "";
-        row.insertCell(14).innerHTML = b.bookingStatus || "";
+        row.insertCell(7).innerHTML = b.houseboatName || "";
+        row.insertCell(8).innerHTML = b.checkIn || "";
+        row.insertCell(9).innerHTML = b.checkOut || "";
+        row.insertCell(10).innerHTML = b.totalPax || "";
+        row.insertCell(11).innerHTML = "₹ " + (b.packageAmount || 0);
+        row.insertCell(12).innerHTML = "₹ " + (b.advanceReceived || 0);
+        row.insertCell(13).innerHTML = "₹ " + (b.balanceAmount || 0);
+        row.insertCell(14).innerHTML = b.advanceMode || "";
+        row.insertCell(15).innerHTML = b.bookingStatus || "";
 
     });
 
