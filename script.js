@@ -80,6 +80,7 @@ async function loadBookings() {
         row.insertCell(3).innerHTML = b.mobile || "";
         row.insertCell(4).innerHTML = b.cruiseDate || "";
         row.insertCell(5).innerHTML = b.package || "";
+        row.insertCell(6).innerHTML = b.checkInPoint || "";
         row.insertCell(6).innerHTML = b.houseboatName || "";
         row.insertCell(7).innerHTML = b.checkIn || "";
         row.insertCell(8).innerHTML = b.checkOut || "";
