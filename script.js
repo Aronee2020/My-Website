@@ -89,7 +89,7 @@ async function loadBookings() {
         row.insertCell(12).innerHTML = "₹ " + (b.advanceReceived || 0);
         row.insertCell(13).innerHTML = "₹ " + (b.balanceAmount || 0);
         row.insertCell(14).innerHTML = b.advanceMode || "";
-        row.insertCell(15).innerHTML = b.bookingStatus || "";
+        
 
     });
 
