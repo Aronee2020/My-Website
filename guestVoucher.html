@@ -90,7 +90,7 @@ YOUR BOOKING IS CONFIRMED
 
 <p>
 
-Dear <b><span id="guestName"></span></b> Sir,
+Dear <b><span id="guestName"></span></b>
 
 <br><br>
 
@@ -263,3 +263,15 @@ We wish you a memorable cruise.
 </body>
 
 </html>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    let booking = JSON.parse(localStorage.getItem("selectedBooking"));
+
+    if (!booking) return;
+
+    document.getElementById("guestName").innerText = booking.guestName || "";
+    document.getElementById("customerId").innerText = booking.customerId || "";
+
+});
+</script>
