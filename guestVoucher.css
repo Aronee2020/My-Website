@@ -124,11 +124,7 @@ h3{
     margin-bottom:10px;
 
 }
-.bulletDetails {
-    text-align: center;
-    margin-top: 15px;
-    line-height: 1.8;
-}
+
 /* ================= TABLE ================= */
 
 .detailsTable{
@@ -270,4 +266,9 @@ display:none;
 
 }
 
+}
+.bulletDetails {
+    text-align: center;
+    margin-top: 15px;
+    line-height: 1.8;
 }
