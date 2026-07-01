@@ -4,8 +4,9 @@ import {
     addDoc,
     getDocs,
     deleteDoc,
+    updateDoc,
     doc,
-runTransaction
+    runTransaction
 } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
 // ============================================
 // ARONEE HOUSEBOAT BOOKING MANAGEMENT SYSTEM
@@ -16,6 +17,7 @@ runTransaction
 let bookingNo = 1;
 let customerNo = 1;
 let receiptNo = 1;
+let currentBookings = [];
 // ======================================
 // LOCAL STORAGE FUNCTIONS
 // ======================================
@@ -58,8 +60,9 @@ function saveBookings(bookings) {
 // Load bookings into table
 async function loadBookings() {
 
-    let bookings = await getBookings();
+currentBookings = await getBookings();
 
+let bookings = currentBookings;
     let tbody = document.querySelector("#bookingTable tbody");
 
     tbody.innerHTML = "";
@@ -203,7 +206,7 @@ let newOut = timeToMinutes(checkOutValue);
 
         let row=table.rows[i];
 
-        let rowBoat=row.cells[6].innerHTML;
+        let rowBoat = row.cells[7].innerHTML;
 
         let rowDate=row.cells[4].innerHTML;
 
@@ -587,22 +590,14 @@ let bookingObject = {
 
 };
 // // Save booking into Firebase
-
 try {
-
     console.log("Saving...", bookingObject);
-
     await addDoc(collection(db, "bookings"), bookingObject);
     console.log("Booking Object:", bookingObject);
-
     console.log("Saved Successfully");
-
     await loadBookings();
-
     await updateDashboard();
-
     await updateNextNumbers();
-
 } catch (error) {
 
     console.error(error);
@@ -651,38 +646,40 @@ function selectRow(row){
 
     let booking = currentBookings.find(b => b.firebaseId === firebaseId);
 
-    if (!booking) return;
+    if(!booking) return;
 
-    document.getElementById("bookingId").value = row.cells[0].innerHTML;
-    document.getElementById("bookingDate").value = row.cells[1].innerHTML;
-    document.getElementById("guestName").value = row.cells[2].innerHTML;
-    document.getElementById("mobile").value = row.cells[3].innerHTML;
-    document.getElementById("cruiseDate").value = row.cells[4].innerHTML;
-    document.getElementById("package").value = row.cells[5].innerHTML;
+    document.getElementById("bookingId").value = booking.bookingId || "";
+    document.getElementById("bookingDate").value = booking.bookingDate || "";
+    document.getElementById("guestName").value = booking.guestName || "";
+    document.getElementById("mobile").value = booking.mobile || "";
 
-    // ✅ NEW COLUMN ADDED (Check-in Point)
-    document.getElementById("checkInPoint").value = row.cells[6].innerHTML;
+    document.getElementById("address").value = booking.address || "";
 
-    document.getElementById("houseboatName").value = row.cells[7].innerHTML;
-    document.getElementById("houseboatType").value = row.cells[8].innerHTML;
+    document.getElementById("cruiseDate").value = booking.cruiseDate || "";
+    document.getElementById("package").value = booking.package || "";
+    document.getElementById("checkInPoint").value = booking.checkInPoint || "";
 
-    document.getElementById("checkIn").value = row.cells[9].innerHTML;
-    document.getElementById("checkOut").value = row.cells[10].innerHTML;
+    document.getElementById("houseboatName").value = booking.houseboatName || "";
+    document.getElementById("houseboatType").value = booking.houseboatType || "";
 
-    document.getElementById("totalPax").value = row.cells[11].innerHTML;
+    document.getElementById("checkIn").value = booking.checkIn || "";
+    document.getElementById("checkOut").value = booking.checkOut || "";
 
-    document.getElementById("packageAmount").value =
-        row.cells[12].innerHTML.replace("₹ ","");
+    document.getElementById("adults").value = booking.adults || "";
+    document.getElementById("children").value = booking.children || "";
+    document.getElementById("kids").value = booking.kids || "";
 
-    document.getElementById("advanceReceived").value =
-        row.cells[13].innerHTML.replace("₹ ","");
+    calculateTotalPax();
 
-    document.getElementById("balanceAmount").value =
-        row.cells[14].innerHTML.replace("₹ ","");
+    document.getElementById("packageAmount").value = booking.packageAmount || "";
+    document.getElementById("advanceReceived").value = booking.advanceReceived || "";
+    document.getElementById("balanceAmount").value = booking.balanceAmount || "";
 
-    document.getElementById("advanceMode").value = row.cells[15].innerHTML;
+    document.getElementById("advanceMode").value = booking.advanceMode || "";
 
-    document.getElementById("bookingStatus").value = row.cells[16].innerHTML;
+    document.getElementById("transactionRef").value = booking.transactionRef || "";
+
+    document.getElementById("bookingStatus").value = booking.bookingStatus || "";
 }
 // =====================================
 // UPDATE BOOKING
@@ -895,9 +892,6 @@ function searchBookings(){
             show=false;
 
         if(date!="" && rowDate!=date)
-            show=false;
-
-        if(status!="" && rowStatus!=status)
             show=false;
 
         if(boat!="" && rowBoat!=boat)
