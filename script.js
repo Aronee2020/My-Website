@@ -683,57 +683,58 @@ function selectRow(row){
 // =====================================
 
 async function updateBooking(){
-    if(selectedRow==null){
 
+    if(selectedRow == null){
         alert("Please select a booking first.");
-
         return;
-
     }
-let bookings = await getBookings();
 
-    selectedRow.cells[2].innerHTML = document.getElementById("guestName").value;
-    selectedRow.cells[3].innerHTML = document.getElementById("mobile").value;
-    selectedRow.cells[4].innerHTML = document.getElementById("cruiseDate").value;
-    selectedRow.cells[5].innerHTML = document.getElementById("package").value;
-    selectedRow.cells[6].innerHTML = document.getElementById("houseboatName").value;
-    selectedRow.cells[7].innerHTML = document.getElementById("checkIn").value;
-    selectedRow.cells[8].innerHTML = document.getElementById("checkOut").value;
-    selectedRow.cells[9].innerHTML = document.getElementById("totalPax").value;
-    selectedRow.cells[10].innerHTML = "₹ " + document.getElementById("packageAmount").value;
-    selectedRow.cells[11].innerHTML = "₹ " + document.getElementById("advanceReceived").value;
-    selectedRow.cells[12].innerHTML = "₹ " + document.getElementById("balanceAmount").value;
-    selectedRow.cells[13].innerHTML = document.getElementById("advanceMode").value;
-    selectedRow.cells[14].innerHTML = document.getElementById("bookingStatus").value;
+    // 🔥 GET FIREBASE ID FROM ROW
+    let firebaseId = selectedRow.dataset.firebaseId;
 
+    const bookingRef = doc(db, "bookings", firebaseId);
 
-let bookingId = selectedRow.cells[0].innerHTML;
+    try {
 
-let index = bookings.findIndex(function(b){
-    return b.bookingId === bookingId;
-});
+        await updateDoc(bookingRef, {
 
-if(index !== -1){
+            guestName: document.getElementById("guestName").value,
+            mobile: document.getElementById("mobile").value,
+            address: document.getElementById("address").value,
 
-    bookings[index].guestName = document.getElementById("guestName").value;
-    bookings[index].mobile = document.getElementById("mobile").value;
-    bookings[index].cruiseDate = document.getElementById("cruiseDate").value;
-    bookings[index].package = document.getElementById("package").value;
-    bookings[index].houseboatName = document.getElementById("houseboatName").value;
-    bookings[index].checkIn = document.getElementById("checkIn").value;
-    bookings[index].checkOut = document.getElementById("checkOut").value;
-    bookings[index].totalPax = document.getElementById("totalPax").value;
-    bookings[index].packageAmount = document.getElementById("packageAmount").value;
-    bookings[index].advanceReceived = document.getElementById("advanceReceived").value;
-    bookings[index].balanceAmount = document.getElementById("balanceAmount").value;
-    bookings[index].advanceMode = document.getElementById("advanceMode").value;
-    bookings[index].bookingStatus = document.getElementById("bookingStatus").value;
+            cruiseDate: document.getElementById("cruiseDate").value,
+            package: document.getElementById("package").value,
+            checkInPoint: document.getElementById("checkInPoint").value,
 
-// Firebase update will be added here
-updateDashboard();
-}
-    alert("Booking Updated Successfully.");
+            houseboatName: document.getElementById("houseboatName").value,
+            houseboatType: document.getElementById("houseboatType").value,
 
+            checkIn: document.getElementById("checkIn").value,
+            checkOut: document.getElementById("checkOut").value,
+
+            adults: document.getElementById("adults").value,
+            children: document.getElementById("children").value,
+            kids: document.getElementById("kids").value,
+            totalPax: document.getElementById("totalPax").value,
+
+            packageAmount: document.getElementById("packageAmount").value,
+            advanceReceived: document.getElementById("advanceReceived").value,
+            balanceAmount: document.getElementById("balanceAmount").value,
+
+            advanceMode: document.getElementById("advanceMode").value,
+            bookingStatus: document.getElementById("bookingStatus").value
+
+        });
+
+        await loadBookings();
+        await updateDashboard();
+
+        alert("Booking Updated Successfully");
+
+    } catch(error){
+        console.error(error);
+        alert(error.message);
+    }
 }
 // =====================================
 // DELETE BOOKING
