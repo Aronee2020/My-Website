@@ -32,8 +32,14 @@ console.log(booking);
     setValue("checkIn", booking.checkIn);
     setValue("checkOut", booking.checkOut);
 
-    setValue("totalPax", booking.totalPax);
+setValue(
+    "totalPaxDetails",
+    booking.adults + " Adults, " +
+    booking.children + " Children, " +
+    booking.kids + " Kids"
+);
 
+setValue("checkInPoint", booking.checkInPoint);
     // -----------------------------
     // Payment
     // -----------------------------
