@@ -20,6 +20,7 @@ console.log(booking);
 
     setValue("guestName", booking.guestName);
     setValue("bookingId", booking.bookingId);
+    setValue("receiptNo", booking.receiptNo);
     setValue("customerId", booking.customerId);
     setValue("bookingDate", booking.bookingDate);
     setValue("cruiseDate", booking.cruiseDate);
