@@ -24,7 +24,7 @@ console.log(booking);
     setValue("customerId", booking.customerId);
     setValue("bookingDate", booking.bookingDate);
     setValue("cruiseDate", booking.cruiseDate);
-
+    setValue("mobile", booking.mobile);
     setValue("package", booking.package);
     setValue("houseboat", booking.houseboatName);
     setValue("houseboatType", booking.houseboatType);
