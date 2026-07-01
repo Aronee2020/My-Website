@@ -82,15 +82,14 @@ async function loadBookings() {
         row.insertCell(5).innerHTML = b.package || "";
         row.insertCell(6).innerHTML = b.checkInPoint || "";
         row.insertCell(7).innerHTML = b.houseboatName || "";
-        row.insertCell(8).innerHTML = b.houseboatType || "";
-        row.insertCell(8).innerHTML = b.checkIn || "";
-        row.insertCell(9).innerHTML = b.checkOut || "";
-        row.insertCell(10).innerHTML = b.totalPax || "";
-        row.insertCell(11).innerHTML = "₹ " + (b.packageAmount || 0);
-        row.insertCell(12).innerHTML = "₹ " + (b.advanceReceived || 0);
-        row.insertCell(13).innerHTML = "₹ " + (b.balanceAmount || 0);
-        row.insertCell(14).innerHTML = b.advanceMode || "";
-            });
+row.insertCell(8).innerHTML = b.houseboatType || "";
+row.insertCell(9).innerHTML = b.checkIn || "";
+row.insertCell(10).innerHTML = b.checkOut || "";
+row.insertCell(11).innerHTML = b.totalPax || "";
+row.insertCell(12).innerHTML = "₹ " + (b.packageAmount || 0);
+row.insertCell(13).innerHTML = "₹ " + (b.advanceReceived || 0);
+row.insertCell(14).innerHTML = "₹ " + (b.balanceAmount || 0);
+row.insertCell(15).innerHTML = b.advanceMode || "";            });
 
 }
 // ======================================
@@ -648,25 +647,30 @@ function selectRow(row){
     document.getElementById("mobile").value = row.cells[3].innerHTML;
     document.getElementById("cruiseDate").value = row.cells[4].innerHTML;
     document.getElementById("package").value = row.cells[5].innerHTML;
-    document.getElementById("houseboatName").value = row.cells[6].innerHTML;
-     document.getElementById("houseboatType").value = row.cells[7].innerHTML;
-    document.getElementById("checkIn").value = row.cells[8].innerHTML;
-    document.getElementById("checkOut").value = row.cells[9].innerHTML;
-    document.getElementById("totalPax").value = row.cells[10].innerHTML;
+
+    // ✅ NEW COLUMN ADDED (Check-in Point)
+    document.getElementById("checkInPoint").value = row.cells[6].innerHTML;
+
+    document.getElementById("houseboatName").value = row.cells[7].innerHTML;
+    document.getElementById("houseboatType").value = row.cells[8].innerHTML;
+
+    document.getElementById("checkIn").value = row.cells[9].innerHTML;
+    document.getElementById("checkOut").value = row.cells[10].innerHTML;
+
+    document.getElementById("totalPax").value = row.cells[11].innerHTML;
 
     document.getElementById("packageAmount").value =
-        row.cells[11].innerHTML.replace("₹ ","");
-
-    document.getElementById("advanceReceived").value =
         row.cells[12].innerHTML.replace("₹ ","");
 
-    document.getElementById("balanceAmount").value =
+    document.getElementById("advanceReceived").value =
         row.cells[13].innerHTML.replace("₹ ","");
 
-    document.getElementById("advanceMode").value = row.cells[14].innerHTML;
+    document.getElementById("balanceAmount").value =
+        row.cells[14].innerHTML.replace("₹ ","");
 
-    document.getElementById("bookingStatus").value = row.cells[15].innerHTML;
+    document.getElementById("advanceMode").value = row.cells[15].innerHTML;
 
+    document.getElementById("bookingStatus").value = row.cells[16].innerHTML;
 }
 // =====================================
 // UPDATE BOOKING
