@@ -647,6 +647,12 @@ function selectRow(row){
 
     selectedRow = row;
 
+    let firebaseId = row.dataset.firebaseId;
+
+    let booking = currentBookings.find(b => b.firebaseId === firebaseId);
+
+    if (!booking) return;
+
     document.getElementById("bookingId").value = row.cells[0].innerHTML;
     document.getElementById("bookingDate").value = row.cells[1].innerHTML;
     document.getElementById("guestName").value = row.cells[2].innerHTML;
