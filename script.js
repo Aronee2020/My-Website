@@ -265,24 +265,30 @@ let selectedRow = null;
 
 document.addEventListener("DOMContentLoaded", async function () {
 
-await loadBookings();
+    await loadBookings();
+    await updateDashboard();
+    await updateNextNumbers();
+    setToday();
 
-await updateDashboard();
+    // =========================
+    // SAFE EVENT LISTENERS
+    // =========================
 
-await updateNextNumbers();
+    let adults = document.getElementById("adults");
+    let children = document.getElementById("children");
+    let kids = document.getElementById("kids");
 
-setToday();
+    if (adults) adults.addEventListener("input", calculateTotalPax);
+    if (children) children.addEventListener("input", calculateTotalPax);
+    if (kids) kids.addEventListener("input", calculateTotalPax);
 
-    // Total Pax
-    document.getElementById("adults").addEventListener("input", calculateTotalPax);
-    document.getElementById("children").addEventListener("input", calculateTotalPax);
-    document.getElementById("kids").addEventListener("input", calculateTotalPax);
-document.getElementById("packageAmount").addEventListener("input", calculateBalance);
-document.getElementById("advanceReceived").addEventListener("input", calculateBalance);
+    let packageAmount = document.getElementById("packageAmount");
+    let advanceReceived = document.getElementById("advanceReceived");
 
- 
+    if (packageAmount) packageAmount.addEventListener("input", calculateBalance);
+    if (advanceReceived) advanceReceived.addEventListener("input", calculateBalance);
+
 });
-
 // ------------------------
 // Booking ID
 // ------------------------
