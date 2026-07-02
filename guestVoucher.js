@@ -30,6 +30,7 @@ console.log(booking);
     setValue("houseboatType", booking.houseboatType);
 
     setValue("checkIn", booking.checkIn);
+    setValue("boardingTime", booking.checkIn);
     setValue("checkOut", booking.checkOut);
 
 setValue(
