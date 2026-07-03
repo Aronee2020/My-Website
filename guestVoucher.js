@@ -66,11 +66,8 @@ setValue("balance", money(booking.balanceAmount));
     // -----------------------------
     // Special Instruction
     // -----------------------------
-
-    setValue(
-        "specialInstruction",
-        booking.specialInstruction || ""
-    );
+setValue("foodMenu", booking.foodMenu || "");
+    setValue("specialInstruction",booking.specialInstruction || "");
 
 });
 
