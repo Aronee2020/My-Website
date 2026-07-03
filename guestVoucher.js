@@ -28,8 +28,6 @@ console.log(booking);
     setValue("package", booking.package);
     setValue("houseboat", booking.houseboatName);
     setValue("houseboatType", booking.houseboatType);
-
-    setValue("checkIn", booking.checkIn);
     setValue("boardingTime", booking.checkIn);
     setValue("checkOut", booking.checkOut);
 
@@ -60,8 +58,6 @@ setValue("balance", money(booking.balanceAmount));
 
 document.getElementById("foodMenu").innerHTML =
     (booking.foodMenu || "").replace(/\n/g, "<br>");
-
-setValue("boardingTime", booking.checkIn || "");
     setValue("specialInstruction",booking.specialInstruction || "");
 });
 
