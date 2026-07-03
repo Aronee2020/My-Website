@@ -58,7 +58,10 @@ setValue("balance", money(booking.balanceAmount));
     // Food Menu
     // -----------------------------
 
-setValue("foodMenu", booking.foodMenu || "");
+document.getElementById("foodMenu").innerHTML =
+    (booking.foodMenu || "").replace(/\n/g, "<br>");
+
+setValue("boardingTime", booking.checkIn || "");
     setValue("specialInstruction",booking.specialInstruction || "");
 });
 
