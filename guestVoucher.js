@@ -58,17 +58,8 @@ setValue("balance", money(booking.balanceAmount));
     // Food Menu
     // -----------------------------
 
-    setValue(
-        "foodMenu",
-        booking.foodMenu || ""
-    );
-
-    // -----------------------------
-    // Special Instruction
-    // -----------------------------
 setValue("foodMenu", booking.foodMenu || "");
     setValue("specialInstruction",booking.specialInstruction || "");
-
 });
 
 // ==========================================
