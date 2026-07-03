@@ -293,3 +293,10 @@ display:none;
 #foodMenu{
     white-space: pre-line;
 }
+.foodMenuCell{
+    white-space: pre-line;
+    text-align:left;
+    vertical-align:top;
+    width:35%;
+    padding:8px;
+}
