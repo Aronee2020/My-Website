@@ -1,7 +1,10 @@
 /* ===========================================
    ARONEE GUEST VOUCHER
 =========================================== */
-
+@page{
+    size: A4;
+    margin:10mm;
+}
 *{
     margin:0;
     padding:0;
@@ -18,14 +21,14 @@ body{
 
 .voucher{
 
-    width:210mm;
-    min-height:297mm;
+    width:190mm;
+    min-height:277mm;
 
     background:#fff;
 
-    margin:auto;
+    margin:10mm auto;
 
-    padding:25px;
+    padding:15mm;
 
     box-shadow:0 0 10px rgba(0,0,0,.15);
 
@@ -211,27 +214,20 @@ h3{
 @media print{
 
 body{
-
     background:white;
-
+    margin:0;
     padding:0;
-
 }
 
 .voucher{
-
-    width:100%;
-
-    min-height:auto;
-
+    width:190mm;
+    min-height:277mm;
+    margin:10mm auto;
+    padding:15mm;
     box-shadow:none;
-
-    margin:0;
-
 }
 
-}
-.buttonArea{
+}.buttonArea{
 
     margin-top:30px;
     text-align:center;
