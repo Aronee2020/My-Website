@@ -62,8 +62,7 @@ setValue("balance", money(booking.balanceAmount));
 
 document.getElementById("foodMenu").innerHTML =
     (booking.foodMenu || "").replace(/\n/g, "<br>");
-    setValue("specialInstruction",booking.specialInstruction || "");
-});
+    });
 
 // ==========================================
 // Set HTML
