@@ -128,33 +128,28 @@ h3{
 /* ================= TABLE ================= */
 
 .detailsTable{
-
     width:100%;
-
     border-collapse:collapse;
-
-    margin-bottom:20px;
-
+    margin:15px 0;
+    table-layout:fixed;
+    border:1px solid #555;
 }
 
 .detailsTable td{
-
     border:1px solid #555;
     padding:10px;
     font-size:14px;
     text-align:center;
     vertical-align:top;
-
 }
 .detailsTable th{
-
     border:1px solid #555;
     padding:10px;
-    background:#edf4ff;
-    font-size:14px;
+    background:#f2f2f2;
+    font-size:15px;
     font-weight:bold;
     text-align:center;
-
+    vertical-align:middle;
 }
 /* ================= FOOD BOX ================= */
 
