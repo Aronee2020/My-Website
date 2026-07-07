@@ -139,24 +139,23 @@ h3{
 
 .detailsTable td{
 
-    border:1px solid #888;
-
+    border:1px solid #555;
     padding:10px;
-
     font-size:14px;
+    text-align:center;
+    vertical-align:top;
 
 }
+.detailsTable th{
 
-.detailsTable td:nth-child(odd){
-
+    border:1px solid #555;
+    padding:10px;
     background:#edf4ff;
-
+    font-size:14px;
     font-weight:bold;
-
-    width:20%;
+    text-align:center;
 
 }
-
 /* ================= FOOD BOX ================= */
 
 .foodBox{
@@ -294,9 +293,11 @@ display:none;
     white-space: pre-line;
 }
 .foodMenuCell{
-    white-space: pre-line;
+
     text-align:left;
+    white-space:pre-line;
     vertical-align:top;
-    width:35%;
-    padding:8px;
+    width:30%;
+    line-height:1.6;
+
 }
