@@ -60,7 +60,7 @@ body{
 }
 
 .logo img{
-    width:120px;      /* Slightly smaller than 120px */
+    width:125px;      /* Slightly smaller than 120px */
     height:auto;
     display:block;
 }
@@ -74,7 +74,7 @@ body{
 
 .services{
     width:33%;
-    padding-left:35px;
+    padding-left:40x;
     font-size:14px;
     line-height:1.7;
 }
