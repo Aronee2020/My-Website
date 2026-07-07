@@ -41,14 +41,6 @@ body{
 
 /* ================= LOGO ================= */
 
-.logo{
-    position:relative;
-    padding-right:20px;
-    margin-right:20px;
-    display:flex;
-    align-items:center;
-}
-
 .logo::after{
     content:"";
     position:absolute;
@@ -58,21 +50,20 @@ body{
     width:4px;
     background:#ffc107;
 }
-
-.logo img{
-    width:95px;
-    height:auto;
-    display:block;
-}.services{
-
-    width:30%;
-
-    font-size:14px;
-
-    line-height:1.7;
-
+.logo{
+    width:22%;
+    padding-right:20px;
+    border-right:5px solid #ffc107;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
+.logo img{
+    width:110px;      /* Slightly smaller than 120px */
+    height:auto;
+    display:block;
+}
 .services ul{
 
     margin-top:8px;
@@ -81,16 +72,18 @@ body{
 
 }
 
+.services{
+    width:33%;
+    padding-left:20px;
+    font-size:14px;
+    line-height:1.7;
+}
+
 .office{
-
-    width:35%;
-
+    width:45%;
     text-align:right;
-
     font-size:13px;
-
     line-height:1.6;
-
 }
 
 .yellowLine{
