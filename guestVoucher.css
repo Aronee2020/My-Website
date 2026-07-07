@@ -43,11 +43,7 @@ body{
 
 }
 
-.logo{
-    position:relative;
-    padding-right:25px;
-    margin-right:25px;
-}
+
 
 .logo::after{
     content:"";
@@ -59,9 +55,14 @@ body{
     background:#ffc107;
 }
 
-.logo img{
-    width:120px;
-    display:block;
+.logo::after{
+    content:"";
+    position:absolute;
+    top:10px;
+    bottom:10px;
+    right:0;
+    width:6px;
+    background:#ffc107;
 }
 .services{
 
