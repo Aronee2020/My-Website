@@ -39,6 +39,10 @@ setValue(
 );
 
 setValue("checkInPoint", booking.checkInPoint);
+    setValue("packageAmount", money(booking.packageAmount));
+setValue("advance", money(booking.advanceReceived));
+setValue("balance", money(booking.balanceAmount));
+setValue("advanceMode", booking.advanceMode);
     // -----------------------------
     // Payment
     // -----------------------------
