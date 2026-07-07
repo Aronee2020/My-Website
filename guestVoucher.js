@@ -28,8 +28,8 @@ console.log(booking);
     setValue("package", booking.package);
     setValue("houseboat", booking.houseboatName);
     setValue("houseboatType", booking.houseboatType);
-    setValue("boardingTime", booking.checkIn);
-    setValue("checkOut", booking.checkOut);
+setValue("checkInTime", booking.checkIn);
+setValue("checkOutTime", booking.checkOut);
 
 setValue(
     "totalPaxDetails",
