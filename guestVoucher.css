@@ -43,27 +43,31 @@ body{
 
 }
 
+/* ================= LOGO ================= */
+
 .logo{
     position:relative;
-    padding-right:25px;
-    margin-right:25px;
+    padding-right:20px;
+    margin-right:20px;
+    display:flex;
+    align-items:center;
 }
 
 .logo::after{
     content:"";
     position:absolute;
-    top:15px;
-    bottom:15px;
+    top:5px;
+    bottom:5px;
     right:0;
-    width:6px;
+    width:4px;
     background:#ffc107;
 }
 
 .logo img{
-    width:120px;
+    width:95px;
+    height:auto;
     display:block;
-}
-.services{
+}.services{
 
     width:30%;
 
