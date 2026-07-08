@@ -43,15 +43,7 @@ body{
 
 /* ================= LOGO ================= */
 
-.logo::after{
-    content:"";
-    position:absolute;
-    top:5px;
-    bottom:5px;
-    right:0;
-    width:4px;
-    background:#ffc107;
-}
+
 .logo{
     width:22%;
     padding:15px 20px 15px 0;
@@ -59,6 +51,7 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
+    margin-right:25px;   /* gap after the yellow line */
 }
 .logo img{
     width:135px;      /* Slightly smaller than 120px */
