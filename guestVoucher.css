@@ -51,7 +51,7 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    margin-right:25px;   /* gap after the yellow line */
+   
 }
 .logo img{
     width:135px;      /* Slightly smaller than 120px */
