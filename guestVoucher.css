@@ -101,27 +101,18 @@ body{
 /* ================= CONFIRM ================= */
 
 .confirmBox{
+    display:table;          /* Shrinks to fit the text */
+    margin:0 auto 25px;     /* Centers the box */
+    padding:12px 35px;      /* Top/Bottom 12px, Left/Right 35px */
 
     background:#e7f7ea;
-
     border:2px solid #1b8a3e;
-
     color:#1b8a3e;
-
     font-size:22px;
-
     font-weight:bold;
-
     text-align:center;
-
-    padding:12px;
-
     border-radius:8px;
-
-    margin-bottom:25px;
-
 }
-
 /* ================= HEADINGS ================= */
 
 h3{
