@@ -6,7 +6,7 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Get booking data from localStorage
+    // Get booking data from localNothing happens (no print dialog opens)Storage
     const booking = JSON.parse(localStorage.getItem("selectedBooking"));
 console.log(booking);
     if (!booking) {
@@ -85,17 +85,13 @@ function setValue(id, value) {
 // ==========================================
 
 function printVoucher() {
-
     window.print();
-
 }
-
-// ==========================================
-// Close Window
-// ==========================================
 
 function closeVoucher() {
-
     window.close();
-
 }
+
+// Make functions available to HTML buttons
+window.printVoucher = printVoucher;
+window.closeVoucher = closeVoucher;
