@@ -150,6 +150,21 @@ h3{
     text-align:center;
     vertical-align:middle;
 }
+/* Column Widths */
+.detailsTable th:nth-child(3),
+.detailsTable td:nth-child(3){
+    width:12%;
+}
+
+.detailsTable th:nth-child(4),
+.detailsTable td:nth-child(4){
+    width:12%;
+}
+
+.detailsTable th:nth-child(5),
+.detailsTable td:nth-child(5){
+    width:36%;
+}
 /* ================= FOOD BOX ================= */
 
 .foodBox{
