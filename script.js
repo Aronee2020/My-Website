@@ -664,7 +664,7 @@ function selectRow(row){
 
     document.getElementById("checkIn").value = booking.checkIn || "";
     document.getElementById("checkOut").value = booking.checkOut || "";
-
+    document.getElementById("foodMenu").value = booking.foodMenu || "";
     document.getElementById("adults").value = booking.adults || "";
     document.getElementById("children").value = booking.children || "";
     document.getElementById("kids").value = booking.kids || "";
@@ -714,6 +714,7 @@ async function updateBooking(){
 
             checkIn: document.getElementById("checkIn").value,
             checkOut: document.getElementById("checkOut").value,
+            foodMenu: document.getElementById("foodMenu").value,
 
             adults: document.getElementById("adults").value,
             children: document.getElementById("children").value,
@@ -831,25 +832,39 @@ function exportToExcel(){
 
 function openGuestVoucher(){
 
-    let booking = JSON.parse(
-        localStorage.getItem("selectedBooking")
-    );
+    if(selectedRow == null){
 
-    if(!booking){
-
-        alert("Please save the booking first.");
+        alert("Please select a booking.");
 
         return;
 
     }
+
+    let firebaseId = selectedRow.dataset.firebaseId;
+
+    let booking = currentBookings.find(
+        b => b.firebaseId === firebaseId
+    );
+
+    if(!booking){
+
+        alert("Booking not found.");
+
+        return;
+
+    }
+
+    localStorage.setItem(
+        "selectedBooking",
+        JSON.stringify(booking)
+    );
 
     window.open(
         "guestVoucher.html",
         "_blank"
     );
 
-}
-// =====================================
+}// =====================================
 // SEARCH BOOKINGS
 // =====================================
 
