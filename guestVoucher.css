@@ -245,14 +245,6 @@ body{
     margin:0;
     padding:0;
 }
-   .logo{
-    border-right:none !important;
-}
-
-.logo::after{
-    display:none !important;
-}
-
 .voucher{
     width:190mm;
     min-height:277mm;
