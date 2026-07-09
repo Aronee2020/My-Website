@@ -304,7 +304,7 @@ async function generateBookingID() {
 
         const counterDoc = await transaction.get(counterRef);
 
-        let lastNumber = 260000;
+        let lastNumber = 187;      // Start before 188
 
         if (counterDoc.exists()) {
             lastNumber = counterDoc.data().lastBookingNumber;
@@ -319,9 +319,8 @@ async function generateBookingID() {
         return newNumber;
     });
 
-    const year = new Date().getFullYear().toString().slice(-2);
+    return "BKID/" + bookingNumber + "/26-27";
 
-    return "HB" + year + bookingNumber.toString().padStart(4, "0");
 }
 
 // ------------------------
