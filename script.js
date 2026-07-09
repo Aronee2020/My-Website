@@ -520,6 +520,11 @@ if(!checkAvailability()){
   // Generate unique Booking ID from Firebase
 const bookingId = await generateBookingID();
 document.getElementById("bookingId").value = bookingId;
+    // Generate Customer ID from Booking ID number
+const bookingNumber = bookingId.split("/")[1];
+
+document.getElementById("customerId").value =
+    "ARN-KBH-" + bookingNumber + "-2026";
     console.log("Generated Booking ID:", bookingId);
 console.log("Textbox Booking ID:", document.getElementById("bookingId").value);
 // Save current booking for Guest Voucher
