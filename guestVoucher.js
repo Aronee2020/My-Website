@@ -85,9 +85,48 @@ function setValue(id, value) {
 // ==========================================
 
 function printVoucher() {
-    window.print();
-}
 
+    // Get booking details
+    const booking = JSON.parse(localStorage.getItem("selectedBooking"));
+
+    if (!booking) {
+        alert("Booking data not found.");
+        return;
+    }
+
+    // Create PDF file name
+    const bookingId = booking.bookingId || "Voucher";
+    const guestName = (booking.guestName || "Guest")
+        .replace(/[\\/:*?"<>|]/g, "_"); // Remove invalid filename characters
+
+    const fileName = `${bookingId}-${guestName}.pdf`;
+
+    // Select voucher
+    const element = document.querySelector(".voucher");
+
+    // PDF Options
+    const opt = {
+        margin: 5,
+        filename: fileName,
+        image: {
+            type: "jpeg",
+            quality: 1
+        },
+        html2canvas: {
+            scale: 2,
+            useCORS: true
+        },
+        jsPDF: {
+            unit: "mm",
+            format: "a4",
+            orientation: "portrait"
+        }
+    };
+
+    // Download PDF
+    html2pdf().set(opt).from(element).save();
+
+}
 function closeVoucher() {
     window.close();
 }
