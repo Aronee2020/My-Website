@@ -86,7 +86,6 @@ function setValue(id, value) {
 
 function printVoucher() {
 
-    // Get booking details
     const booking = JSON.parse(localStorage.getItem("selectedBooking"));
 
     if (!booking) {
@@ -94,19 +93,28 @@ function printVoucher() {
         return;
     }
 
-    // Create PDF file name
     const bookingId = booking.bookingId || "Voucher";
     const guestName = (booking.guestName || "Guest")
-        .replace(/[\\/:*?"<>|]/g, "_"); // Remove invalid filename characters
+        .replace(/[\\/:*?"<>|]/g, "_");
 
     const fileName = `${bookingId}-${guestName}.pdf`;
 
-    // Select voucher
     const element = document.querySelector(".voucher");
 
-    // PDF Options
+    // Save original styles
+    const oldMargin = element.style.margin;
+    const oldWidth = element.style.width;
+    const oldMinHeight = element.style.minHeight;
+    const oldBoxShadow = element.style.boxShadow;
+
+    // Apply PDF styles
+    element.style.margin = "0";
+    element.style.width = "210mm";
+    element.style.minHeight = "297mm";
+    element.style.boxShadow = "none";
+
     const opt = {
-        margin: 5,
+        margin: [0, 0, 0, 0],
         filename: fileName,
         image: {
             type: "jpeg",
@@ -114,7 +122,8 @@ function printVoucher() {
         },
         html2canvas: {
             scale: 2,
-            useCORS: true
+            useCORS: true,
+            scrollY: 0
         },
         jsPDF: {
             unit: "mm",
@@ -123,8 +132,19 @@ function printVoucher() {
         }
     };
 
-    // Download PDF
-    html2pdf().set(opt).from(element).save();
+    html2pdf()
+        .set(opt)
+        .from(element)
+        .save()
+        .then(() => {
+
+            // Restore original styles
+            element.style.margin = oldMargin;
+            element.style.width = oldWidth;
+            element.style.minHeight = oldMinHeight;
+            element.style.boxShadow = oldBoxShadow;
+
+        });
 
 }
 function closeVoucher() {
