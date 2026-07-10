@@ -369,15 +369,14 @@ display:none;
     page-break-before: always;
     break-before: page;
 
-    width:100%;
+    width:190mm;
     min-height:277mm;
 
-    padding-top:15mm;
-    padding-left:0;
-    padding-right:0;
-    padding-bottom:10mm;
+    margin:0 auto;
+    padding:15mm;
 
     box-sizing:border-box;
+    background:#fff;
 
 }
 .instructionPage h3{
