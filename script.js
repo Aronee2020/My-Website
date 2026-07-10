@@ -678,6 +678,8 @@ function selectRow(row){
     document.getElementById("checkIn").value = booking.checkIn || "";
     document.getElementById("checkOut").value = booking.checkOut || "";
     document.getElementById("foodMenu").value = booking.foodMenu || "";
+    document.getElementById("specialInstruction").value =
+    booking.specialInstruction || "";
     document.getElementById("adults").value = booking.adults || "";
     document.getElementById("children").value = booking.children || "";
     document.getElementById("kids").value = booking.kids || "";
@@ -728,7 +730,7 @@ async function updateBooking(){
             checkIn: document.getElementById("checkIn").value,
             checkOut: document.getElementById("checkOut").value,
             foodMenu: document.getElementById("foodMenu").value,
-
+            specialInstruction: document.getElementById("specialInstruction").value,
             adults: document.getElementById("adults").value,
             children: document.getElementById("children").value,
             kids: document.getElementById("kids").value,
