@@ -324,14 +324,21 @@ display:none;
     line-height:1.6;
 
 }
+/* ================= Guest Information ================= */
 
 .guestDetails{
     margin:15px 0 20px;
     font-family:"Times New Roman", serif;
     font-size:15px;
-    line-height:1.9;
 }
 
 .guestDetails p{
-    margin:4px 0;
+    margin:6px 0;
+    line-height:1.8;
+}
+
+.guestDetails .label{
+    display:inline-block;
+    width:160px;     /* Keeps all values aligned */
+    font-weight:bold;
 }
