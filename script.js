@@ -912,8 +912,7 @@ function searchBookings(){
 
         let rowDate=row.cells[4].innerHTML;
 
-        let rowBoat=row.cells[6].innerHTML;
-
+let rowBoat = row.cells[7].innerText.trim().toLowerCase();
         let rowStatus=row.cells[14].innerHTML;
 
         let show=true;
