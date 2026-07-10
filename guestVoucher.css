@@ -360,3 +360,10 @@ display:none;
     margin-bottom:10px;
 
 }
+/* ================= SECOND PAGE ================= */
+
+.instructionPage{
+
+    page-break-before: always;
+
+}
