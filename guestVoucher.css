@@ -391,7 +391,7 @@ display:none;
 
     margin:0 auto;
 
-    padding:15mm;
+    padding:15mm 15mm 0 15mm;
 
     box-sizing:border-box;
 
@@ -428,7 +428,7 @@ display:none;
 
 .instructionPage + h3{
 
-    margin-top:5px !important;
+    margin-top:0 !important;
 
     margin-bottom:5px !important;
 
