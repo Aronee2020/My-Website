@@ -52,7 +52,7 @@ function formatDate(dateString) {
     // =============================
 // Guest Info
 // =============================
-setValue("guestNameDisplay", booking.guestName);
+setValue("guestNameDisplay", "Mr./Ms " + booking.guestName);
 setValue("mobileDisplay", booking.mobile);
 setValue("cruiseDateDisplay", formatDate(booking.cruiseDate));
 setValue("totalPaxDisplay", booking.totalPax + " Pax");
