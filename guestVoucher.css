@@ -324,3 +324,11 @@ display:none;
     line-height:1.6;
 
 }
+.guestDetails{
+    margin:15px 0 20px 0;
+    padding:10px 15px;
+    border:1px solid #ccc;
+    line-height:2;
+    font-size:15px;
+    font-family:"Times New Roman", serif;
+}
