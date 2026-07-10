@@ -342,3 +342,21 @@ display:none;
     width:160px;     /* Keeps all values aligned */
     font-weight:bold;
 }
+/* ================= Guest Instructions ================= */
+
+#instructionList,
+#termsList{
+
+    font-family:"Times New Roman", Times, serif;
+    font-size:16px;
+    line-height:1.8;
+    padding-left:25px;
+
+}
+
+#instructionList li,
+#termsList li{
+
+    margin-bottom:10px;
+
+}
