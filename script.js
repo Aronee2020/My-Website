@@ -299,7 +299,11 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     if (packageAmount) packageAmount.addEventListener("input", calculateBalance);
     if (advanceReceived) advanceReceived.addEventListener("input", calculateBalance);
-
+document.getElementById("adults").value = "";
+document.getElementById("children").value = "";
+document.getElementById("kids").value = "";
+document.getElementById("packageAmount").value = "";
+document.getElementById("advanceReceived").value = "";
 });
 // ------------------------
 // Booking ID
