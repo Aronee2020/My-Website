@@ -328,19 +328,22 @@ display:none;
 
 .guestDetails{
     margin:15px 0 20px;
-    font-family:"Times New Roman", serif;
-    font-size:15px;
+    font-family:"Times New Roman", Times, serif;
+    font-size:16px;
+    font-weight:normal;
 }
 
 .guestDetails p{
     margin:6px 0;
     line-height:1.8;
+    font-weight:normal;
 }
 
 .guestDetails .label{
     display:inline-block;
-    width:160px;     /* Keeps all values aligned */
-    font-weight:bold;
+    width:160px;
+    font-family:"Times New Roman", Times, serif;
+    font-weight:normal;   /* Remove bold */
 }
 /* ================= Guest Instructions ================= */
 
