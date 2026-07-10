@@ -896,8 +896,11 @@ function searchBookings(){
     let status =
     document.getElementById("searchStatus").value;
 
-    let boat =
-    document.getElementById("searchBoat").value;
+    let boat = document.getElementById("searchBoat")
+    .value
+    .trim()
+    .toLowerCase();
+    console.log("Selected Boat =", boat);
 
     let rows =
     document.getElementById("bookingTable")
@@ -912,7 +915,12 @@ function searchBookings(){
 
         let rowDate=row.cells[4].innerHTML;
 
-let rowBoat = row.cells[7].innerText.trim().toLowerCase();
+let rowBoat = row.cells[7]
+    .textContent
+    .trim()
+    .toLowerCase();
+
+console.log("Table Boat =", rowBoat);
         let rowStatus=row.cells[14].innerHTML;
 
         let show=true;
