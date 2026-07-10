@@ -101,20 +101,28 @@ row.insertCell(15).innerHTML = b.advanceMode || "";            });
 
 async function updateNextNumbers() {
 
+    // Read the Booking Counter
+    const counterRef = doc(db, "counters", "bookingCounter");
+    const counterSnap = await getDoc(counterRef);
+
+    let nextNumber = 188;
+
+    if (counterSnap.exists()) {
+        nextNumber = counterSnap.data().lastBookingNumber + 1;
+    }
+
+    // Show next Customer ID
+    document.getElementById("customerId").value =
+        "ARN-KBH-" + nextNumber + "-2026";
+
+    // Receipt Number (keep your existing logic)
     let bookings = await getBookings();
-
-    // Customer ID and Receipt No can still use the count
-    customerNo = bookings.length + 1;
     receiptNo = bookings.length + 1;
-
-    // DO NOT generate Booking ID here anymore
-    // generateBookingID();
-
-    generateCustomerID();
     generateReceiptNo();
 
-    // Optional: show that the booking ID will be generated on save
-    document.getElementById("bookingId").value = "Auto Generated on Save";
+    // Booking ID is generated only on Save
+    document.getElementById("bookingId").value =
+        "Auto Generated on Save";
 }// ======================================
 // Convert 12-hour time to minutes
 // Example: 5:30 PM -> 1050
