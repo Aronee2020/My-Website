@@ -28,6 +28,14 @@ console.log(booking);
     setValue("package", booking.package);
     setValue("houseboat", booking.houseboatName);
     setValue("houseboatType", booking.houseboatType);
+    // =============================
+// Guest Info
+// =============================
+setValue("guestNameDisplay", booking.guestName);
+setValue("mobileDisplay", booking.mobile);
+setValue("cruiseDateDisplay", booking.cruiseDate);
+setValue("totalPaxDisplay", booking.totalPax + " Pax");
+setValue("houseboatTypeDisplay", booking.houseboatType);
 setValue("checkInTime", booking.checkIn);
 setValue("checkOutTime", booking.checkOut);
 
