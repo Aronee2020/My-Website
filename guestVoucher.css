@@ -369,11 +369,31 @@ display:none;
     page-break-before: always;
     break-before: page;
 
-    padding-top: 15mm;   /* Same top spacing as Page 1 */
-    padding-left: 15mm;
-    padding-right: 15mm;
-    padding-bottom: 15mm;
+    width:100%;
+    min-height:277mm;
 
-    box-sizing: border-box;
+    padding-top:15mm;
+    padding-left:0;
+    padding-right:0;
+    padding-bottom:10mm;
+
+    box-sizing:border-box;
+
+}
+.instructionPage h3{
+
+    margin-top:0;
+    margin-bottom:12px;
+
+    font-family:"Times New Roman", Times, serif;
+    font-size:28px;
+    color:#0b3d91;
+
+}
+
+.instructionPage ul{
+
+    margin-top:0;
+    margin-bottom:20px;
 
 }
