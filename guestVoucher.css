@@ -399,8 +399,8 @@ display:none;
 
 .instructionPage ul{
 
-    margin:0;
-    padding-left:25px;
+    margin-top:0;
+    margin-bottom:0;
 
 }
 
@@ -427,4 +427,34 @@ display:none;
 
     margin-top:0;
 
+}
+/* ================= FINAL SPACING ADJUSTMENT ================= */
+
+/* Payment Details heading */
+.detailsTable + .instructionPage h3{
+    margin-top:5px;
+}
+
+
+/* Guest Instructions section */
+.instructionPage h3{
+    margin-bottom:5px;
+}
+
+#instructionList{
+    margin-top:0;
+    margin-bottom:0;
+}
+
+
+/* Terms & Conditions heading */
+.instructionPage + h3{
+    margin-top:0;
+    margin-bottom:5px;
+}
+
+
+/* Terms list */
+#termsList{
+    margin-top:0;
 }
