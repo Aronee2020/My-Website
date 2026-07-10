@@ -358,7 +358,6 @@ display:none;
 
 }
 /* ================= SECOND PAGE ================= */
-/* ================= SECOND PAGE ================= */
 
 .instructionPage{
 
@@ -394,4 +393,18 @@ display:none;
     margin-top:0;
     margin-bottom:5px;
 
+}
+/* Reduce space between Guest Instructions and Terms & Conditions */
+
+.instructionPage + h3{
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+#instructionList{
+    margin-bottom:0;
+}
+
+#termsList{
+    margin-top:0;
 }
