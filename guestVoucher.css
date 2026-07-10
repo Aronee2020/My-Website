@@ -383,24 +383,54 @@ display:none;
     page-break-before:always;
     break-before:page;
 
-    page-break-inside:avoid;
-    break-inside:avoid;
+    width:100%;
 
-    width:190mm;
-    min-height:277mm;
+    margin:0;
 
-    margin:0 auto;
-
-    padding:15mm 15mm 0 15mm;
+    padding:0;
 
     box-sizing:border-box;
-
-    background:#fff;
 
     text-align:left;
 
 }
 
+
+.instructionPage h3{
+
+    margin:0 0 8px 0;
+
+    font-family:"Times New Roman", Times, serif;
+
+    font-size:22px;
+
+    color:#0b3d91;
+
+    text-align:left;
+
+}
+
+
+#instructionList,
+#termsList{
+
+    margin:0 0 5px 0;
+
+    padding-left:25px;
+
+    font-size:15px;
+
+    line-height:1.3;
+
+}
+
+
+#instructionList li,
+#termsList li{
+
+    margin-bottom:5px;
+
+}
 .instructionPage h3{
 
     margin:0 0 8px 0;
@@ -422,20 +452,6 @@ display:none;
     padding-left:25px;
 
 }
-
-
-/* Terms heading after instructions */
-
-.instructionPage + h3{
-
-    margin-top:0 !important;
-
-    margin-bottom:5px !important;
-
-    text-align:left;
-
-}
-
 
 #instructionList{
 
