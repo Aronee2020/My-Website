@@ -17,7 +17,18 @@ console.log(booking);
     // -----------------------------
     // Booking Details
     // -----------------------------
+// ==========================================
+// Format Date (YYYY-MM-DD → DD/MM/YYYY)
+// ==========================================
+function formatDate(dateString) {
 
+    if (!dateString) return "";
+
+    const parts = dateString.split("-");
+
+    return `${parts[2]}/${parts[1]}/${parts[0]}`;
+}
+    
     setValue("guestName", booking.guestName);
     setValue("bookingId", booking.bookingId);
     setValue("receiptNo", booking.receiptNo);
@@ -33,7 +44,7 @@ console.log(booking);
 // =============================
 setValue("guestNameDisplay", booking.guestName);
 setValue("mobileDisplay", booking.mobile);
-setValue("cruiseDateDisplay", booking.cruiseDate);
+setValue("cruiseDateDisplay", formatDate(booking.cruiseDate));
 setValue("totalPaxDisplay", booking.totalPax + " Pax");
 setValue("houseboatTypeDisplay", booking.houseboatType);
 setValue("checkInTime", booking.checkIn);
