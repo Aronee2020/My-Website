@@ -362,8 +362,18 @@ display:none;
 }
 /* ================= SECOND PAGE ================= */
 
+/* ================= SECOND PAGE ================= */
+
 .instructionPage{
 
     page-break-before: always;
+    break-before: page;
+
+    padding-top: 15mm;   /* Same top spacing as Page 1 */
+    padding-left: 15mm;
+    padding-right: 15mm;
+    padding-bottom: 15mm;
+
+    box-sizing: border-box;
 
 }
