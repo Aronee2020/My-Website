@@ -56,8 +56,21 @@ function formatDate(dateString) {
 setValue("guestNameDisplay", "Mr./Ms " + booking.guestName);
 setValue("mobileDisplay", booking.mobile);
 setValue("cruiseDateDisplay", formatDate(booking.cruiseDate));
-setValue("totalPaxDisplay", booking.totalPax + " Pax");
-setValue("houseboatTypeDisplay", booking.houseboatType);
+let paxText = [];
+
+if (booking.adults > 0) {
+    paxText.push(`${booking.adults} Adult${booking.adults > 1 ? "s" : ""}`);
+}
+
+if (booking.children > 0) {
+    paxText.push(`${booking.children} Child${booking.children > 1 ? "ren" : ""}`);
+}
+
+if (booking.kids > 0) {
+    paxText.push(`${booking.kids} Kid${booking.kids > 1 ? "s" : ""}`);
+}
+
+setValue("totalPaxDisplay", paxText.join(" and "));setValue("houseboatTypeDisplay", booking.houseboatType);
 setValue("checkInTime", booking.checkIn);
 setValue("checkOutTime", booking.checkOut);
 
