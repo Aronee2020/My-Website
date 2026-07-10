@@ -349,14 +349,20 @@ display:none;
 
     font-size:15px;
     line-height:1.3;
+    padding-left:25px;
+    text-align:left;
+
 }
 
 #instructionList li,
 #termsList li{
 
     margin-bottom:5px;
+    text-align:left;
 
 }
+
+
 /* ================= SECOND PAGE ================= */
 
 .instructionPage{
@@ -373,38 +379,52 @@ display:none;
     box-sizing:border-box;
     background:#fff;
 
+    text-align:left;   /* Important - removes center alignment */
+
 }
 
 
 .instructionPage h3{
 
-    margin-top:0;
-    margin-bottom:8px;
+    margin:0 0 5px 0;
 
     font-family:"Times New Roman", Times, serif;
     font-size:22px;
     color:#0b3d91;
+
+    text-align:left;
 
 }
 
 
 .instructionPage ul{
 
-    margin-top:0;
-    margin-bottom:5px;
+    margin:0;
+    padding-left:25px;
 
 }
-/* Reduce space between Guest Instructions and Terms & Conditions */
+
+
+/* Space between Guest Instructions and Terms */
 
 .instructionPage + h3{
-    margin-top:5px;
-    margin-bottom:0;
+
+    margin-top:0;
+    margin-bottom:5px;
+    text-align:left;
+
 }
+
 
 #instructionList{
+
     margin-bottom:0;
+
 }
 
+
 #termsList{
+
     margin-top:0;
+
 }
