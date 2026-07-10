@@ -18,15 +18,25 @@ console.log(booking);
     // Booking Details
     // -----------------------------
 // ==========================================
-// Format Date (YYYY-MM-DD → DD/MM/YYYY)
+// ==========================================
+// Format Date (YYYY-MM-DD → 11 July 2026)
 // ==========================================
 function formatDate(dateString) {
 
     if (!dateString) return "";
 
-    const parts = dateString.split("-");
+    const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
 
-    return `${parts[2]}/${parts[1]}/${parts[0]}`;
+    const date = new Date(dateString);
+
+    const day = date.getDate();
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+
+    return `${day} ${month} ${year}`;
 }
     
     setValue("guestName", booking.guestName);
