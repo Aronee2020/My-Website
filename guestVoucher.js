@@ -181,19 +181,25 @@ function loadPackageDetails(packageName){
 
         case "Overnight Cruise":
 
-            instructions = [
+    instructions = [
 
-                "Balance payment must be completed at check-in.",
+        "Balance payment must be completed at check-in.",
 
-                "Special dishes can be arranged if informed at least 2 days in advance (extra charges apply).",
+        "Evening Cruise: 5:00 PM – 6:30 PM.",
 
-                "Television is not available on the houseboat.",
+        "Morning Cruise: 7:00 AM – 8:00 AM.",
 
-                "Music system with microphone is available.",
+        "Air conditioning is available from 9:00 PM to 6:00 AM.",
 
-                "Smoking is strictly prohibited."
+        "Special dishes can be arranged if informed at least 2 days in advance (extra charges apply).",
 
-            ];
+        "Television is not available on the houseboat.",
+
+        "Music system with microphone is available.",
+
+        "Smoking is strictly prohibited."
+
+    ];
 
             terms = [
 
