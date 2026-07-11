@@ -201,19 +201,21 @@ function loadPackageDetails(packageName){
 
     ];
 
-            terms = [
+           terms = [
 
-                "Cruise will start as per schedule.",
+    "Cruise will start as per schedule.",
 
-                "Management is not responsible for delays caused by late arrival.",
+    "Management is not responsible for delays caused by late arrival.",
 
-                "Houseboats have limited facilities. Please do not compare them with hotels.",
+    "After cruising hours, the houseboat will remain anchored at the designated jetty.",
 
-                "Cruise operation depends on weather conditions.",
+    "Houseboats have limited facilities. Please do not compare them with hotels.",
 
-                "Weather-related cancellations are refundable."
+    "Cruise operation depends on weather conditions.",
 
-            ];
+    "Weather-related cancellations are refundable."
+
+];
 
         break;
 
