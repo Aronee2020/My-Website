@@ -889,61 +889,44 @@ function openGuestVoucher(){
 
 function searchBookings(){
 
-    let keyword =
-    document.getElementById("searchText")
-    .value
-    .toLowerCase();
+    let keyword = document.getElementById("searchText").value.toLowerCase();
+    let date = document.getElementById("searchDate").value;
+    let status = document.getElementById("searchStatus").value;
+    let boat = document.getElementById("searchBoat").value.trim().toLowerCase();
 
-    let date =
-    document.getElementById("searchDate").value;
+    let rows = document.getElementById("bookingTable")
+        .getElementsByTagName("tbody")[0]
+        .rows;
 
-    let status =
-    document.getElementById("searchStatus").value;
+    for(let i = 0; i < rows.length; i++){
 
-    let boat = document.getElementById("searchBoat")
-    .value
-    .trim()
-    .toLowerCase();
-    console.log("Selected Boat =", boat);
+        let row = rows[i];
+        let text = row.innerText.toLowerCase();
+        let rowDate = row.cells[4].innerHTML;
+        let rowBoat = row.cells[7].textContent.trim().toLowerCase();
 
-    let rows =
-    document.getElementById("bookingTable")
-    .getElementsByTagName("tbody")[0]
-    .rows;
+        // Get booking status from currentBookings using Firebase ID
+        let firebaseId = row.dataset.firebaseId;
+        let booking = currentBookings.find(b => b.firebaseId === firebaseId);
+        let rowStatus = booking?.bookingStatus || "";
 
-    for(let i=0;i<rows.length;i++){
+        let show = true;
 
-        let row=rows[i];
+        if(keyword !== "" && !text.includes(keyword))
+            show = false;
 
-        let text=row.innerText.toLowerCase();
+        if(date !== "" && rowDate !== date)
+            show = false;
 
-        let rowDate=row.cells[4].innerHTML;
+        if(boat !== "" && rowBoat !== boat)
+            show = false;
 
-let rowBoat = row.cells[7]
-    .textContent
-    .trim()
-    .toLowerCase();
+        if(status !== "" && rowStatus !== status)
+            show = false;
 
-console.log("Table Boat =", rowBoat);
-        let rowStatus=row.cells[14].innerHTML;
-
-        let show=true;
-
-        if(keyword!="" && !text.includes(keyword))
-            show=false;
-
-        if(date!="" && rowDate!=date)
-            show=false;
-
-        if(boat!="" && rowBoat!=boat)
-            show=false;
-
-        row.style.display=show?"":"none";
-
+        row.style.display = show ? "" : "none";
     }
-
 }
-
 // =====================================
 // CLEAR SEARCH
 // =====================================
