@@ -723,7 +723,6 @@ document.getElementById("postponeReason").value =
     booking.postponeReason || "";
 
 bookingStatusChanged();
-    bookingStatusChanged();
 }
 // =====================================
 // UPDATE BOOKING
