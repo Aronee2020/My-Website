@@ -770,7 +770,18 @@ async function updateBooking(){
             balanceAmount: document.getElementById("balanceAmount").value,
 
             advanceMode: document.getElementById("advanceMode").value,
-            bookingStatus: document.getElementById("bookingStatus").value
+
+bookingStatus: document.getElementById("bookingStatus").value,
+
+cancelDate: document.getElementById("cancelDate").value,
+
+refundAmount: document.getElementById("refundAmount").value,
+
+cancelReason: document.getElementById("cancelReason").value,
+
+newCruiseDate: document.getElementById("newCruiseDate").value,
+
+postponeReason: document.getElementById("postponeReason").value
 
         });
 
