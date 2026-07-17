@@ -467,11 +467,6 @@ class="form-select">
 
 <!-- ================= BOOKING STATUS ================= -->
 
-
-
-
-
-
 <div class="row mt-3">
 
     <div class="col-md-4">
@@ -479,8 +474,9 @@ class="form-select">
         <label>Booking Status</label>
 
         <select
-        id="bookingStatus"
-        class="form-select">
+            id="bookingStatus"
+            class="form-select"
+            onchange="bookingStatusChanged()">
 
             <option>Confirmed</option>
             <option>Cancelled</option>
@@ -492,7 +488,35 @@ class="form-select">
 
 </div>
 
+<!-- Cancellation Details -->
+<div id="cancelSection" class="row mt-3" style="display:none;">
 
+    <div class="col-md-3">
+        <label>Cancellation Date</label>
+        <input type="date" id="cancelDate" class="form-control">
+    </div>
+
+    <div class="col-md-9">
+        <label>Cancellation Reason</label>
+        <input type="text" id="cancelReason" class="form-control">
+    </div>
+
+</div>
+
+<!-- Postponement Details -->
+<div id="postponeSection" class="row mt-3" style="display:none;">
+
+    <div class="col-md-3">
+        <label>New Cruise Date</label>
+        <input type="date" id="newCruiseDate" class="form-control">
+    </div>
+
+    <div class="col-md-9">
+        <label>Reason for Postponement</label>
+        <input type="text" id="postponeReason" class="form-control">
+    </div>
+
+</div>
 <!-- ================= CANCELLED DETAILS ================= -->
 
 <div
