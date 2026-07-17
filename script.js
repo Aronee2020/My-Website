@@ -429,20 +429,31 @@ function validateMobile(){
 
 function bookingStatusChanged(){
 
-    let status=document.getElementById("bookingStatus").value;
+    let status = document.getElementById("bookingStatus").value;
 
-    document.getElementById("cancelSection").style.display="none";
+    // Hide both sections first
+    document.getElementById("cancelSection").style.display = "none";
+    document.getElementById("postponeSection").style.display = "none";
 
+    // Show Cancellation Details
+    if(status === "Cancelled"){
 
-    if(status==="Cancelled"){
+        document.getElementById("cancelSection").style.display = "flex";
 
-        document.getElementById("cancelSection").style.display="flex";
+        // Automatically fill today's date
+        if(document.getElementById("cancelDate").value == ""){
+
+            document.getElementById("cancelDate").value =
+                new Date().toISOString().split("T")[0];
+
+        }
 
     }
 
-    if(status==="Postponed"){
+    // Show Postponement Details
+    if(status === "Postponed"){
 
-        document.getElementById("postponeSection").style.display="flex";
+        document.getElementById("postponeSection").style.display = "flex";
 
     }
 
@@ -699,6 +710,7 @@ function selectRow(row){
     document.getElementById("transactionRef").value = booking.transactionRef || "";
 
     document.getElementById("bookingStatus").value = booking.bookingStatus || "";
+    bookingStatusChanged();
 }
 // =====================================
 // UPDATE BOOKING
