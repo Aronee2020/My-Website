@@ -710,6 +710,19 @@ function selectRow(row){
     document.getElementById("transactionRef").value = booking.transactionRef || "";
 
     document.getElementById("bookingStatus").value = booking.bookingStatus || "";
+    document.getElementById("cancelDate").value =
+    booking.cancelDate || "";
+
+document.getElementById("cancelReason").value =
+    booking.cancelReason || "";
+
+document.getElementById("newCruiseDate").value =
+    booking.newCruiseDate || "";
+
+document.getElementById("postponeReason").value =
+    booking.postponeReason || "";
+
+bookingStatusChanged();
     bookingStatusChanged();
 }
 // =====================================
