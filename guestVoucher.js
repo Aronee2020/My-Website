@@ -47,6 +47,7 @@ function formatDate(dateString) {
     setValue("cruiseDate", booking.cruiseDate);
     setValue("mobile", booking.mobile);
     setValue("package", booking.package);
+    console.log("Package Name:", booking.package);
     loadPackageDetails(booking.package);
     setValue("houseboat", booking.houseboatName);
     setValue("houseboatType", booking.houseboatType);
