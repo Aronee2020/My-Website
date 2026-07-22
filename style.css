@@ -151,64 +151,44 @@ input[readonly]{
 }
 
 .button-area .btn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 4px 10px rgba(0,0,0,.2);
+    transform:none !important;
+    box-shadow:none !important;
+    opacity:0.9;
 }
-
 /* Save Booking */
-.btn-save{
-    background:#198754;
+.save-btn{
+    background:#198754 !important;
 }
 
-.btn-save:hover{
-    background:#157347;
-}
 
 /* Guest Voucher */
-.btn-primary{
-    background:#0d6efd;
+.voucher-btn{
+    background:#0d6efd !important;
 }
 
-.btn-primary:hover{
-    background:#0b5ed7;
-}
 
 /* Update */
-.btn-update{
-    background:#fd7e14;
+.update-btn{
+    background:#fd7e14 !important;
 }
 
-.btn-update:hover{
-    background:#e96b02;
-}
 
 /* Delete */
-.btn-delete{
-    background:#dc3545;
+.delete-btn{
+    background:#dc3545 !important;
 }
 
-.btn-delete:hover{
-    background:#bb2d3b;
-}
 
 /* Export Excel */
-.btn-export{
-    background:#20c997;
+.export-btn{
+    background:#20c997 !important;
 }
 
-.btn-export:hover{
-    background:#1aa179;
-}
 
 /* Clear */
-.btn-clear{
-    background:#6c757d;
-}
-
-.btn-clear:hover{
-    background:#565e64;
-}
-/* ================= STATUS BOX ================= */
+.clear-btn{
+    background:#6c757d !important;
+}/* ================= STATUS BOX ================= */
 
 .status-box{
     display:none;
