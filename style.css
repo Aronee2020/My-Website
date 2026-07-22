@@ -138,63 +138,76 @@ input[readonly]{
     text-align:center;
 }
 
-.btn{
-    min-width:140px;
+.button-area .btn{
+    min-width:170px;
+    height:50px;
     margin:5px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
     font-weight:600;
-    border-radius:8px;
+    color:#fff;
+    transition:all .3s ease;
 }
 
+.button-area .btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 4px 10px rgba(0,0,0,.2);
+}
+
+/* Save Booking */
 .btn-save{
     background:#198754;
-    color:#fff;
 }
 
 .btn-save:hover{
     background:#157347;
-    color:#fff;
 }
 
-.btn-update{
+/* Guest Voucher */
+.btn-primary{
     background:#0d6efd;
-    color:#fff;
+}
+
+.btn-primary:hover{
+    background:#0b5ed7;
+}
+
+/* Update */
+.btn-update{
+    background:#fd7e14;
 }
 
 .btn-update:hover{
-    background:#0b5ed7;
-    color:#fff;
+    background:#e96b02;
 }
 
+/* Delete */
 .btn-delete{
     background:#dc3545;
-    color:#fff;
 }
 
 .btn-delete:hover{
     background:#bb2d3b;
-    color:#fff;
 }
 
+/* Export Excel */
 .btn-export{
-    background:#fd7e14;
-    color:#fff;
+    background:#20c997;
 }
 
 .btn-export:hover{
-    background:#e96b02;
-    color:#fff;
+    background:#1aa179;
 }
 
+/* Clear */
 .btn-clear{
     background:#6c757d;
-    color:#fff;
 }
 
 .btn-clear:hover{
-    background:#5c636a;
-    color:#fff;
+    background:#565e64;
 }
-
 /* ================= STATUS BOX ================= */
 
 .status-box{
