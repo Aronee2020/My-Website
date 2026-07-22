@@ -62,11 +62,10 @@ function saveBookings(bookings) {
 async function loadBookings() {
 
 currentBookings = await getBookings();
-
 let bookings = [...currentBookings];
 
 bookings.sort((a, b) => {
-    return new Date(a.cruiseDate) - new Date(b.cruiseDate);
+    return new Date(b.cruiseDate) - new Date(a.cruiseDate);
 });
     let tbody = document.querySelector("#bookingTable tbody");
 
