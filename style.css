@@ -188,8 +188,8 @@ input[readonly]{
 /* Clear */
 .clear-btn{
     background:#6c757d !important;
-}/* ================= STATUS BOX ================= */
-
+}
+/* ================= STATUS BOX ================= */
 .status-box{
     display:none;
     background:#fff8dc;
@@ -244,8 +244,8 @@ input[readonly]{
     padding:15px;
 }
 
-.btn{
-    width:100%;
+.button-area .btn{
+    width:auto;
 }
 
 }
