@@ -63,7 +63,11 @@ async function loadBookings() {
 
 currentBookings = await getBookings();
 
-let bookings = currentBookings;
+let bookings = [...currentBookings];
+
+bookings.sort((a, b) => {
+    return new Date(a.cruiseDate) - new Date(b.cruiseDate);
+});
     let tbody = document.querySelector("#bookingTable tbody");
 
     tbody.innerHTML = "";
