@@ -81,7 +81,7 @@ bookings.sort((a, b) => {
             selectRow(this);
         };
 
-        row.insertCell(0).innerHTML = b.bookingId || "";
+        row.insertCell(0).innerHTML = b.customerId || "";
         row.insertCell(1).innerHTML = b.bookingDate || "";
         row.insertCell(2).innerHTML = b.guestName || "";
         row.insertCell(3).innerHTML = b.mobile || "";
