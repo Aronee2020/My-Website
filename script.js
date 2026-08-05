@@ -408,23 +408,33 @@ function calculateBalance(){
 // Mobile Number Validation
 // ======================================
 
-function validateMobile(){
+function validateMobile() {
 
     let mobile = document.getElementById("mobile");
 
-    // Keep only numbers
-    mobile.value = mobile.value.replace(/\D/g, "");
+    // Allow only + at the beginning and digits
+    mobile.value = mobile.value.replace(/(?!^\+)[^\d]/g, "");
 
-    if(mobile.value.length > 10){
-
-        alert("Mobile Number should contain only 10 digits.");
-
-        mobile.value = mobile.value.substring(0,10);
-
-        mobile.focus();
-
+    // Ensure only one + at the beginning
+    if (mobile.value.indexOf("+") > 0) {
+        mobile.value = mobile.value.replace(/\+/g, "");
     }
 
+    // Maximum 15 digits (excluding +) as per international standard
+    let digits = mobile.value.replace(/\D/g, "");
+
+    if (digits.length > 15) {
+
+        alert("Mobile number can contain a maximum of 15 digits.");
+
+        if (mobile.value.startsWith("+")) {
+            mobile.value = "+" + digits.substring(0, 15);
+        } else {
+            mobile.value = digits.substring(0, 15);
+        }
+
+        mobile.focus();
+    }
 }
 // ------------------------
 // Booking Status
