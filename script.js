@@ -82,10 +82,10 @@ bookings.sort((a, b) => {
         };
 
         row.insertCell(0).innerHTML = b.customerId || "";
-        row.insertCell(1).innerHTML = b.bookingDate || "";
+        row.insertCell(1).innerHTML = b.cruiseDate || "";
         row.insertCell(2).innerHTML = b.guestName || "";
         row.insertCell(3).innerHTML = b.mobile || "";
-        row.insertCell(4).innerHTML = b.cruiseDate || "";
+        row.insertCell(4).innerHTML = b.bookingDate || "";        
         row.insertCell(5).innerHTML = b.package || "";
         row.insertCell(6).innerHTML = b.checkInPoint || "";
         row.insertCell(7).innerHTML = b.houseboatName || "";
