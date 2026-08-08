@@ -407,6 +407,288 @@ class="form-select">
     </div>
 
 </div>
+    <!-- ==========================================
+     TAXI SERVICE SECTION
+========================================== -->
+
+<div id="taxiSection" style="display:none;">
+
+    <div class="section-title">
+        🚕 Taxi Service Details
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <label>Taxi Service Type</label>
+            <select id="taxiServiceType">
+                <option value="">Select Type</option>
+                <option value="One Way">One Way</option>
+                <option value="Round Trip">Round Trip</option>
+                <option value="Multiple Transfers">Multiple Transfers</option>
+                <option value="Full Day">Full Day</option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label>Vehicle Type</label>
+            <select id="taxiVehicleType">
+                <option value="">Select Vehicle</option>
+                <option value="Sedan">Sedan</option>
+                <option value="SUV">SUV</option>
+                <option value="Innova">Innova</option>
+                <option value="Tempo Traveller">Tempo Traveller</option>
+                <option value="Mini Bus">Mini Bus</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <label>No. of Passengers</label>
+            <input type="number" id="taxiPassengers" min="1">
+        </div>
+
+        <div class="col-md-6">
+            <label>Taxi Amount</label>
+            <input type="number" id="taxiAmount" min="0" step="0.01"
+                   oninput="calculateTaxiBalance()">
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <label>Taxi Advance</label>
+            <input type="number" id="taxiAdvance" min="0" step="0.01"
+                   oninput="calculateTaxiBalance()">
+        </div>
+
+        <div class="col-md-6">
+            <label>Taxi Balance</label>
+            <input type="number" id="taxiBalance" readonly>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <label>Payment Mode</label>
+            <select id="taxiPaymentMode">
+                <option value="">Select Payment Mode</option>
+                <option value="Cash">Cash</option>
+                <option value="UPI">UPI</option>
+                <option value="Bank Transfer">Bank Transfer</option>
+                <option value="Card">Card</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label>Taxi Status</label>
+            <select id="taxiStatus">
+                <option value="Pending">Pending</option>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancelled">Cancelled</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <label>Taxi Itinerary</label>
+            <textarea id="taxiItinerary"
+                      rows="5"
+                      placeholder="Enter complete taxi itinerary..."></textarea>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <label>Taxi Remarks</label>
+            <textarea id="taxiRemarks"
+                      rows="3"
+                      placeholder="Additional taxi details..."></textarea>
+        </div>
+
+    </div>
+
+</div>
+    <!-- ==========================================
+     ACCOMMODATION SECTION
+========================================== -->
+
+<div id="accommodationSection" style="display:none;">
+
+    <div class="section-title">
+        🏨 Accommodation Details
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <label>Accommodation Type</label>
+            <select id="accommodationType">
+                <option value="">Select Type</option>
+                <option value="Hotel">Hotel</option>
+                <option value="Resort">Resort</option>
+                <option value="Homestay">Homestay</option>
+                <option value="Villa">Villa</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label>Property Name</label>
+            <input type="text" id="accommodationProperty">
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <label>Check-in Date</label>
+            <input type="date" id="accommodationCheckIn"
+                   onchange="calculateAccommodationNights()">
+        </div>
+
+        <div class="col-md-4">
+            <label>Check-out Date</label>
+            <input type="date" id="accommodationCheckOut"
+                   onchange="calculateAccommodationNights()">
+        </div>
+
+        <div class="col-md-4">
+            <label>No. of Nights</label>
+            <input type="number" id="accommodationNights" readonly>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <label>No. of Rooms</label>
+            <input type="number" id="accommodationRooms" min="1">
+        </div>
+
+        <div class="col-md-4">
+            <label>Adults</label>
+            <input type="number" id="accommodationAdults" min="0">
+        </div>
+
+        <div class="col-md-4">
+            <label>Children</label>
+            <input type="number" id="accommodationChildren" min="0">
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <label>Room Type</label>
+            <select id="accommodationRoomType">
+                <option value="">Select Room Type</option>
+                <option value="Standard">Standard</option>
+                <option value="Deluxe">Deluxe</option>
+                <option value="Premium">Premium</option>
+                <option value="Suite">Suite</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label>Meal Plan</label>
+            <select id="accommodationMealPlan">
+                <option value="">Select Meal Plan</option>
+                <option value="EP">EP - Room Only</option>
+                <option value="CP">CP - Breakfast</option>
+                <option value="BB">BB - Bed & Breakfast</option>
+                <option value="HB">HB - Half Board</option>
+                <option value="MAP">MAP - Modified American Plan</option>
+                <option value="AP">AP - American Plan</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <label>Accommodation Amount</label>
+            <input type="number" id="accommodationAmount" min="0"
+                   step="0.01"
+                   oninput="calculateAccommodationBalance()">
+        </div>
+
+        <div class="col-md-6">
+            <label>Accommodation Advance</label>
+            <input type="number" id="accommodationAdvance" min="0"
+                   step="0.01"
+                   oninput="calculateAccommodationBalance()">
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <label>Accommodation Balance</label>
+            <input type="number" id="accommodationBalance" readonly>
+        </div>
+
+        <div class="col-md-6">
+            <label>Payment Mode</label>
+            <select id="accommodationPaymentMode">
+                <option value="">Select Payment Mode</option>
+                <option value="Cash">Cash</option>
+                <option value="UPI">UPI</option>
+                <option value="Bank Transfer">Bank Transfer</option>
+                <option value="Card">Card</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <label>Accommodation Itinerary</label>
+            <textarea id="accommodationItinerary"
+                      rows="5"
+                      placeholder="Enter accommodation itinerary..."></textarea>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <label>Accommodation Status</label>
+            <select id="accommodationStatus">
+                <option value="Pending">Pending</option>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancelled">Cancelled</option>
+            </select>
+        </div>
+
+    </div>
+
+</div>
 <!-- ================= PAYMENT DETAILS ================= -->
 
 <div class="row mt-3">
