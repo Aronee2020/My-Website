@@ -59,7 +59,11 @@ function saveBookings(bookings) {
 
 }
 // Load bookings into table
-function toggleTaxiSection() {
+// ==========================================
+// ADDITIONAL SERVICES FUNCTIONS
+// ==========================================
+
+window.toggleTaxiSection = function () {
 
     const required = document.getElementById("taxiRequired").value;
     const section = document.getElementById("taxiSection");
@@ -69,18 +73,38 @@ function toggleTaxiSection() {
     } else {
         section.style.display = "none";
     }
-}
-function calculateTaxiBalance() {
+};
 
-    const amount = parseFloat(document.getElementById("taxiAmount").value) || 0;
-    const advance = parseFloat(document.getElementById("taxiAdvance").value) || 0;
+
+window.toggleAccommodationSection = function () {
+
+    const required = document.getElementById("accommodationRequired").value;
+    const section = document.getElementById("accommodationSection");
+
+    if (required === "Yes") {
+        section.style.display = "block";
+    } else {
+        section.style.display = "none";
+    }
+};
+
+
+window.calculateTaxiBalance = function () {
+
+    const amount =
+        parseFloat(document.getElementById("taxiAmount").value) || 0;
+
+    const advance =
+        parseFloat(document.getElementById("taxiAdvance").value) || 0;
 
     const balance = amount - advance;
 
     document.getElementById("taxiBalance").value =
         balance >= 0 ? balance.toFixed(2) : "0.00";
-}
-function calculateAccommodationNights() {
+};
+
+
+window.calculateAccommodationNights = function () {
 
     const checkIn =
         document.getElementById("accommodationCheckIn").value;
@@ -101,8 +125,10 @@ function calculateAccommodationNights() {
 
     document.getElementById("accommodationNights").value =
         difference > 0 ? difference : 0;
-}
-function calculateAccommodationBalance() {
+};
+
+
+window.calculateAccommodationBalance = function () {
 
     const amount =
         parseFloat(document.getElementById("accommodationAmount").value) || 0;
@@ -114,20 +140,7 @@ function calculateAccommodationBalance() {
 
     document.getElementById("accommodationBalance").value =
         balance >= 0 ? balance.toFixed(2) : "0.00";
-}
-function toggleAccommodationSection() {
-
-    const required = document.getElementById("accommodationRequired").value;
-    const section = document.getElementById("accommodationSection");
-
-    if (required === "Yes") {
-        section.style.display = "block";
-    } else {
-        section.style.display = "none";
-    }
-}
-
-
+};
 async function loadBookings() {
 
 currentBookings = await getBookings();
