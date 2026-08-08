@@ -374,3 +374,62 @@ input[readonly]{
     font-weight:bold;
 
 }
+/* ==========================================
+   ADDITIONAL SERVICES - FORM ALIGNMENT
+========================================== */
+
+#taxiSection,
+#accommodationSection {
+    width: 100%;
+    margin-top: 15px;
+}
+
+#taxiSection .row,
+#accommodationSection .row {
+    margin-bottom: 15px;
+}
+
+#taxiSection label,
+#accommodationSection label {
+    display: block;
+    width: 100%;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+#taxiSection input,
+#taxiSection select,
+#taxiSection textarea,
+#accommodationSection input,
+#accommodationSection select,
+#accommodationSection textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d9dfe8;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 15px;
+    min-height: 42px;
+}
+
+#taxiSection textarea,
+#accommodationSection textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+#taxiSection input:focus,
+#taxiSection select:focus,
+#taxiSection textarea:focus,
+#accommodationSection input:focus,
+#accommodationSection select:focus,
+#accommodationSection textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+#taxiSection .section-title,
+#accommodationSection .section-title {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
