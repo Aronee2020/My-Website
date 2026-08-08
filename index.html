@@ -378,6 +378,35 @@ class="form-select">
 </div>
 
 <!-- PART 2 CONTINUES -->
+    <!-- ==========================================
+     OPTIONAL SERVICES
+========================================== -->
+
+<div class="section-title">
+    Additional Services
+</div>
+
+<div class="row">
+
+    <!-- Taxi Service -->
+    <div class="col-md-6">
+        <label>Taxi Service Required?</label>
+        <select id="taxiRequired" onchange="toggleTaxiSection()">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+    </div>
+
+    <!-- Accommodation -->
+    <div class="col-md-6">
+        <label>Accommodation Required?</label>
+        <select id="accommodationRequired" onchange="toggleAccommodationSection()">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+    </div>
+
+</div>
 <!-- ================= PAYMENT DETAILS ================= -->
 
 <div class="row mt-3">
