@@ -59,6 +59,18 @@ function saveBookings(bookings) {
 
 }
 // Load bookings into table
+function toggleTaxiSection() {
+
+    const required = document.getElementById("taxiRequired").value;
+    const section = document.getElementById("taxiSection");
+
+    if (required === "Yes") {
+        section.style.display = "block";
+    } else {
+        section.style.display = "none";
+    }
+}
+
 async function loadBookings() {
 
 currentBookings = await getBookings();
