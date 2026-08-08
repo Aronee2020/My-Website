@@ -70,6 +70,63 @@ function toggleTaxiSection() {
         section.style.display = "none";
     }
 }
+function calculateTaxiBalance() {
+
+    const amount = parseFloat(document.getElementById("taxiAmount").value) || 0;
+    const advance = parseFloat(document.getElementById("taxiAdvance").value) || 0;
+
+    const balance = amount - advance;
+
+    document.getElementById("taxiBalance").value =
+        balance >= 0 ? balance.toFixed(2) : "0.00";
+}
+function calculateAccommodationNights() {
+
+    const checkIn =
+        document.getElementById("accommodationCheckIn").value;
+
+    const checkOut =
+        document.getElementById("accommodationCheckOut").value;
+
+    if (!checkIn || !checkOut) {
+        document.getElementById("accommodationNights").value = "";
+        return;
+    }
+
+    const start = new Date(checkIn);
+    const end = new Date(checkOut);
+
+    const difference =
+        (end - start) / (1000 * 60 * 60 * 24);
+
+    document.getElementById("accommodationNights").value =
+        difference > 0 ? difference : 0;
+}
+function calculateAccommodationBalance() {
+
+    const amount =
+        parseFloat(document.getElementById("accommodationAmount").value) || 0;
+
+    const advance =
+        parseFloat(document.getElementById("accommodationAdvance").value) || 0;
+
+    const balance = amount - advance;
+
+    document.getElementById("accommodationBalance").value =
+        balance >= 0 ? balance.toFixed(2) : "0.00";
+}
+function toggleAccommodationSection() {
+
+    const required = document.getElementById("accommodationRequired").value;
+    const section = document.getElementById("accommodationSection");
+
+    if (required === "Yes") {
+        section.style.display = "block";
+    } else {
+        section.style.display = "none";
+    }
+}
+
 
 async function loadBookings() {
 
