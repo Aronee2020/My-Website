@@ -832,6 +832,50 @@ document.getElementById("postponeReason").value =
     booking.postponeReason || "";
 
 bookingStatusChanged();
+    // ======================================
+// LOAD TAXI SERVICE DETAILS
+// ======================================
+
+document.getElementById("taxiRequired").value =
+    booking.taxiRequired || "No";
+
+document.getElementById("taxiServiceType").value =
+    booking.taxiServiceType || "";
+
+document.getElementById("taxiVehicleType").value =
+    booking.taxiVehicleType || "";
+
+document.getElementById("taxiPassengers").value =
+    booking.taxiPassengers || "";
+
+document.getElementById("taxiItinerary").value =
+    booking.taxiItinerary || "";
+
+document.getElementById("taxiAmount").value =
+    booking.taxiAmount || "";
+
+document.getElementById("taxiAdvance").value =
+    booking.taxiAdvance || "";
+
+document.getElementById("taxiBalance").value =
+    booking.taxiBalance || "";
+
+document.getElementById("taxiPaymentMode").value =
+    booking.taxiPaymentMode || "";
+
+document.getElementById("taxiStatus").value =
+    booking.taxiStatus || "Pending";
+
+document.getElementById("taxiRemarks").value =
+    booking.taxiRemarks || "";
+
+
+// Show / hide Taxi section
+toggleTaxiSection();
+
+
+// Recalculate Taxi balance
+calculateTaxiBalance();
 }
 // =====================================
 // UPDATE BOOKING
