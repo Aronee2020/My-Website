@@ -154,7 +154,7 @@ function loadPackageDetails(packageName){
 
                 "Television is not available on the houseboat.",
 
-                "Music system with microphone is available. Kindly keep the volume low after 9:30 PM.",
+                "Music system with mic is available. Kindly keep the volume low after 9:30 PM.",
 
                 "Smoking is strictly prohibited inside the houseboat."
 
