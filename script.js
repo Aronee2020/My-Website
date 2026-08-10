@@ -708,8 +708,22 @@ let bookingObject = {
     postponeReason: document.getElementById("postponeReason").value,
 
     foodMenu: document.getElementById("foodMenu").value,
+specialInstruction: document.getElementById("specialInstruction").value,
 
-    specialInstruction: document.getElementById("specialInstruction").value
+// ======================================
+// TAXI SERVICE
+// ======================================
+taxiRequired: document.getElementById("taxiRequired").value,
+taxiServiceType: document.getElementById("taxiServiceType").value,
+taxiVehicleType: document.getElementById("taxiVehicleType").value,
+taxiPassengers: document.getElementById("taxiPassengers").value,
+taxiItinerary: document.getElementById("taxiItinerary").value,
+taxiAmount: document.getElementById("taxiAmount").value,
+taxiAdvance: document.getElementById("taxiAdvance").value,
+taxiBalance: document.getElementById("taxiBalance").value,
+taxiPaymentMode: document.getElementById("taxiPaymentMode").value,
+taxiStatus: document.getElementById("taxiStatus").value,
+taxiRemarks: document.getElementById("taxiRemarks").value
 
 };
 // // Save booking into Firebase
