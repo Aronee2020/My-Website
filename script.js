@@ -724,6 +724,7 @@ taxiRemarks: document.getElementById("taxiRemarks").value,
 
 foodMenu: document.getElementById("foodMenu").value,
 specialInstruction: document.getElementById("specialInstruction").value
+};
 // // Save booking into Firebase
 try {
     console.log("Saving...", bookingObject);
