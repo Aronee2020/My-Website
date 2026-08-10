@@ -264,10 +264,6 @@ function loadPackageDetails(packageName){
 
             instructions = [
 
-                "One-hour lunch break will be provided.",
-
-                "Route: Tejaswini River → Mavilakadappuram → Return.",
-
                 "Special dishes can be arranged with 2 days' prior notice.",
 
                 "AC is not available during cruising."
