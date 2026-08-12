@@ -353,7 +353,8 @@ display:none;
 
 .paymentDetails .label {
     display: inline-block;
-    width: 160px;
+    width: 200px;
+    white-space: nowrap;
 }
 
 .guestDetails .label{
