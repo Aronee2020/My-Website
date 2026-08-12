@@ -197,10 +197,124 @@ setValue(
     return "₹ " + Number(value).toLocaleString("en-IN");
 }
 
-setValue("packageAmount", money(booking.packageAmount));
-setValue("advance", money(booking.advanceReceived));
-setValue("balance", money(booking.balanceAmount));
-    setValue("advanceMode", booking.advanceMode);
+// ==========================================
+// PAYMENT DETAILS
+// ==========================================
+
+// Package Amount
+const packageAmount =
+    parseFloat(booking.packageAmount) || 0;
+
+// Taxi Amount
+const taxiAmount =
+    booking.taxiRequired === "Yes"
+        ? parseFloat(booking.taxiAmount) || 0
+        : 0;
+
+// Total Amount
+const totalAmount =
+    packageAmount + taxiAmount;
+
+// Houseboat Advance
+const houseboatAdvance =
+    parseFloat(booking.advanceReceived) || 0;
+
+// Taxi Advance
+const taxiAdvance =
+    booking.taxiRequired === "Yes"
+        ? parseFloat(booking.taxiAdvance) || 0
+        : 0;
+
+// Total Advance Received
+const totalAdvance =
+    houseboatAdvance + taxiAdvance;
+
+// FINAL BALANCE
+const finalBalance =
+    totalAmount - totalAdvance;
+
+
+// ==========================================
+// PACKAGE AMOUNT
+// ==========================================
+
+setValue(
+    "packageAmount",
+    money(packageAmount)
+);
+
+
+// ==========================================
+// TRANSPORTATION CHARGES
+// ==========================================
+
+const taxiChargesLine =
+    document.getElementById("taxiChargesLine");
+
+if (booking.taxiRequired === "Yes" && taxiAmount > 0) {
+
+    taxiChargesLine.style.display = "block";
+
+    setValue(
+        "taxiCharges",
+        money(taxiAmount)
+    );
+
+} else {
+
+    taxiChargesLine.style.display = "none";
+
+}
+
+
+// ==========================================
+// TOTAL AMOUNT
+// ==========================================
+
+setValue(
+    "totalAmount",
+    money(totalAmount)
+);
+
+
+// ==========================================
+// ADVANCE RECEIVED
+// ==========================================
+
+setValue(
+    "advance",
+    money(totalAdvance)
+);
+
+
+// ==========================================
+// PAYMENT MODE
+// ==========================================
+
+let paymentModes = [];
+
+if (houseboatAdvance > 0 && booking.advanceMode) {
+    paymentModes.push(booking.advanceMode);
+}
+
+if (taxiAdvance > 0 && booking.taxiPaymentMode) {
+    paymentModes.push(booking.taxiPaymentMode);
+}
+
+setValue(
+    "advanceMode",
+    paymentModes.join(" / ")
+);
+
+
+// ==========================================
+// BALANCE AMOUNT
+// ==========================================
+
+setValue(
+    "balance",
+    money(finalBalance)
+);
 
     // -----------------------------
     // Food Menu
