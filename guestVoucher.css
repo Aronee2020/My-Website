@@ -525,3 +525,31 @@ display:none;
 .clear-btn{
     background:#6c757d !important;
 }
+/* ==========================================
+   TRANSPORTATION DETAILS TABLE
+========================================== */
+
+#taxiVoucherSection .detailsTable {
+    width: 100%;
+    table-layout: fixed;
+}
+
+#taxiVoucherSection .detailsTable th:nth-child(1),
+#taxiVoucherSection .detailsTable td:nth-child(1) {
+    width: 20%;
+}
+
+#taxiVoucherSection .detailsTable th:nth-child(2),
+#taxiVoucherSection .detailsTable td:nth-child(2) {
+    width: 60%;
+}
+
+#taxiVoucherSection .detailsTable th:nth-child(3),
+#taxiVoucherSection .detailsTable td:nth-child(3) {
+    width: 20%;
+}
+
+#taxiVoucherSection .detailsTable td:nth-child(2) {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
