@@ -169,53 +169,88 @@ Your Customer ID is : <b><span id="customerId"></span></b>
 
 <!-- ================= PAYMENT DETAILS ================= -->
 
-<h3>Payment Details</h3>
+<!-- ================= PAYMENT + INSTRUCTIONS AREA ================= -->
 
-<div class="paymentDetails">
+<div class="bottomVoucherSection">
 
-    <p>
-        <span class="label">Package Amount</span> :
-        <span id="packageAmount"></span>
-    </p>
+    <!-- ================= PAYMENT DETAILS ================= -->
 
-    <p id="taxiChargesLine">
-        <span class="label">Transportation Charges</span> :
-        <span id="taxiCharges"></span>
-    </p>
+    <div class="paymentColumn">
 
-    <p>
-        <span class="label">Total Amount</span> :
-        <span id="totalAmount"></span>
-    </p>
+        <h3>💳 Payment Details</h3>
 
-    <p>
-        <span class="label">Advance Received</span> :
-        <span id="advance"></span>
-    </p>
+        <div class="paymentDetails">
 
-    <p>
-        <span class="label">Payment Mode</span> :
-        <span id="advanceMode"></span>
-    </p>
+            <p>
+                <span class="label">Package Amount</span>
+                <span class="colon">:</span>
+                <span id="packageAmount"></span>
+            </p>
 
-    <p>
-        <span class="label">Balance Amount</span> :
-        <span id="balance"></span>
-    </p>
+            <p id="taxiChargesLine">
+                <span class="label">Transportation Charges</span>
+                <span class="colon">:</span>
+                <span id="taxiCharges"></span>
+            </p>
 
-</div><!-- ================= TERMS ================= -->
-<div class="instructionPage">
+            <p>
+                <span class="label">Total Amount</span>
+                <span class="colon">:</span>
+                <span id="totalAmount"></span>
+            </p>
 
-<h3>Guest Instructions</h3>
+            <p>
+                <span class="label">Advance Received</span>
+                <span class="colon">:</span>
+                <span id="advance"></span>
+            </p>
 
-<ul class="terms" id="instructionList"></ul>
+            <p>
+                <span class="label">Payment Mode</span>
+                <span class="colon">:</span>
+                <span id="advanceMode"></span>
+            </p>
+
+            <p class="balanceRow">
+                <span class="label">Balance Amount</span>
+                <span class="colon">:</span>
+                <span id="balance"></span>
+            </p>
+
+        </div>
+
+    </div>
 
 
-<h3>Terms & Conditions</h3>
+    <!-- ================= INSTRUCTIONS + TERMS ================= -->
 
-<ul class="terms" id="termsList"></ul>
+    <div class="instructionColumn">
 
-</div><!-- ================= FOOTER ================= -->
+        <!-- Guest Instructions -->
+
+        <div class="instructionBox">
+
+            <h3>📋 Guest Instructions</h3>
+
+            <ul class="terms" id="instructionList"></ul>
+
+        </div>
+
+
+        <!-- Terms & Conditions -->
+
+        <div class="termsBox">
+
+            <h3>📋 Terms & Conditions</h3>
+
+            <ul class="terms" id="termsList"></ul>
+
+        </div>
+
+    </div>
+
+</div>
+    <!-- ================= FOOTER ================= -->
 <div class="footer">
 
 <b>
