@@ -115,10 +115,80 @@ if (booking.taxiRequired === "Yes") {
     taxiVoucherSection.style.display = "none";
 
 }
-    setValue("packageAmount", money(booking.packageAmount));
-setValue("advance", money(booking.advanceReceived));
-setValue("balance", money(booking.balanceAmount));
-setValue("advanceMode", booking.advanceMode);
+    // =============================
+// PAYMENT DETAILS
+// =============================
+
+const houseboatAmount =
+    parseFloat(booking.packageAmount) || 0;
+
+const taxiAmount =
+    booking.taxiRequired === "Yes"
+        ? parseFloat(booking.taxiAmount) || 0
+        : 0;
+
+const totalAmount = houseboatAmount + taxiAmount;
+
+const advanceAmount =
+    parseFloat(booking.advanceReceived) || 0;
+
+const balanceAmount =
+    totalAmount - advanceAmount;
+
+
+// Houseboat Charges
+setValue(
+    "houseboatCharges",
+    money(houseboatAmount)
+);
+
+
+// Taxi Charges
+const taxiChargesRow =
+    document.getElementById("taxiChargesRow");
+
+if (booking.taxiRequired === "Yes" && taxiAmount > 0) {
+
+    taxiChargesRow.style.display = "table-row";
+
+    setValue(
+        "taxiCharges",
+        money(taxiAmount)
+    );
+
+} else {
+
+    taxiChargesRow.style.display = "none";
+
+}
+
+
+// Total Amount
+setValue(
+    "totalAmount",
+    money(totalAmount)
+);
+
+
+// Advance
+setValue(
+    "advance",
+    money(advanceAmount)
+);
+
+
+// Payment Mode
+setValue(
+    "advanceMode",
+    booking.advanceMode || ""
+);
+
+
+// Balance
+setValue(
+    "balance",
+    money(balanceAmount)
+);
     // -----------------------------
     // Payment
     // -----------------------------
