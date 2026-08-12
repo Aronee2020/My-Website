@@ -83,6 +83,38 @@ setValue(
 );
 
 setValue("checkInPoint", booking.checkInPoint);
+    // =============================
+// TAXI DETAILS FOR GUEST VOUCHER
+// =============================
+
+const taxiVoucherSection = document.getElementById("taxiVoucherSection");
+
+if (booking.taxiRequired === "Yes") {
+
+    taxiVoucherSection.style.display = "block";
+
+    setValue(
+        "voucherTaxiVehicleType",
+        booking.taxiVehicleType || ""
+    );
+
+    setValue(
+        "voucherTaxiPackageDetails",
+        booking.taxiItinerary || ""
+    );
+
+    setValue(
+        "voucherTaxiAmount",
+        booking.taxiAmount
+            ? money(booking.taxiAmount)
+            : ""
+    );
+
+} else {
+
+    taxiVoucherSection.style.display = "none";
+
+}
     setValue("packageAmount", money(booking.packageAmount));
 setValue("advance", money(booking.advanceReceived));
 setValue("balance", money(booking.balanceAmount));
