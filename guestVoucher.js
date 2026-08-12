@@ -21,7 +21,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log("Guest Voucher Booking:", booking);
 
+// ==========================================
+// HEADER GUEST NAME & CUSTOMER ID
+// ==========================================
 
+setValue(
+    "guestName",
+    "Mr./Ms " + (booking.guestName || "")
+);
+
+setValue(
+    "customerId",
+    booking.customerId || ""
+);
     // ==========================================
     // FORMAT MONEY
     // ==========================================
