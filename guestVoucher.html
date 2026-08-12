@@ -156,44 +156,39 @@ Your Customer ID is : <b><span id="customerId"></span></b>
 
 <h3>Payment Details</h3>
 
-<table class="detailsTable paymentTable">
+<div class="paymentDetails">
 
-    <tr>
-        <th>Description</th>
-        <th>Amount</th>
-    </tr>
+    <p>
+        <span class="label">Package Amount</span> :
+        <span id="packageAmount"></span>
+    </p>
 
-    <tr>
-        <td>Houseboat Charges</td>
-        <td id="houseboatCharges"></td>
-    </tr>
+    <p id="taxiChargesLine">
+        <span class="label">Transportation Charges</span> :
+        <span id="taxiCharges"></span>
+    </p>
 
-    <tr id="taxiChargesRow" style="display:none;">
-        <td>Transportation Charges</td>
-        <td id="taxiCharges"></td>
-    </tr>
+    <p>
+        <span class="label">Total Amount</span> :
+        <span id="totalAmount"></span>
+    </p>
 
-    <tr>
-        <td><strong>Total Amount</strong></td>
-        <td id="totalAmount"><strong></strong></td>
-    </tr>
+    <p>
+        <span class="label">Advance Received</span> :
+        <span id="advance"></span>
+    </p>
 
-    <tr>
-        <td>Advance Received</td>
-        <td id="advance"></td>
-    </tr>
+    <p>
+        <span class="label">Payment Mode</span> :
+        <span id="advanceMode"></span>
+    </p>
 
-    <tr>
-        <td>Payment Mode</td>
-        <td id="advanceMode"></td>
-    </tr>
+    <p>
+        <span class="label">Balance Amount</span> :
+        <span id="balance"></span>
+    </p>
 
-    <tr>
-        <td><strong>Balance Amount</strong></td>
-        <td id="balance"><strong></strong></td>
-    </tr>
-
-</table><!-- ================= TERMS ================= -->
+</div><!-- ================= TERMS ================= -->
 <div class="instructionPage">
 
 <h3>Guest Instructions</h3>
