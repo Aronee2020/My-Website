@@ -338,6 +338,23 @@ display:none;
     line-height:1.8;
     font-weight:normal;
 }
+/* ================================
+   PAYMENT DETAILS
+================================ */
+
+.paymentDetails {
+    margin-top: 5px;
+}
+
+.paymentDetails p {
+    margin: 8px 0;
+    line-height: 1.4;
+}
+
+.paymentDetails .label {
+    display: inline-block;
+    width: 160px;
+}
 
 .guestDetails .label{
     display:inline-block;
