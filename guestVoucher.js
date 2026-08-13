@@ -278,7 +278,25 @@ setValue(
         "totalAmount",
         money(totalAmount)
     );
+// ==========================================
+// SHOW TOTAL AMOUNT ONLY WHEN TAXI IS USED
+// ==========================================
 
+const totalAmountLine =
+    document.getElementById("totalAmountLine");
+
+if (totalAmountLine) {
+
+    if (
+        booking.taxiRequired === "Yes" &&
+        taxiAmount > 0
+    ) {
+        totalAmountLine.style.display = "block";
+    } else {
+        totalAmountLine.style.display = "none";
+    }
+
+}
 
     // Advance Received
     setValue(
