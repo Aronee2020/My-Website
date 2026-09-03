@@ -273,87 +273,126 @@ function timeToMinutes(time){
 // Houseboat Availability Check
 // ======================================
 
-function checkAvailability(){
+// ======================================
+// HOUSEBOAT AVAILABILITY CHECK
+// ======================================
 
-    let table=document.getElementById("bookingTable");
+function checkAvailability() {
 
-    let boat=document.getElementById("houseboatName").value;
+    let table = document.getElementById("bookingTable");
 
-    let date=document.getElementById("cruiseDate").value;
+    let boat = document.getElementById("houseboatName").value.trim();
+    let date = document.getElementById("cruiseDate").value.trim();
 
-  let checkInValue = document.getElementById("checkIn").value;
-let checkOutValue = document.getElementById("checkOut").value;
+    let checkInValue = document.getElementById("checkIn").value.trim();
+    let checkOutValue = document.getElementById("checkOut").value.trim();
 
-console.log("NEW Check In :", checkInValue);
-console.log("NEW Check Out:", checkOutValue);
+    console.log("New Houseboat:", boat);
+    console.log("New Cruise Date:", date);
+    console.log("New Check In:", checkInValue);
+    console.log("New Check Out:", checkOutValue);
 
-let newIn = timeToMinutes(checkInValue);
-let newOut = timeToMinutes(checkOutValue);
+    // Convert new booking time to minutes
+    let newIn = timeToMinutes(checkInValue);
+    let newOut = timeToMinutes(checkOutValue);
 
-    if(newIn==-1 || newOut==-1){
-
+    // Invalid time
+    if (newIn === -1 || newOut === -1) {
         return false;
-
     }
 
-    for(let i=1;i<table.rows.length;i++){
+    // Check that checkout is after check-in
+    if (newOut <= newIn) {
 
-        let row=table.rows[i];
+        alert(
+            "❌ INVALID TIME\n\n" +
+            "Check-out time must be after Check-in time."
+        );
 
-        let rowBoat = row.cells[7].innerHTML;
+        return false;
+    }
 
-        let rowDate=row.cells[4].innerHTML;
+    // ======================================
+    // CHECK EXISTING BOOKINGS
+    // ======================================
 
-let oldCheckIn = row.cells[7].innerHTML.trim();
-let oldCheckOut = row.cells[8].innerHTML.trim();
+    for (let i = 1; i < table.rows.length; i++) {
 
-console.log("Booking ID :", row.cells[0].innerHTML);
-console.log("Old Check In :", oldCheckIn);
-console.log("Old Check Out:", oldCheckOut);
+        let row = table.rows[i];
 
-let oldIn = timeToMinutes(oldCheckIn);
-let oldOut = timeToMinutes(oldCheckOut);
+        // ==================================
+        // CORRECT TABLE COLUMNS
+        // ==================================
 
-        if(rowBoat==boat && rowDate==date){
+        let rowBoat = row.cells[7].innerHTML.trim();
 
-            if(newIn<oldOut && newOut>oldIn){
+        let rowDate = row.cells[1].innerHTML.trim();
+
+        let oldCheckIn = row.cells[9].innerHTML.trim();
+
+        let oldCheckOut = row.cells[10].innerHTML.trim();
+
+        console.log("Existing Booking");
+        console.log("Houseboat:", rowBoat);
+        console.log("Cruise Date:", rowDate);
+        console.log("Check In:", oldCheckIn);
+        console.log("Check Out:", oldCheckOut);
+
+        // ==================================
+        // SAME HOUSEBOAT + SAME DATE
+        // ==================================
+
+        if (rowBoat === boat && rowDate === date) {
+
+            let oldIn = timeToMinutes(oldCheckIn);
+            let oldOut = timeToMinutes(oldCheckOut);
+
+            // Ignore invalid existing times
+            if (oldIn === -1 || oldOut === -1) {
+                continue;
+            }
+
+            // ==================================
+            // TIME OVERLAP CHECK
+            // ==================================
+
+            if (newIn < oldOut && newOut > oldIn) {
 
                 alert(
+                    "❌ HOUSEBOAT ALREADY BOOKED\n\n" +
 
-"❌ HOUSEBOAT ALREADY BOOKED\n\n"+
+                    "Guest : " +
+                    row.cells[2].innerHTML +
 
-"Guest : "+row.cells[2].innerHTML+
+                    "\nBooking ID : " +
+                    row.cells[0].innerHTML +
 
-"\nBooking ID : "+row.cells[0].innerHTML+
+                    "\nHouseboat : " +
+                    boat +
 
-"\nHouseboat : "+boat+
+                    "\nDate : " +
+                    date +
 
-"\nDate : "+date+
+                    "\nExisting Time : " +
+                    oldCheckIn +
 
-"\nExisting Time : "+
+                    " - " +
+                    oldCheckOut +
 
-row.cells[7].innerHTML+
-
-" - "+
-
-row.cells[8].innerHTML+
-
-"\n\nPlease choose another houseboat."
-
+                    "\n\nPlease choose another houseboat or time."
                 );
 
                 return false;
-
             }
-
         }
-
     }
 
-    return true;
+    // ======================================
+    // HOUSEBOAT AVAILABLE
+    // ======================================
 
-}
-// Selected table row
+    return true;
+}// Selected table row
 let selectedRow = null;
 
 // ------------------------
