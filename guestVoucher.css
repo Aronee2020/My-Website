@@ -1306,3 +1306,18 @@ h3 {
     }
 
 }
+/* =====================================================
+PAYMENT VALUE - SPACE AFTER COLON
+===================================================== */
+
+.paymentDetails p > span:last-child {
+padding-left: 8px !important;
+text-align: left;
+white-space: nowrap;
+}
+
+/* Keep colon centered */
+.paymentDetails .colon {
+text-align: center;
+padding: 0;
+}
