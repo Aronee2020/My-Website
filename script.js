@@ -776,6 +776,9 @@ let bookingObject = {
     advanceReceived: document.getElementById("advanceReceived").value,
 
     balanceAmount: document.getElementById("balanceAmount").value,
+    totalAmount: document.getElementById("totalAmount").value,
+
+totalBalance: document.getElementById("totalBalance").value,
 
     advanceMode: document.getElementById("advanceMode").value,
 
@@ -1005,7 +1008,8 @@ async function updateBooking(){
             packageAmount: document.getElementById("packageAmount").value,
             advanceReceived: document.getElementById("advanceReceived").value,
             balanceAmount: document.getElementById("balanceAmount").value,
-
+            totalAmount: document.getElementById("totalAmount").value,
+            totalBalance: document.getElementById("totalBalance").value,
             advanceMode: document.getElementById("advanceMode").value,
 
 bookingStatus: document.getElementById("bookingStatus").value,
