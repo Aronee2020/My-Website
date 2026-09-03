@@ -1105,7 +1105,7 @@ function searchBookings(){
 
         let row = rows[i];
         let text = row.innerText.toLowerCase();
-        let rowDate = row.cells[4].innerHTML;
+       let rowDate = row.cells[1].innerHTML;
         let rowBoat = row.cells[7].textContent.trim().toLowerCase();
 
         // Get booking status from currentBookings using Firebase ID
