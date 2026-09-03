@@ -960,10 +960,11 @@ document.getElementById("taxiRemarks").value =
 
 // Show / hide Taxi section
 toggleTaxiSection();
-
-
 // Recalculate Taxi balance
 calculateTaxiBalance();
+
+// Recalculate Total Amount and Total Balance
+calculateBalance();
 }
 // =====================================
 // UPDATE BOOKING
