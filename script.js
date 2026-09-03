@@ -512,25 +512,31 @@ function calculateTotalPax(){
 }
 
 // ------------------------
-// Balance
+// PAYMENT CALCULATION
 // ------------------------
 
-function calculateBalance(){
+function calculateBalance() {
 
+    // Houseboat Amount
     let packageAmount =
         parseFloat(document.getElementById("packageAmount").value) || 0;
 
+    // Houseboat Advance
     let houseboatAdvance =
         parseFloat(document.getElementById("advanceReceived").value) || 0;
 
+    // Taxi Amount
     let taxiAmount =
-        parseFloat(document.getElementById("taxiAmount")?.value) || 0;
+        parseFloat(document.getElementById("taxiAmount").value) || 0;
 
+    // Taxi Advance
     let taxiAdvance =
-        parseFloat(document.getElementById("taxiAdvance")?.value) || 0;
+        parseFloat(document.getElementById("taxiAdvance").value) || 0;
 
 
-    // ================= HOUSEBOAT BALANCE =================
+    // ======================================
+    // HOUSEBOAT BALANCE
+    // ======================================
 
     let houseboatBalance =
         Math.max(packageAmount - houseboatAdvance, 0);
@@ -539,7 +545,10 @@ function calculateBalance(){
         houseboatBalance.toFixed(2);
 
 
-    // ================= TOTAL AMOUNT =================
+    // ======================================
+    // TOTAL AMOUNT
+    // HOUSEBOAT + TAXI
+    // ======================================
 
     let totalAmount =
         packageAmount + taxiAmount;
@@ -548,18 +557,22 @@ function calculateBalance(){
         totalAmount.toFixed(2);
 
 
-    // ================= TOTAL BALANCE =================
+    // ======================================
+    // TOTAL BALANCE
+    // TOTAL AMOUNT - ALL ADVANCES
+    // ======================================
 
     let totalBalance =
         Math.max(
-            totalAmount - houseboatAdvance - taxiAdvance,
+            totalAmount -
+            houseboatAdvance -
+            taxiAdvance,
             0
         );
 
     document.getElementById("totalBalance").value =
         totalBalance.toFixed(2);
-}
-// ======================================
+}// ======================================
 // Mobile Number Validation
 // ======================================
 
