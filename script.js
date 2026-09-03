@@ -517,13 +517,47 @@ function calculateTotalPax(){
 
 function calculateBalance(){
 
-    let packageAmount=parseFloat(document.getElementById("packageAmount").value)||0;
+    let packageAmount =
+        parseFloat(document.getElementById("packageAmount").value) || 0;
 
-    let advance=parseFloat(document.getElementById("advanceReceived").value)||0;
+    let houseboatAdvance =
+        parseFloat(document.getElementById("advanceReceived").value) || 0;
 
-    document.getElementById("balanceAmount").value=
-    packageAmount-advance;
+    let taxiAmount =
+        parseFloat(document.getElementById("taxiAmount")?.value) || 0;
 
+    let taxiAdvance =
+        parseFloat(document.getElementById("taxiAdvance")?.value) || 0;
+
+
+    // ================= HOUSEBOAT BALANCE =================
+
+    let houseboatBalance =
+        Math.max(packageAmount - houseboatAdvance, 0);
+
+    document.getElementById("balanceAmount").value =
+        houseboatBalance.toFixed(2);
+
+
+    // ================= TOTAL AMOUNT =================
+
+    let totalAmount =
+        packageAmount + taxiAmount;
+
+    document.getElementById("totalAmount").value =
+        totalAmount.toFixed(2);
+
+
+    // ================= TOTAL BALANCE =================
+
+    let totalBalance =
+        Math.max(
+            totalAmount - houseboatAdvance - taxiAdvance,
+            0
+        );
+
+    document.getElementById("totalBalance").value =
+        totalBalance.toFixed(2);
 }
 // ======================================
 // Mobile Number Validation
