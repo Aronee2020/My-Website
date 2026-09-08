@@ -816,32 +816,66 @@ specialInstruction: document.getElementById("specialInstruction").value
 };
 // // Save booking into Firebase
 try {
+
     console.log("Saving...", bookingObject);
-    await addDoc(collection(db, "bookings"), bookingObject);
-    console.log("Booking Object:", bookingObject);
-    console.log("Saved Successfully");
-    await loadBookings();
-    await updateDashboard();
-    await updateNextNumbers();
-} catch (error) {
 
-    console.error(error);
+    // ================================
+    // SAVE TO FIREBASE
+    // ================================
 
-    alert(error.message);
+    await addDoc(
+        collection(db, "bookings"),
+        bookingObject
+    );
 
-    return;
+    console.log("Booking Saved Successfully");
 
-}
-// ======================================
-// Save for Guest Voucher
-// ======================================
+    // ================================
+    // SAVE FOR GUEST VOUCHER
+    // ================================
 
-localStorage.setItem(
-    "selectedBooking",
-    JSON.stringify(bookingObject)
-);
+    localStorage.setItem(
+        "selectedBooking",
+        JSON.stringify(bookingObject)
+    );
+
+    // ================================
+    // SUCCESS MESSAGE
+    // ================================
 
     alert("Booking Saved Successfully.");
+
+    // ================================
+    // REFRESH SYSTEM
+    // ================================
+
+    try {
+        await loadBookings();
+        await updateDashboard();
+        await updateNextNumbers();
+    } catch (refreshError) {
+
+        console.error(
+            "Booking saved, but refresh failed:",
+            refreshError
+        );
+
+    }
+
+} catch (error) {
+
+    console.error(
+        "Booking Save Error:",
+        error
+    );
+
+    alert(
+        "❌ Booking could not be saved.\n\n" +
+        error.message
+    );
+
+    return;
+}
 
   document.getElementById("bookingForm").reset();
 
