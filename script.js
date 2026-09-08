@@ -1,4 +1,5 @@
 import { db } from "./firebase.js";
+
 import {
     collection,
     addDoc,
@@ -236,8 +237,7 @@ function timeToMinutes(time){
     // 10 AM
     // 10:00 AM
 
-    let match = time.match(/^(\d{1,2})(?::(\d{2}))?\s*(AM|PM)$/);
-
+let match = time.match(/^(\d{1,2})(?::(\d{2}))?\s*(AM|PM)$/);
     if(!match){
     return -1;
 }
@@ -430,23 +430,6 @@ document.getElementById("packageAmount").value = "";
 document.getElementById("advanceReceived").value = "";
 });
 
-// ============================================
-// MAKE FUNCTIONS AVAILABLE TO HTML BUTTONS
-// ============================================
-
-window.saveBooking = saveBooking;
-window.updateBooking = updateBooking;
-window.deleteBooking = deleteBooking;
-window.exportToExcel = exportToExcel;
-window.openGuestVoucher = openGuestVoucher;
-window.searchBookings = searchBookings;
-window.clearSearch = clearSearch;
-window.bookingStatusChanged = bookingStatusChanged;
-window.toggleTaxiSection = toggleTaxiSection;
-window.toggleAccommodationSection = toggleAccommodationSection;
-window.calculateTaxiBalance = calculateTaxiBalance;
-window.calculateAccommodationNights = calculateAccommodationNights;
-window.calculateAccommodationBalance = calculateAccommodationBalance;
 // ------------------------
 // Booking ID
 // ------------------------
