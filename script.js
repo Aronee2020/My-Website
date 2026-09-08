@@ -1240,13 +1240,15 @@ function clearSearch(){
 // =====================================
 
 async function updateDashboard(){
-   let bookings = await getBookings();
+
+    let bookings = await getBookings();
 
     let today = new Date().toISOString().split("T")[0];
 
-    let tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate()+1);
-    tomorrow = tomorrow.toISOString().split("T")[0];
+    let tomorrowDate = new Date();
+    tomorrowDate.setDate(tomorrowDate.getDate() + 1);
+
+    let tomorrow = tomorrowDate.toISOString().split("T")[0];
 
     let todayCount = 0;
     let tomorrowCount = 0;
@@ -1256,37 +1258,74 @@ async function updateDashboard(){
 
     bookings.forEach(function(b){
 
-        if(b.cruiseDate === today)
-            todayCount++;
+        // =====================================
+        // CANCELLED BOOKINGS
+        // Do NOT show in Today/Tomorrow
+        // =====================================
 
-        if(b.cruiseDate === tomorrow)
-            tomorrowCount++;
+        if(b.bookingStatus === "Cancelled"){
 
-        if(b.bookingStatus === "Confirmed")
-            confirmed++;
-
-        if(b.bookingStatus === "Cancelled")
             cancelled++;
 
-        if(b.bookingStatus === "Postponed")
+            return;
+        }
+
+        // =====================================
+        // POSTPONED BOOKINGS
+        // Do NOT count using old cruise date
+        // =====================================
+
+        if(b.bookingStatus === "Postponed"){
+
             postponed++;
+
+            return;
+        }
+
+        // =====================================
+        // CONFIRMED BOOKINGS
+        // =====================================
+
+        if(b.bookingStatus === "Confirmed"){
+
+            confirmed++;
+
+            if(b.cruiseDate === today){
+
+                todayCount++;
+
+            }
+
+            if(b.cruiseDate === tomorrow){
+
+                tomorrowCount++;
+
+            }
+
+        }
 
     });
 
-    document.getElementById("todayBookings").innerHTML = todayCount;
-    document.getElementById("tomorrowBookings").innerHTML = tomorrowCount;
-    document.getElementById("totalBookings").innerHTML = bookings.length;
-    document.getElementById("confirmedBookings").innerHTML = confirmed;
-    document.getElementById("cancelledBookings").innerHTML = cancelled;
-    document.getElementById("postponedBookings").innerHTML = postponed;
+    // =====================================
+    // UPDATE DASHBOARD
+    // =====================================
+
+    document.getElementById("todayBookings").innerHTML =
+        todayCount;
+
+    document.getElementById("tomorrowBookings").innerHTML =
+        tomorrowCount;
+
+    document.getElementById("totalBookings").innerHTML =
+        bookings.length;
+
+    document.getElementById("confirmedBookings").innerHTML =
+        confirmed;
+
+    document.getElementById("cancelledBookings").innerHTML =
+        cancelled;
+
+    document.getElementById("postponedBookings").innerHTML =
+        postponed;
 
 }
-window.saveBooking = saveBooking;
-window.validateMobile = validateMobile;
-window.updateBooking = updateBooking;
-window.deleteBooking = deleteBooking;
-window.openGuestVoucher = openGuestVoucher;
-window.searchBookings = searchBookings;
-window.clearSearch = clearSearch;
-window.bookingStatusChanged = bookingStatusChanged;
-window.exportToExcel = exportToExcel;
