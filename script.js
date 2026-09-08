@@ -1381,3 +1381,20 @@ async function updateDashboard(){
         postponed;
 
 }
+// ============================================
+// MAKE FUNCTIONS AVAILABLE TO HTML BUTTONS
+// ============================================
+
+window.saveBooking = saveBooking;
+window.updateBooking = updateBooking;
+window.deleteBooking = deleteBooking;
+window.exportToExcel = exportToExcel;
+window.openGuestVoucher = openGuestVoucher;
+window.searchBookings = searchBookings;
+window.clearSearch = clearSearch;
+window.bookingStatusChanged = bookingStatusChanged;
+window.toggleTaxiSection = toggleTaxiSection;
+window.toggleAccommodationSection = toggleAccommodationSection;
+window.calculateTaxiBalance = calculateTaxiBalance;
+window.calculateAccommodationNights = calculateAccommodationNights;
+window.calculateAccommodationBalance = calculateAccommodationBalance;
