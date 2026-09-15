@@ -640,6 +640,34 @@ function bookingStatusChanged(){
     }
 
 }
+// ======================================
+// CUSTOMISED HOUSEBOAT TYPE
+// ======================================
+
+function toggleCustomHouseboatType() {
+
+    const houseboatType =
+        document.getElementById("houseboatType").value;
+
+    const section =
+        document.getElementById("customHouseboatTypeSection");
+
+    const input =
+        document.getElementById("customHouseboatType");
+
+    if (houseboatType === "Customised") {
+
+        section.style.display = "block";
+
+        input.focus();
+
+    } else {
+
+        section.style.display = "none";
+
+        input.value = "";
+    }
+}
 // ============================================
 // SAVE BOOKING
 // ============================================
@@ -758,8 +786,10 @@ let bookingObject = {
 
     houseboatName: document.getElementById("houseboatName").value,
 
-    houseboatType: document.getElementById("houseboatType").value,
-
+    houseboatType:
+    document.getElementById("houseboatType").value === "Customised"
+        ? document.getElementById("customHouseboatType").value.trim()
+        : document.getElementById("houseboatType").value,
     checkIn: document.getElementById("checkIn").value,
 
     checkOut: document.getElementById("checkOut").value,
@@ -919,9 +949,38 @@ function selectRow(row){
     document.getElementById("package").value = booking.package || "";
     document.getElementById("checkInPoint").value = booking.checkInPoint || "";
 
-    document.getElementById("houseboatName").value = booking.houseboatName || "";
-    document.getElementById("houseboatType").value = booking.houseboatType || "";
+document.getElementById("houseboatName").value =
+    booking.houseboatName || "";
 
+const standardHouseboatTypes = [
+    "1 Bedroom Standard Houseboat",
+    "2 Bedroom Standard Houseboat",
+    "3 Bedroom Standard Houseboat"
+];
+
+if (standardHouseboatTypes.includes(booking.houseboatType)) {
+
+    document.getElementById("houseboatType").value =
+        booking.houseboatType;
+
+    document.getElementById("customHouseboatType").value = "";
+
+} else if (booking.houseboatType) {
+
+    document.getElementById("houseboatType").value =
+        "Customised";
+
+    document.getElementById("customHouseboatType").value =
+        booking.houseboatType;
+
+} else {
+
+    document.getElementById("houseboatType").value = "";
+
+    document.getElementById("customHouseboatType").value = "";
+}
+
+toggleCustomHouseboatType();
     document.getElementById("checkIn").value = booking.checkIn || "";
     document.getElementById("checkOut").value = booking.checkOut || "";
     document.getElementById("foodMenu").value = booking.foodMenu || "";
@@ -1029,8 +1088,13 @@ async function updateBooking(){
             package: document.getElementById("package").value,
             checkInPoint: document.getElementById("checkInPoint").value,
 
-            houseboatName: document.getElementById("houseboatName").value,
-            houseboatType: document.getElementById("houseboatType").value,
+           houseboatName:
+    document.getElementById("houseboatName").value,
+
+houseboatType:
+    document.getElementById("houseboatType").value === "Customised"
+        ? document.getElementById("customHouseboatType").value.trim()
+        : document.getElementById("houseboatType").value,
 
             checkIn: document.getElementById("checkIn").value,
             checkOut: document.getElementById("checkOut").value,
