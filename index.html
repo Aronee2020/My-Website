@@ -357,26 +357,56 @@ class="form-select">
 
 <div class="col-md-6">
 
-<label>Houseboat Type</label>
+<div class="col-md-6">
 
-<select
-id="houseboatType"
-class="form-select">
+    <label>Houseboat Type</label>
 
-<option value="">Select Type</option>
+    <select
+        id="houseboatType"
+        class="form-select"
+        onchange="toggleCustomHouseboatType()">
 
-<option>1 Bedroom Standard Houseboat</option>
+        <option value="">Select Type</option>
 
-<option>2 Bedroom Standard Houseboat</option>
+        <option value="1 Bedroom Standard Houseboat">
+            1 Bedroom Standard Houseboat
+        </option>
 
-<option>3 Bedroom Standard Houseboat</option>
-    
-</select>
+        <option value="2 Bedroom Standard Houseboat">
+            2 Bedroom Standard Houseboat
+        </option>
+
+        <option value="3 Bedroom Standard Houseboat">
+            3 Bedroom Standard Houseboat
+        </option>
+
+        <option value="Customised">
+            Customised
+        </option>
+
+    </select>
 
 </div>
+</div>
+<!-- CUSTOMISED HOUSEBOAT TYPE -->
+
+<div class="row mt-3"
+     id="customHouseboatTypeSection"
+     style="display:none;">
+
+    <div class="col-md-12">
+
+        <label>Customised Houseboat Type</label>
+
+        <input
+            type="text"
+            id="customHouseboatType"
+            class="form-control"
+            placeholder="Example: 3 Bedroom + 1 Bedroom Houseboat">
+
+    </div>
 
 </div>
-
 <!-- PART 2 CONTINUES -->
     <!-- ==========================================
      OPTIONAL SERVICES
