@@ -301,17 +301,21 @@ function checkAvailability() {
         return false;
     }
 
-    // Check that checkout is after check-in
-    if (newOut <= newIn) {
+   // ======================================
+// CHECK-IN / CHECK-OUT TIME
+// Allow overnight bookings
+// Example: 5 PM → 8:30 AM
+// ======================================
 
-        alert(
-            "❌ INVALID TIME\n\n" +
-            "Check-out time must be after Check-in time."
-        );
+if (newOut === newIn) {
 
-        return false;
-    }
+    alert(
+        "❌ INVALID TIME\n\n" +
+        "Check-out time cannot be the same as Check-in time."
+    );
 
+    return false;
+}
     // ======================================
     // CHECK EXISTING BOOKINGS
     // ======================================
