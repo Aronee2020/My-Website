@@ -711,8 +711,23 @@ async function saveBooking() {
         alert("Please select Houseboat.");
         document.getElementById("houseboatName").focus();
         return;
-
     }
+    // ======================================
+// CUSTOMISED HOUSEBOAT TYPE VALIDATION
+// ======================================
+
+if (
+    document.getElementById("houseboatType").value === "Customised" &&
+    document.getElementById("customHouseboatType").value.trim() === ""
+) {
+
+    alert("Please enter the Customised Houseboat Type.");
+
+    document.getElementById("customHouseboatType").focus();
+
+    return;
+}
+
 // Check Advance Amount
 let packageAmount = parseFloat(document.getElementById("packageAmount").value) || 0;
 let advance = parseFloat(document.getElementById("advanceReceived").value) || 0;
@@ -1445,3 +1460,5 @@ window.toggleAccommodationSection = toggleAccommodationSection;
 window.calculateTaxiBalance = calculateTaxiBalance;
 window.calculateAccommodationNights = calculateAccommodationNights;
 window.calculateAccommodationBalance = calculateAccommodationBalance;
+window.toggleCustomHouseboatType =
+    toggleCustomHouseboatType;
