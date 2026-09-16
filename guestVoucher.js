@@ -57,7 +57,28 @@ document.addEventListener("DOMContentLoaded", function () {
     const booking = JSON.parse(bookingData);
 
     console.log("Guest Voucher Booking:", booking);
+// ==========================================
+// APPLY VOUCHER BRAND
+// ==========================================
 
+const selectedBrand =
+    voucherBrands[booking.voucherBrand] ||
+    voucherBrands.Aronee;
+
+document.getElementById("voucherLogo").src =
+    selectedBrand.logo;
+
+document.getElementById("voucherCompanyName").textContent =
+    selectedBrand.companyName;
+
+document.getElementById("voucherAddress").innerHTML =
+    selectedBrand.address;
+
+document.getElementById("voucherCompanyIntro").textContent =
+    selectedBrand.introName;
+
+document.getElementById("voucherFooterCompany").textContent =
+    selectedBrand.companyName;
 // ==========================================
 // HEADER GUEST NAME & CUSTOMER ID
 // ==========================================
