@@ -790,7 +790,17 @@ if (
 
     return;
 }
+if (
+    document.getElementById("houseboatName").value === "Others" &&
+    document.getElementById("customHouseboatName").value.trim() === ""
+) {
 
+    alert("Please enter the Houseboat Name(s).");
+
+    document.getElementById("customHouseboatName").focus();
+
+    return;
+}
 // Check Advance Amount
 let packageAmount = parseFloat(document.getElementById("packageAmount").value) || 0;
 let advance = parseFloat(document.getElementById("advanceReceived").value) || 0;
