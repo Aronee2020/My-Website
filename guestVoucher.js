@@ -25,7 +25,7 @@ const voucherBrands = {
     KBH: {
         companyName: "KERALA BEKAL HOUSEBOAT",
         introName: "Kerala Bekal Houseboat",
-logo: "kbh-logo.jpg",
+logo: "kbh-logo.png",
         address: `
             <!-- KBH ADDRESS WILL BE ADDED HERE -->
         `
