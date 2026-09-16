@@ -672,6 +672,23 @@ function toggleCustomHouseboatType() {
         input.value = "";
     }
 }
+function toggleCustomHouseboatName() {
+
+    const select = document.getElementById("houseboatName");
+    const section = document.getElementById("customHouseboatNameSection");
+    const input = document.getElementById("customHouseboatName");
+
+    if (select.value === "Others") {
+
+        section.style.display = "block";
+
+    } else {
+
+        section.style.display = "none";
+        input.value = "";
+
+    }
+}
 // ======================================
 // CUSTOMISED PACKAGE
 // ======================================
