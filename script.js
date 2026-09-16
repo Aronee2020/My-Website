@@ -1580,3 +1580,5 @@ window.toggleCustomHouseboatType =
     toggleCustomHouseboatType;
 window.toggleCustomPackageType =
     toggleCustomPackageType;
+window.toggleCustomHouseboatName =
+    toggleCustomHouseboatName;
