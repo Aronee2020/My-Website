@@ -38,7 +38,9 @@ KBH: {
         companyName: "NILESHWAR HOUSEBOAT",
         introName: "Nileshwar Houseboat",
         logo: "nileshwar-logo.png",
-        address: `
+        address: Houseboat Terminal,
+        Kottapuram, Nileshwar, 
+        Kerala 671314`
             <!-- NILESHWAR ADDRESS WILL BE ADDED HERE -->
         `
     }
