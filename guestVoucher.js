@@ -22,18 +22,17 @@ const voucherBrands = {
         `
     },
 
-    KBH: {
-        companyName: "KERALA BEKAL HOUSEBOAT",
-        introName: "Kerala Bekal Houseboat",
-logo: "kbh-logo.png",
-        address: `MALABAR INNOVATION ENTERPRENEURSHIP
-        ZONE, MANGATTUPARAMBA, NEAR KANNUR
-UNIVERSITY CAMPUS, KALLIASSERI
- Kannur,
-Kerala - 670567,
-            <!-- KBH ADDRESS WILL BE ADDED HERE -->
-        `
-    },
+KBH: {
+    companyName: "KERALA BEKAL HOUSEBOAT",
+    introName: "Kerala Bekal Houseboat",
+    logo: "kbh-logo.png",
+    address: `
+        MALABAR INNOVATION ENTREPRENEURSHIP<br>
+        ZONE, MANGATTUPARAMBA, NEAR KANNUR<br>
+        UNIVERSITY CAMPUS, KALLIASSERI<br>
+        Kannur, Kerala - 670567
+    `
+},
 
     Nileshwar: {
         companyName: "NILESHWAR HOUSEBOAT",
