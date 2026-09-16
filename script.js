@@ -1267,10 +1267,13 @@ async function updateBooking(){
 
     guestName: document.getElementById("guestName").value,
 
-    travelPartner:
-        document.getElementById("travelPartner").value.trim(),
+   travelPartner:
+    document.getElementById("travelPartner").value.trim(),
 
-    mobile: document.getElementById("mobile").value,
+voucherBrand:
+    document.getElementById("voucherBrand").value,
+
+mobile: document.getElementById("mobile").value,
 
     address: document.getElementById("address").value,
             cruiseDate: document.getElementById("cruiseDate").value,
