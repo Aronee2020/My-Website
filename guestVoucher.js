@@ -3,7 +3,44 @@
 // Guest Voucher
 // guestVoucher.js
 // ==========================================
+// ==========================================
+// VOUCHER BRAND CONFIGURATION
+// ==========================================
 
+const voucherBrands = {
+
+    Aronee: {
+        companyName: "ARONEE TOURS & TRAVELS PVT. LTD",
+        introName: "Aronee Tours & Travels Pvt. Ltd.",
+        logo: "logo.png",
+        address: `
+            Ansariya Complex<br>
+            Main Bazar,Nileshwar<br>
+            Kasaragod,Kerala - 671314<br>
+            ☎ +91 9072219555<br>
+            ✉ info@aronee.com
+        `
+    },
+
+    KBH: {
+        companyName: "KERALA BEKAL HOUSEBOAT",
+        introName: "Kerala Bekal Houseboat",
+        logo: "kbh-logo.png",
+        address: `
+            <!-- KBH ADDRESS WILL BE ADDED HERE -->
+        `
+    },
+
+    Nileshwar: {
+        companyName: "NILESHWAR HOUSEBOAT",
+        introName: "Nileshwar Houseboat",
+        logo: "nileshwar-logo.png",
+        address: `
+            <!-- NILESHWAR ADDRESS WILL BE ADDED HERE -->
+        `
+    }
+
+};
 document.addEventListener("DOMContentLoaded", function () {
 
     // ==========================================
