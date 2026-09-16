@@ -853,8 +853,6 @@ console.log("Textbox Booking ID:", document.getElementById("bookingId").value);
 
 let bookingObject = {
 
-    let bookingObject = {
-
     bookingId: document.getElementById("bookingId").value,
 
     customerId: document.getElementById("customerId").value,
@@ -863,13 +861,12 @@ let bookingObject = {
         document.getElementById("travelPartner").value.trim(),
 
     receiptNo: document.getElementById("receiptNo").value,
+
     bookingDate: document.getElementById("bookingDate").value,
 
     guestName: document.getElementById("guestName").value,
-travelPartner:
-    document.getElementById("travelPartner").value.trim(),
-    mobile: document.getElementById("mobile").value,
 
+    mobile: document.getElementById("mobile").value,
     address: document.getElementById("address").value,
 
     cruiseDate: document.getElementById("cruiseDate").value,
