@@ -853,12 +853,16 @@ console.log("Textbox Booking ID:", document.getElementById("bookingId").value);
 
 let bookingObject = {
 
+    let bookingObject = {
+
     bookingId: document.getElementById("bookingId").value,
 
     customerId: document.getElementById("customerId").value,
 
-    receiptNo: document.getElementById("receiptNo").value,
+    travelPartner:
+        document.getElementById("travelPartner").value.trim(),
 
+    receiptNo: document.getElementById("receiptNo").value,
     bookingDate: document.getElementById("bookingDate").value,
 
     guestName: document.getElementById("guestName").value,
@@ -1033,9 +1037,14 @@ function selectRow(row){
 
     if(!booking) return;
 
-    document.getElementById("bookingId").value = booking.bookingId || "";
-    document.getElementById("bookingDate").value = booking.bookingDate || "";
-    document.getElementById("guestName").value = booking.guestName || "";
+document.getElementById("bookingId").value = booking.bookingId || "";
+
+document.getElementById("travelPartner").value =
+    booking.travelPartner || "";
+
+document.getElementById("bookingDate").value = booking.bookingDate || "";
+
+document.getElementById("guestName").value = booking.guestName || "";
     document.getElementById("mobile").value = booking.mobile || "";
 
     document.getElementById("address").value = booking.address || "";
