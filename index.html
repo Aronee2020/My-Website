@@ -345,38 +345,56 @@ readonly>
     </div>
 
 </div>
-<!-- Houseboat -->
+<!-- ================= HOUSEBOAT ================= -->
 
 <div class="row mt-3">
 
+```
 <div class="col-md-6">
 
-<label>Houseboat Name</label>
+    <label>Houseboat Name</label>
 
-<select
-id="houseboatName"
-class="form-select">
+    <select
+        id="houseboatName"
+        class="form-select"
+        onchange="toggleCustomHouseboatName()">
 
-<option value="">Select Houseboat</option>
-<option>Dreampalace</option>
-<option>Madhuwahini</option>
-<option>Arabian palace</option>
-<option>Lakepalace</option>
-<option>Dolphin</option>
-<option>Meadows</option>
-<option>Rainbow</option>
-<option>Jalarani</option>    
-<option>Jalakanyaka</option>
-<option>KL 14</option>
-<option>Valiyaparamba</option>
-<option>Bekal Riveria</option>
-<option>Atlanta</option>
-<option>Lotus</option>
-</select>
+        <option value="">Select Houseboat</option>
+        <option>Arabian Palace</option>
+        <option>Madhuwahini</option>
+        <option>Dreampalace</option>
+        <option>Lakepalace</option>
+        <option>Dolphin</option>
+        <option>Meadows</option>
+        <option>Rainbow</option>
+        <option>Jalarani</option>
+        <option>Jalakanyaka</option>
+        <option>KL 14</option>
+        <option>Valiyaparamba</option>
+        <option>Bekal Riveria</option>
+        <option>Atlanta</option>
+        <option>Lotus</option>
+
+        <option value="Others">Others</option>
+
+    </select>
+
+    <!-- Appears only when Others is selected -->
+    <div id="customHouseboatNameSection"
+         style="display:none; margin-top:10px;">
+
+        <label>Houseboat Name(s)</label>
+
+        <input
+            type="text"
+            id="customHouseboatName"
+            class="form-control"
+            placeholder="Type houseboat name(s), separated by commas">
+
+    </div>
 
 </div>
 
-<div class="col-md-6">
 
 <div class="col-md-6">
 
@@ -408,6 +426,8 @@ class="form-select">
     </select>
 
 </div>
+```
+
 </div>
 <!-- CUSTOMISED HOUSEBOAT TYPE -->
 
