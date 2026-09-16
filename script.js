@@ -1269,8 +1269,10 @@ package:
 checkInPoint:
     document.getElementById("checkInPoint").value,
 
-           houseboatName:
-    document.getElementById("houseboatName").value,
+          houseboatName:
+    document.getElementById("houseboatName").value === "Others"
+        ? document.getElementById("customHouseboatName").value.trim()
+        : document.getElementById("houseboatName").value,
 
 houseboatType:
     document.getElementById("houseboatType").value === "Customised"
