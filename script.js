@@ -866,7 +866,8 @@ let bookingObject = {
     bookingDate: document.getElementById("bookingDate").value,
 
     guestName: document.getElementById("guestName").value,
-
+travelPartner:
+    document.getElementById("travelPartner").value.trim(),
     mobile: document.getElementById("mobile").value,
 
     address: document.getElementById("address").value,
