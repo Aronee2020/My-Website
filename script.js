@@ -1087,8 +1087,45 @@ toggleCustomPackageType();
 document.getElementById("checkInPoint").value =
     booking.checkInPoint || "";
 
-document.getElementById("houseboatName").value =
-    booking.houseboatName || "";
+const standardHouseboatNames = [
+    "Arabian Palace",
+    "Madhuwahini",
+    "Dreampalace",
+    "Lakepalace",
+    "Dolphin",
+    "Meadows",
+    "Rainbow",
+    "Jalarani",
+    "Jalakanyaka",
+    "KL 14",
+    "Valiyaparamba",
+    "Bekal Riveria",
+    "Atlanta",
+    "Lotus"
+];
+
+if (standardHouseboatNames.includes(booking.houseboatName)) {
+
+    document.getElementById("houseboatName").value =
+        booking.houseboatName;
+
+    document.getElementById("customHouseboatName").value = "";
+
+} else if (booking.houseboatName) {
+
+    document.getElementById("houseboatName").value = "Others";
+
+    document.getElementById("customHouseboatName").value =
+        booking.houseboatName;
+
+} else {
+
+    document.getElementById("houseboatName").value = "";
+
+    document.getElementById("customHouseboatName").value = "";
+}
+
+toggleCustomHouseboatName();
 
 const standardHouseboatTypes = [
     "1 Bedroom Standard Houseboat",
