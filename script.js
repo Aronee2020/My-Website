@@ -1262,10 +1262,14 @@ async function updateBooking(){
 
         await updateDoc(bookingRef, {
 
-            guestName: document.getElementById("guestName").value,
-            mobile: document.getElementById("mobile").value,
-            address: document.getElementById("address").value,
+    guestName: document.getElementById("guestName").value,
 
+    travelPartner:
+        document.getElementById("travelPartner").value.trim(),
+
+    mobile: document.getElementById("mobile").value,
+
+    address: document.getElementById("address").value,
             cruiseDate: document.getElementById("cruiseDate").value,
 
 package:
