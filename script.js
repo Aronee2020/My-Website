@@ -672,6 +672,34 @@ function toggleCustomHouseboatType() {
         input.value = "";
     }
 }
+// ======================================
+// CUSTOMISED PACKAGE
+// ======================================
+
+function toggleCustomPackageType() {
+
+    const packageType =
+        document.getElementById("package").value;
+
+    const section =
+        document.getElementById("customPackageSection");
+
+    const input =
+        document.getElementById("customPackage");
+
+    if (packageType === "Customised") {
+
+        section.style.display = "block";
+
+        input.focus();
+
+    } else {
+
+        section.style.display = "none";
+
+        input.value = "";
+    }
+}
 // ============================================
 // SAVE BOOKING
 // ============================================
@@ -709,7 +737,21 @@ async function saveBooking() {
         return;
 
     }
+// ======================================
+// CUSTOMISED PACKAGE VALIDATION
+// ======================================
 
+if (
+    document.getElementById("package").value === "Customised" &&
+    document.getElementById("customPackage").value.trim() === ""
+) {
+
+    alert("Please enter the Customised Package.");
+
+    document.getElementById("customPackage").focus();
+
+    return;
+}
     if(document.getElementById("houseboatName").value==""){
 
         alert("Please select Houseboat.");
@@ -800,8 +842,12 @@ let bookingObject = {
 
     cruiseDate: document.getElementById("cruiseDate").value,
 
-    package: document.getElementById("package").value,
-    checkInPoint: document.getElementById("checkInPoint").value,
+    package:
+    document.getElementById("package").value === "Customised"
+        ? document.getElementById("customPackage").value.trim()
+        : document.getElementById("package").value,
+
+checkInPoint: document.getElementById("checkInPoint").value,
 
     houseboatName: document.getElementById("houseboatName").value,
 
@@ -964,9 +1010,52 @@ function selectRow(row){
 
     document.getElementById("address").value = booking.address || "";
 
-    document.getElementById("cruiseDate").value = booking.cruiseDate || "";
-    document.getElementById("package").value = booking.package || "";
-    document.getElementById("checkInPoint").value = booking.checkInPoint || "";
+    document.getElementById("cruiseDate").value =
+    booking.cruiseDate || "";
+
+// ======================================
+// LOAD PACKAGE
+// ======================================
+
+const standardPackages = [
+    "Day Cruise",
+    "Sunset Cruise",
+    "Overnight Cruise",
+    "Lunch Cruise",
+    "Day Night Cruise",
+    "Dinner Cruise",
+    "1 Hour Cruise",
+    "2 Hour Cruise",
+    "Breakfast Cruise",
+    "3 Hour Cruise"
+];
+
+if (standardPackages.includes(booking.package)) {
+
+    document.getElementById("package").value =
+        booking.package;
+
+    document.getElementById("customPackage").value = "";
+
+} else if (booking.package) {
+
+    document.getElementById("package").value =
+        "Customised";
+
+    document.getElementById("customPackage").value =
+        booking.package;
+
+} else {
+
+    document.getElementById("package").value = "";
+
+    document.getElementById("customPackage").value = "";
+}
+
+toggleCustomPackageType();
+
+document.getElementById("checkInPoint").value =
+    booking.checkInPoint || "";
 
 document.getElementById("houseboatName").value =
     booking.houseboatName || "";
@@ -1104,8 +1193,14 @@ async function updateBooking(){
             address: document.getElementById("address").value,
 
             cruiseDate: document.getElementById("cruiseDate").value,
-            package: document.getElementById("package").value,
-            checkInPoint: document.getElementById("checkInPoint").value,
+
+package:
+    document.getElementById("package").value === "Customised"
+        ? document.getElementById("customPackage").value.trim()
+        : document.getElementById("package").value,
+
+checkInPoint:
+    document.getElementById("checkInPoint").value,
 
            houseboatName:
     document.getElementById("houseboatName").value,
@@ -1466,3 +1561,5 @@ window.calculateAccommodationNights = calculateAccommodationNights;
 window.calculateAccommodationBalance = calculateAccommodationBalance;
 window.toggleCustomHouseboatType =
     toggleCustomHouseboatType;
+window.toggleCustomPackageType =
+    toggleCustomPackageType;
