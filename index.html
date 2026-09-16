@@ -287,7 +287,9 @@ readonly>
 
         <label>Package</label>
 
-        <select id="package" class="form-select">
+        <select id="package"
+                class="form-select"
+                onchange="toggleCustomPackageType()">
 
             <option value="">Select Package</option>
             <option>Day Cruise</option>
@@ -301,10 +303,13 @@ readonly>
             <option>Breakfast Cruise</option>
             <option>3 Hour Cruise</option>
 
+            <option value="Customised">Customised</option>
+
         </select>
 
     </div>
 
+</div>
     <div class="col-md-6">
 
         <label>Check-in Point</label>
