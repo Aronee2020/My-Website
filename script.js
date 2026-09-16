@@ -859,7 +859,8 @@ let bookingObject = {
 
     travelPartner:
         document.getElementById("travelPartner").value.trim(),
-
+voucherBrand:
+        document.getElementById("voucherBrand").value,
     receiptNo: document.getElementById("receiptNo").value,
 
     bookingDate: document.getElementById("bookingDate").value,
@@ -1039,6 +1040,8 @@ document.getElementById("bookingId").value = booking.bookingId || "";
 
 document.getElementById("travelPartner").value =
     booking.travelPartner || "";
+    document.getElementById("voucherBrand").value =
+    booking.voucherBrand || "Aronee";
 
 document.getElementById("bookingDate").value = booking.bookingDate || "";
 
