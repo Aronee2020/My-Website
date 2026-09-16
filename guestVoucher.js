@@ -26,7 +26,11 @@ const voucherBrands = {
         companyName: "KERALA BEKAL HOUSEBOAT",
         introName: "Kerala Bekal Houseboat",
 logo: "kbh-logo.png",
-        address: `
+        address: `MALABAR INNOVATION ENTERPRENEURSHIP
+        ZONE, MANGATTUPARAMBA, NEAR KANNUR
+UNIVERSITY CAMPUS, KALLIASSERI
+ Kannur,
+Kerala - 670567,
             <!-- KBH ADDRESS WILL BE ADDED HERE -->
         `
     },
