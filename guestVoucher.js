@@ -88,9 +88,17 @@ document.getElementById("voucherFooterCompany").textContent =
 // HEADER GUEST NAME & CUSTOMER ID
 // ==========================================
 
+const guestPrefix = booking.guestPrefix || "";
+const guestName = booking.guestName || "";
+
+const fullGuestName =
+    guestPrefix
+        ? guestPrefix + " " + guestName
+        : guestName;
+
 setValue(
     "guestName",
-    "Mr./Ms " + (booking.guestName || "")
+    fullGuestName
 );
 
 setValue(
