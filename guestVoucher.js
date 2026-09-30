@@ -85,6 +85,7 @@ document.getElementById("voucherCompanyIntro").textContent =
 document.getElementById("voucherFooterCompany").textContent =
     selectedBrand.companyName;
 // ==========================================
+    
 // HEADER GUEST NAME & CUSTOMER ID
 // ==========================================
 
