@@ -866,6 +866,7 @@ voucherBrand:
     bookingDate: document.getElementById("bookingDate").value,
 
     guestName: document.getElementById("guestName").value,
+    guestPrefix: document.getElementById("guestPrefix").value,
 
     mobile: document.getElementById("mobile").value,
     address: document.getElementById("address").value,
