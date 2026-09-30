@@ -1047,7 +1047,11 @@ document.getElementById("travelPartner").value =
 document.getElementById("bookingDate").value = booking.bookingDate || "";
 
 document.getElementById("guestName").value = booking.guestName || "";
-    document.getElementById("mobile").value = booking.mobile || "";
+
+document.getElementById("guestPrefix").value =
+    booking.guestPrefix || "";
+
+document.getElementById("mobile").value = booking.mobile || "";
 
     document.getElementById("address").value = booking.address || "";
 
@@ -1266,9 +1270,11 @@ async function updateBooking(){
 
         await updateDoc(bookingRef, {
 
-    guestName: document.getElementById("guestName").value,
+   guestName: document.getElementById("guestName").value,
 
-   travelPartner:
+guestPrefix: document.getElementById("guestPrefix").value,
+
+travelPartner:
     document.getElementById("travelPartner").value.trim(),
 
 voucherBrand:
