@@ -141,10 +141,10 @@ setValue(
     // GUEST INFORMATION
     // ==========================================
 
-    setValue(
-        "guestNameDisplay",
-        "Mr./Ms " + (booking.guestName || "")
-    );
+setValue(
+    "guestNameDisplay",
+    fullGuestName
+);
 
     setValue(
         "mobileDisplay",
