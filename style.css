@@ -437,9 +437,19 @@ input[readonly]{
     background-color: #25D366;
     color: white;
     border: none;
+    transition: none !important;
+    animation: none !important;
+    box-shadow: none;
 }
 
-.whatsapp-btn:hover {
-    background-color: #20b957;
+.whatsapp-btn:hover,
+.whatsapp-btn:focus,
+.whatsapp-btn:active {
+    background-color: #25D366;
     color: white;
+    border: none;
+    transition: none !important;
+    animation: none !important;
+    box-shadow: none;
+    transform: none;
 }
