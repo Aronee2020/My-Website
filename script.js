@@ -1483,7 +1483,181 @@ function openGuestVoucher(){
         "_blank"
     );
 
-}// =====================================
+}
+// ==========================================
+// SEND BOOKING CONFIRMATION VIA WHATSAPP
+// ==========================================
+
+function sendBookingWhatsApp() {
+
+    // --------------------------------------
+    // Make sure a booking is selected
+    // --------------------------------------
+
+    if (selectedRow == null) {
+
+        alert("Please select a booking first.");
+
+        return;
+    }
+
+    // --------------------------------------
+    // Get selected booking from Firebase data
+    // --------------------------------------
+
+    let firebaseId = selectedRow.dataset.firebaseId;
+
+    let booking = currentBookings.find(
+        b => b.firebaseId === firebaseId
+    );
+
+    if (!booking) {
+
+        alert("Booking not found.");
+
+        return;
+    }
+
+    // --------------------------------------
+    // Get guest details
+    // --------------------------------------
+
+    let guestPrefix = booking.guestPrefix || "";
+    let guestName = booking.guestName || "";
+    let mobile = booking.mobile || "";
+
+    let customerId = booking.customerId || "";
+    let bookingId = booking.bookingId || "";
+    let cruiseDateValue = booking.cruiseDate || "";
+
+    let houseboatType = booking.houseboatType || "";
+    let packageName = booking.package || "";
+
+    // --------------------------------------
+    // Check mobile number
+    // --------------------------------------
+
+    if (!mobile) {
+
+        alert(
+            "WhatsApp / Mobile number is missing for this booking."
+        );
+
+        return;
+    }
+
+    // --------------------------------------
+    // Format guest name
+    // --------------------------------------
+
+    let fullGuestName = guestName;
+
+    if (guestPrefix) {
+
+        fullGuestName =
+            guestPrefix + " " + guestName;
+    }
+
+    // --------------------------------------
+    // Format cruise date
+    // --------------------------------------
+
+    let formattedCruiseDate = cruiseDateValue;
+
+    if (cruiseDateValue) {
+
+        let dateObject =
+            new Date(cruiseDateValue + "T00:00:00");
+
+        if (!isNaN(dateObject.getTime())) {
+
+            formattedCruiseDate =
+                dateObject.toLocaleDateString("en-GB", {
+
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric"
+
+                });
+        }
+    }
+
+    // --------------------------------------
+    // Voucher Brand
+    // --------------------------------------
+
+    let voucherBrand =
+        booking.voucherBrand || "Aronee";
+
+    let brandName =
+        "Aronee Tours & Travels";
+
+    if (voucherBrand === "KBH") {
+
+        brandName =
+            "Kerala Bekal Houseboat";
+
+    } else if (voucherBrand === "Nileshwar") {
+
+        brandName =
+            "Nileshwar Houseboat";
+
+    } else if (voucherBrand === "Aronee") {
+
+        brandName =
+            "Aronee Tours & Travels";
+    }
+
+    // --------------------------------------
+    // Create WhatsApp Message
+    // --------------------------------------
+
+    let message =
+`Dear ${fullGuestName},
+
+Your houseboat booking is confirmed.
+
+Customer ID: ${customerId}
+Booking ID: ${bookingId}
+Cruise Date: ${formattedCruiseDate}
+Houseboat Type: ${houseboatType}
+Package: ${packageName}
+
+Thank you for choosing ${brandName}.`;
+
+    // --------------------------------------
+    // Clean WhatsApp number
+    // --------------------------------------
+
+    let whatsappNumber =
+        mobile.replace(/\D/g, "");
+
+    // --------------------------------------
+    // Add India country code
+    // --------------------------------------
+
+    if (whatsappNumber.length === 10) {
+
+        whatsappNumber =
+            "91" + whatsappNumber;
+    }
+
+    // --------------------------------------
+    // Open WhatsApp
+    // --------------------------------------
+
+    let whatsappURL =
+        "https://wa.me/" +
+        whatsappNumber +
+        "?text=" +
+        encodeURIComponent(message);
+
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
+}
+// =====================================
 // SEARCH BOOKINGS
 // =====================================
 
@@ -1645,6 +1819,7 @@ window.deleteBooking = deleteBooking;
 window.exportToExcel = exportToExcel;
 window.openGuestVoucher = openGuestVoucher;
 window.searchBookings = searchBookings;
+window.sendBookingWhatsApp = sendBookingWhatsApp;
 window.clearSearch = clearSearch;
 window.bookingStatusChanged = bookingStatusChanged;
 window.toggleTaxiSection = toggleTaxiSection;
