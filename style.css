@@ -433,3 +433,13 @@ input[readonly]{
     margin-top: 10px;
     margin-bottom: 15px;
 }
+.whatsapp-btn {
+    background-color: #25D366;
+    color: white;
+    border: none;
+}
+
+.whatsapp-btn:hover {
+    background-color: #20b957;
+    color: white;
+}
