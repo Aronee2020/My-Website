@@ -1719,16 +1719,25 @@ function clearSearch(){
 // DASHBOARD
 // =====================================
 
-async function updateDashboard(){
+
+async function updateDashboard() {
 
     let bookings = await getBookings();
 
-    let today = new Date().toISOString().split("T")[0];
+    // Use local date instead of UTC date
+    function formatLocalDate(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
 
-    let tomorrowDate = new Date();
+        return `${year}-${month}-${day}`;
+    }
+
+    const today = formatLocalDate(new Date());
+
+    const tomorrowDate = new Date();
     tomorrowDate.setDate(tomorrowDate.getDate() + 1);
-
-    let tomorrow = tomorrowDate.toISOString().split("T")[0];
+    const tomorrow = formatLocalDate(tomorrowDate);
 
     let todayCount = 0;
     let tomorrowCount = 0;
@@ -1736,60 +1745,49 @@ async function updateDashboard(){
     let cancelled = 0;
     let postponed = 0;
 
-    bookings.forEach(function(b){
+    bookings.forEach(function (b) {
 
-        // =====================================
-        // CANCELLED BOOKINGS
-        // Do NOT show in Today/Tomorrow
-        // =====================================
+        const status = b.bookingStatus || "";
 
-        if(b.bookingStatus === "Cancelled"){
-
+        // Cancelled bookings
+        if (status === "Cancelled") {
             cancelled++;
-
             return;
         }
 
-        // =====================================
-        // POSTPONED BOOKINGS
-        // Do NOT count using old cruise date
-        // =====================================
-
-        if(b.bookingStatus === "Postponed"){
+        // Postponed bookings:
+        // Count against the new cruise date
+        if (status === "Postponed") {
 
             postponed++;
 
+            if (b.newCruiseDate === today) {
+                todayCount++;
+            }
+
+            if (b.newCruiseDate === tomorrow) {
+                tomorrowCount++;
+            }
+
             return;
         }
 
-        // =====================================
-        // CONFIRMED BOOKINGS
-        // =====================================
-
-        if(b.bookingStatus === "Confirmed"){
+        // Confirmed bookings
+        if (status === "Confirmed") {
 
             confirmed++;
 
-            if(b.cruiseDate === today){
-
+            if (b.cruiseDate === today) {
                 todayCount++;
-
             }
 
-            if(b.cruiseDate === tomorrow){
-
+            if (b.cruiseDate === tomorrow) {
                 tomorrowCount++;
-
             }
-
         }
-
     });
 
-    // =====================================
-    // UPDATE DASHBOARD
-    // =====================================
-
+    // Update dashboard cards
     document.getElementById("todayBookings").innerHTML =
         todayCount;
 
@@ -1807,7 +1805,6 @@ async function updateDashboard(){
 
     document.getElementById("postponedBookings").innerHTML =
         postponed;
-
 }
 // ============================================
 // MAKE FUNCTIONS AVAILABLE TO HTML BUTTONS
