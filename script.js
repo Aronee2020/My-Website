@@ -1135,7 +1135,8 @@ function sendBookingWhatsApp() {
     // --------------------------------------
     // Create WhatsApp Message
     // --------------------------------------
-    let message =
+  
+let message =
 `Dear ${fullGuestName},
 Your houseboat booking is confirmed.
 Customer ID: ${customerId}
@@ -1144,6 +1145,7 @@ Cruise Date: ${formattedCruiseDate}
 Houseboat Type: ${houseboatType}
 Package: ${packageName}
 Thank you for choosing ${brandName}.`;
+
     // --------------------------------------
     // Clean WhatsApp number
     // --------------------------------------
