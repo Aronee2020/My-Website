@@ -1,5 +1,4 @@
 import { db } from "./firebase.js";
-
 import {
     collection,
     addDoc,
@@ -14,7 +13,6 @@ import {
 // ARONEE HOUSEBOAT BOOKING MANAGEMENT SYSTEM
 // Version 2.0
 // ============================================
-
 // Auto Numbers
 let bookingNo = 1;
 let customerNo = 1;
@@ -23,147 +21,98 @@ let currentBookings = [];
 // ======================================
 // LOCAL STORAGE FUNCTIONS
 // ======================================
-
 // Get all bookings
 async function getBookings() {
-
     const querySnapshot = await getDocs(collection(db, "bookings"));
-
     let bookings = [];
-
     querySnapshot.forEach((docSnap) => {
-
         bookings.push({
             firebaseId: docSnap.id,
             ...docSnap.data()
         });
-
     });
-
     bookings.sort((a, b) => {
-
         if (!a.bookingDate) return 1;
         if (!b.bookingDate) return -1;
-
         return b.bookingDate.localeCompare(a.bookingDate);
-
     });
-
     return bookings;
-
 }
 // Save all bookings
 function saveBookings(bookings) {
-
     // Firebase version
     // No longer used
-
 }
 // Load bookings into table
 // ==========================================
 // ADDITIONAL SERVICES FUNCTIONS
 // ==========================================
-
 window.toggleTaxiSection = function () {
-
     const required = document.getElementById("taxiRequired").value;
     const section = document.getElementById("taxiSection");
-
     if (required === "Yes") {
         section.style.display = "block";
     } else {
         section.style.display = "none";
     }
 };
-
-
 window.toggleAccommodationSection = function () {
-
     const required = document.getElementById("accommodationRequired").value;
     const section = document.getElementById("accommodationSection");
-
     if (required === "Yes") {
         section.style.display = "block";
     } else {
         section.style.display = "none";
     }
 };
-
-
 window.calculateTaxiBalance = function () {
-
     const amount =
         parseFloat(document.getElementById("taxiAmount").value) || 0;
-
     const advance =
         parseFloat(document.getElementById("taxiAdvance").value) || 0;
-
     const balance = amount - advance;
-
     document.getElementById("taxiBalance").value =
         balance >= 0 ? balance.toFixed(2) : "0.00";
 };
-
-
 window.calculateAccommodationNights = function () {
-
     const checkIn =
         document.getElementById("accommodationCheckIn").value;
-
     const checkOut =
         document.getElementById("accommodationCheckOut").value;
-
     if (!checkIn || !checkOut) {
         document.getElementById("accommodationNights").value = "";
         return;
     }
-
     const start = new Date(checkIn);
     const end = new Date(checkOut);
-
     const difference =
         (end - start) / (1000 * 60 * 60 * 24);
-
     document.getElementById("accommodationNights").value =
         difference > 0 ? difference : 0;
 };
-
-
 window.calculateAccommodationBalance = function () {
-
     const amount =
         parseFloat(document.getElementById("accommodationAmount").value) || 0;
-
     const advance =
         parseFloat(document.getElementById("accommodationAdvance").value) || 0;
-
     const balance = amount - advance;
-
     document.getElementById("accommodationBalance").value =
         balance >= 0 ? balance.toFixed(2) : "0.00";
 };
 async function loadBookings() {
-
 currentBookings = await getBookings();
 let bookings = [...currentBookings];
-
 bookings.sort((a, b) => {
     return new Date(b.cruiseDate) - new Date(a.cruiseDate);
 });
     let tbody = document.querySelector("#bookingTable tbody");
-
     tbody.innerHTML = "";
-
     bookings.forEach(function(b){
-
         let row = tbody.insertRow();
-
         row.dataset.firebaseId = b.firebaseId || "";
-
         row.onclick = function(){
             selectRow(this);
         };
-
         row.insertCell(0).innerHTML = b.customerId || "";
         row.insertCell(1).innerHTML = b.cruiseDate || "";
         row.insertCell(2).innerHTML = b.guestName || "";
@@ -180,33 +129,25 @@ row.insertCell(12).innerHTML = "₹ " + (b.packageAmount || 0);
 row.insertCell(13).innerHTML = "₹ " + (b.advanceReceived || 0);
 row.insertCell(14).innerHTML = "₹ " + (b.balanceAmount || 0);
 row.insertCell(15).innerHTML = b.advanceMode || "";            });
-
 }
 // ======================================
 // Update Next Auto Numbers
 // ======================================
-
 async function updateNextNumbers() {
-
     // Read the Booking Counter
     const counterRef = doc(db, "counters", "bookingCounter");
     const counterSnap = await getDoc(counterRef);
-
     let nextNumber = 188;
-
     if (counterSnap.exists()) {
         nextNumber = counterSnap.data().lastBookingNumber + 1;
     }
-
     // Show next Customer ID
     document.getElementById("customerId").value =
         "ARN-KBH-" + nextNumber + "-2026";
-
     // Receipt Number (keep your existing logic)
     let bookings = await getBookings();
     receiptNo = bookings.length + 1;
     generateReceiptNo();
-
     // Booking ID is generated only on Save
     document.getElementById("bookingId").value =
         "Auto Generated on Save";
@@ -214,61 +155,40 @@ async function updateNextNumbers() {
 // Convert 12-hour time to minutes
 // Example: 5:30 PM -> 1050
 // ======================================
-
 // ======================================
 // Convert Time into Minutes
 // Example:
 // 5:30 PM -> 1050
 // 10:00 AM -> 600
 // ======================================
-
 function timeToMinutes(time){
-
     if(!time) return -1;
-
     time = time.trim().toUpperCase();
-
     // Replace . with :
     time = time.replace(".", ":");
-
     // Match:
     // 5 PM
     // 5:30 PM
     // 10 AM
     // 10:00 AM
-
 let match = time.match(/^(\d{1,2})(?::(\d{2}))?\s*(AM|PM)$/);
     if(!match){
     return -1;
 }
-
     let hour = parseInt(match[1]);
-
     let minute = parseInt(match[2] || "0");
-
     let period = match[3];
-
     if(period=="PM" && hour!=12){
-
         hour += 12;
-
     }
-
     if(period=="AM" && hour==12){
-
         hour = 0;
-
     }
-
     return hour*60+minute;
-
 }
-
 // ======================================
 // Check Houseboat Availability
 // ======================================
-
-
     // ======================================
 // Houseboat Availability Check
 // ======================================
@@ -276,155 +196,111 @@ let match = time.match(/^(\d{1,2})(?::(\d{2}))?\s*(AM|PM)$/);
 // ======================================
 // HOUSEBOAT AVAILABILITY CHECK
 // ======================================
-
 function checkAvailability() {
-
     let table = document.getElementById("bookingTable");
-
     let boat = document.getElementById("houseboatName").value.trim();
     let date = document.getElementById("cruiseDate").value.trim();
-
     let checkInValue = document.getElementById("checkIn").value.trim();
     let checkOutValue = document.getElementById("checkOut").value.trim();
-
     console.log("New Houseboat:", boat);
     console.log("New Cruise Date:", date);
     console.log("New Check In:", checkInValue);
     console.log("New Check Out:", checkOutValue);
-
     // Convert new booking time to minutes
     let newIn = timeToMinutes(checkInValue);
     let newOut = timeToMinutes(checkOutValue);
-
     // Invalid time
     if (newIn === -1 || newOut === -1) {
         return false;
     }
-
    // ======================================
 // CHECK-IN / CHECK-OUT TIME
 // Allow overnight bookings
 // Example: 5 PM → 8:30 AM
 // ======================================
-
 if (newOut === newIn) {
-
     alert(
         "❌ INVALID TIME\n\n" +
         "Check-out time cannot be the same as Check-in time."
     );
-
     return false;
 }
     // ======================================
     // CHECK EXISTING BOOKINGS
     // ======================================
-
     for (let i = 1; i < table.rows.length; i++) {
-
         let row = table.rows[i];
-
         // ==================================
         // CORRECT TABLE COLUMNS
         // ==================================
-
         let rowBoat = row.cells[7].innerHTML.trim();
-
         let rowDate = row.cells[1].innerHTML.trim();
-
         let oldCheckIn = row.cells[9].innerHTML.trim();
-
         let oldCheckOut = row.cells[10].innerHTML.trim();
-
         console.log("Existing Booking");
         console.log("Houseboat:", rowBoat);
         console.log("Cruise Date:", rowDate);
         console.log("Check In:", oldCheckIn);
         console.log("Check Out:", oldCheckOut);
-
         // ==================================
         // SAME HOUSEBOAT + SAME DATE
         // ==================================
-
         if (rowBoat === boat && rowDate === date) {
-
             let oldIn = timeToMinutes(oldCheckIn);
             let oldOut = timeToMinutes(oldCheckOut);
-
             // Ignore invalid existing times
             if (oldIn === -1 || oldOut === -1) {
                 continue;
             }
-
             // ==================================
             // TIME OVERLAP CHECK
             // ==================================
-
             if (newIn < oldOut && newOut > oldIn) {
-
                 alert(
                     "❌ HOUSEBOAT ALREADY BOOKED\n\n" +
-
                     "Guest : " +
                     row.cells[2].innerHTML +
-
                     "\nBooking ID : " +
                     row.cells[0].innerHTML +
-
                     "\nHouseboat : " +
                     boat +
-
                     "\nDate : " +
                     date +
-
                     "\nExisting Time : " +
                     oldCheckIn +
-
                     " - " +
                     oldCheckOut +
-
                     "\n\nPlease choose another houseboat or time."
                 );
-
                 return false;
             }
         }
     }
-
     // ======================================
     // HOUSEBOAT AVAILABLE
     // ======================================
-
     return true;
 }// Selected table row
 let selectedRow = null;
-
 // ------------------------
 // Initialize
 // ------------------------
-
 document.addEventListener("DOMContentLoaded", async function () {
-
     await loadBookings();
     await updateDashboard();
     await updateNextNumbers();
     setToday();
-
     // =========================
     // SAFE EVENT LISTENERS
     // =========================
-
     let adults = document.getElementById("adults");
     let children = document.getElementById("children");
     let kids = document.getElementById("kids");
-
     if (adults) adults.addEventListener("input", calculateTotalPax);
     if (children) children.addEventListener("input", calculateTotalPax);
     if (kids) kids.addEventListener("input", calculateTotalPax);
-
     let packageAmount = document.getElementById("packageAmount");
     let advanceReceived = document.getElementById("advanceReceived");
-
     if (packageAmount) packageAmount.addEventListener("input", calculateBalance);
     if (advanceReceived) advanceReceived.addEventListener("input", calculateBalance);
 document.getElementById("adults").value = "";
@@ -433,140 +309,91 @@ document.getElementById("kids").value = "";
 document.getElementById("packageAmount").value = "";
 document.getElementById("advanceReceived").value = "";
 });
-
 // ------------------------
 // Booking ID
 // ------------------------
-
 async function generateBookingID() {
-
     const counterRef = doc(db, "counters", "bookingCounter");
-
     const bookingNumber = await runTransaction(db, async (transaction) => {
-
         const counterDoc = await transaction.get(counterRef);
-
         let lastNumber = 187;      // Start before 188
-
         if (counterDoc.exists()) {
             lastNumber = counterDoc.data().lastBookingNumber;
         }
-
         const newNumber = lastNumber + 1;
-
         transaction.set(counterRef, {
             lastBookingNumber: newNumber
         });
-
         return newNumber;
     });
-
     return "BKID/" + bookingNumber + "/26-27";
-
 }
-
 // ------------------------
 // Customer ID
 // ------------------------
-
 function generateCustomerID(){
-
     document.getElementById("customerId").value=
     "CUS"+customerNo.toString().padStart(4,"0");
-
 }
-
 // ------------------------
 // Receipt Number
 // ------------------------
-
 function generateReceiptNo(){
-
     document.getElementById("receiptNo").value=
     "RC"+receiptNo.toString().padStart(5,"0");
-
 }
-
 // ------------------------
 // Today's Date
 // ------------------------
-
 function setToday(){
-
     let today=new Date().toISOString().split("T")[0];
-
     document.getElementById("bookingDate").value=today;
-
 }
-
 // ------------------------
 // Total Pax
 // ------------------------
-
 function calculateTotalPax(){
-
     let adults=parseInt(document.getElementById("adults").value)||0;
-
     let children=parseInt(document.getElementById("children").value)||0;
-
     let kids=parseInt(document.getElementById("kids").value)||0;
-
     document.getElementById("totalPax").value=
     adults+children+kids;
-
 }
-
 // ------------------------
 // PAYMENT CALCULATION
 // ------------------------
-
 function calculateBalance() {
-
     // Houseboat Amount
     let packageAmount =
         parseFloat(document.getElementById("packageAmount").value) || 0;
-
     // Houseboat Advance
     let houseboatAdvance =
         parseFloat(document.getElementById("advanceReceived").value) || 0;
-
     // Taxi Amount
     let taxiAmount =
         parseFloat(document.getElementById("taxiAmount").value) || 0;
-
     // Taxi Advance
     let taxiAdvance =
         parseFloat(document.getElementById("taxiAdvance").value) || 0;
-
-
     // ======================================
     // HOUSEBOAT BALANCE
     // ======================================
-
     let houseboatBalance =
         Math.max(packageAmount - houseboatAdvance, 0);
-
     document.getElementById("balanceAmount").value =
         houseboatBalance.toFixed(2);
-
-
     // ======================================
     // TOTAL AMOUNT
     // HOUSEBOAT + TAXI
     // ======================================
-
     let totalAmount =
         packageAmount + taxiAmount;
-
     document.getElementById("totalAmount").value =
         totalAmount.toFixed(2);
-
-
     // ======================================
     // TOTAL BALANCE
     // TOTAL AMOUNT - ALL ADVANCES
     // ======================================
-
     let totalBalance =
         Math.max(
             totalAmount -
@@ -574,146 +401,97 @@ function calculateBalance() {
             taxiAdvance,
             0
         );
-
     document.getElementById("totalBalance").value =
         totalBalance.toFixed(2);
 }// ======================================
 // Mobile Number Validation
 // ======================================
-
 function validateMobile() {
-
     let mobile = document.getElementById("mobile");
-
     // Allow only + at the beginning and digits
     mobile.value = mobile.value.replace(/(?!^\+)[^\d]/g, "");
-
     // Ensure only one + at the beginning
     if (mobile.value.indexOf("+") > 0) {
         mobile.value = mobile.value.replace(/\+/g, "");
     }
-
     // Maximum 15 digits (excluding +) as per international standard
     let digits = mobile.value.replace(/\D/g, "");
-
     if (digits.length > 15) {
-
         alert("Mobile number can contain a maximum of 15 digits.");
-
         if (mobile.value.startsWith("+")) {
             mobile.value = "+" + digits.substring(0, 15);
         } else {
             mobile.value = digits.substring(0, 15);
         }
-
         mobile.focus();
     }
 }
 // ------------------------
 // Booking Status
 // ------------------------
-
 function bookingStatusChanged(){
-
     let status = document.getElementById("bookingStatus").value;
-
     // Hide both sections first
     document.getElementById("cancelSection").style.display = "none";
     document.getElementById("postponeSection").style.display = "none";
-
     // Show Cancellation Details
     if(status === "Cancelled"){
-
         document.getElementById("cancelSection").style.display = "flex";
-
         // Automatically fill today's date
         if(document.getElementById("cancelDate").value == ""){
-
             document.getElementById("cancelDate").value =
                 new Date().toISOString().split("T")[0];
-
-        }
-
+       }
     }
-
     // Show Postponement Details
     if(status === "Postponed"){
-
         document.getElementById("postponeSection").style.display = "flex";
-
     }
-
 }
 // ======================================
 // CUSTOMISED HOUSEBOAT TYPE
 // ======================================
-
 function toggleCustomHouseboatType() {
-
     const houseboatType =
         document.getElementById("houseboatType").value;
-
     const section =
         document.getElementById("customHouseboatTypeSection");
-
     const input =
         document.getElementById("customHouseboatType");
-
     if (houseboatType === "Customised") {
-
         section.style.display = "block";
-
         input.focus();
-
     } else {
-
         section.style.display = "none";
-
         input.value = "";
     }
 }
 function toggleCustomHouseboatName() {
-
     const select = document.getElementById("houseboatName");
     const section = document.getElementById("customHouseboatNameSection");
     const input = document.getElementById("customHouseboatName");
-
     if (select.value === "Others") {
-
         section.style.display = "block";
-
     } else {
-
         section.style.display = "none";
         input.value = "";
-
     }
 }
 // ======================================
 // CUSTOMISED PACKAGE
 // ======================================
-
 function toggleCustomPackageType() {
-
     const packageType =
         document.getElementById("package").value;
-
     const section =
         document.getElementById("customPackageSection");
-
     const input =
         document.getElementById("customPackage");
-
     if (packageType === "Customised") {
-
         section.style.display = "block";
-
         input.focus();
-
     } else {
-
         section.style.display = "none";
-
         input.value = "";
     }
 }
@@ -724,53 +502,36 @@ window.validateMobile = validateMobile;
 async function saveBooking() {
     // Validation
     if(document.getElementById("guestName").value.trim()==""){
-
         alert("Please enter Guest Name.");
         document.getElementById("guestName").focus();
         return;
-
-    }
-
+}
     if(document.getElementById("mobile").value.trim()==""){
-
         alert("Please enter Mobile Number.");
         document.getElementById("mobile").focus();
         return;
-
     }
-
     if(document.getElementById("cruiseDate").value==""){
-
         alert("Please select Cruise Date.");
         document.getElementById("cruiseDate").focus();
         return;
-
     }
-
     if(document.getElementById("package").value==""){
-
         alert("Please select Package.");
         document.getElementById("package").focus();
         return;
-
     }
 // ======================================
 // CUSTOMISED PACKAGE VALIDATION
 // ======================================
-
 if (
     document.getElementById("package").value === "Customised" &&
     document.getElementById("customPackage").value.trim() === ""
 ) {
-
     alert("Please enter the Customised Package.");
-
     document.getElementById("customPackage").focus();
-
     return;
-}
-    if(document.getElementById("houseboatName").value==""){
-
+}    if(document.getElementById("houseboatName").value==""){
         alert("Please select Houseboat.");
         document.getElementById("houseboatName").focus();
         return;
@@ -778,50 +539,35 @@ if (
     // ======================================
 // CUSTOMISED HOUSEBOAT TYPE VALIDATION
 // ======================================
-
 if (
     document.getElementById("houseboatType").value === "Customised" &&
     document.getElementById("customHouseboatType").value.trim() === ""
 ) {
-
     alert("Please enter the Customised Houseboat Type.");
-
     document.getElementById("customHouseboatType").focus();
-
     return;
 }
 if (
     document.getElementById("houseboatName").value === "Others" &&
     document.getElementById("customHouseboatName").value.trim() === ""
 ) {
-
     alert("Please enter the Houseboat Name(s).");
-
     document.getElementById("customHouseboatName").focus();
-
     return;
 }
 // Check Advance Amount
 let packageAmount = parseFloat(document.getElementById("packageAmount").value) || 0;
 let advance = parseFloat(document.getElementById("advanceReceived").value) || 0;
-
 if (advance > packageAmount) {
-
     alert("Advance Received cannot exceed the Package Amount.");
-
     document.getElementById("advanceReceived").focus();
-
     return;
-
 }
 let checkIn = timeToMinutes(document.getElementById("checkIn").value);
 let checkOut = timeToMinutes(document.getElementById("checkOut").value);
-
 if(checkIn === -1 || checkOut === -1){
-
     alert(
 `Please enter time in any of these formats:
-
 10 AM
 10AM
 10.00 AM
@@ -830,102 +576,67 @@ if(checkIn === -1 || checkOut === -1){
 7 PM
 7PM`
     );
-
     return;
 }
-
 if(!checkAvailability()){
-
     return;
-
 }
   // Generate unique Booking ID from Firebase
 const bookingId = await generateBookingID();
 document.getElementById("bookingId").value = bookingId;
     // Generate Customer ID from Booking ID number
 const bookingNumber = bookingId.split("/")[1];
-
 document.getElementById("customerId").value =
     "ARN-KBH-" + bookingNumber + "-2026";
     console.log("Generated Booking ID:", bookingId);
 console.log("Textbox Booking ID:", document.getElementById("bookingId").value);
 // Save current booking for Guest Voucher
-
 let bookingObject = {
-
     bookingId: document.getElementById("bookingId").value,
-
     customerId: document.getElementById("customerId").value,
-
     travelPartner:
         document.getElementById("travelPartner").value.trim(),
 voucherBrand:
         document.getElementById("voucherBrand").value,
     receiptNo: document.getElementById("receiptNo").value,
-
     bookingDate: document.getElementById("bookingDate").value,
-
     guestName: document.getElementById("guestName").value,
     guestPrefix: document.getElementById("guestPrefix").value,
-
     mobile: document.getElementById("mobile").value,
     address: document.getElementById("address").value,
-
     cruiseDate: document.getElementById("cruiseDate").value,
-
     package:
     document.getElementById("package").value === "Customised"
         ? document.getElementById("customPackage").value.trim()
         : document.getElementById("package").value,
-
 checkInPoint: document.getElementById("checkInPoint").value,
-
     houseboatName:
     document.getElementById("houseboatName").value === "Others"
         ? document.getElementById("customHouseboatName").value.trim()
         : document.getElementById("houseboatName").value,
-
     houseboatType:
     document.getElementById("houseboatType").value === "Customised"
         ? document.getElementById("customHouseboatType").value.trim()
         : document.getElementById("houseboatType").value,
     checkIn: document.getElementById("checkIn").value,
-
     checkOut: document.getElementById("checkOut").value,
-
     adults: document.getElementById("adults").value,
-
     children: document.getElementById("children").value,
-
     kids: document.getElementById("kids").value,
-
     totalPax: document.getElementById("totalPax").value,
-
     packageAmount: document.getElementById("packageAmount").value,
-
     advanceReceived: document.getElementById("advanceReceived").value,
-
     balanceAmount: document.getElementById("balanceAmount").value,
     totalAmount: document.getElementById("totalAmount").value,
-
 totalBalance: document.getElementById("totalBalance").value,
-
     advanceMode: document.getElementById("advanceMode").value,
-
     transactionRef: document.getElementById("transactionRef").value,
-
     bookingStatus: document.getElementById("bookingStatus").value,
-
     cancelDate: document.getElementById("cancelDate").value,
-
     refundAmount: document.getElementById("refundAmount").value,
-
     cancelReason: document.getElementById("cancelReason").value,
-
     newCruiseDate: document.getElementById("newCruiseDate").value,
-
     postponeReason: document.getElementById("postponeReason").value,
-
 // ======================================
 // TAXI SERVICE DETAILS
 // ======================================
@@ -940,128 +651,89 @@ taxiBalance: document.getElementById("taxiBalance").value,
 taxiPaymentMode: document.getElementById("taxiPaymentMode").value,
 taxiStatus: document.getElementById("taxiStatus").value,
 taxiRemarks: document.getElementById("taxiRemarks").value,
-
 foodMenu: document.getElementById("foodMenu").value,
 specialInstruction: document.getElementById("specialInstruction").value
 };
 // // Save booking into Firebase
 try {
-
     console.log("Saving...", bookingObject);
-
     // ================================
     // SAVE TO FIREBASE
     // ================================
-
     await addDoc(
         collection(db, "bookings"),
         bookingObject
     );
-
     console.log("Booking Saved Successfully");
-
     // ================================
     // SAVE FOR GUEST VOUCHER
     // ================================
-
     localStorage.setItem(
         "selectedBooking",
         JSON.stringify(bookingObject)
     );
-
     // ================================
     // SUCCESS MESSAGE
     // ================================
-
     alert("Booking Saved Successfully.");
-
     // ================================
     // REFRESH SYSTEM
-    // ================================
-
+    // ===============================
     try {
         await loadBookings();
         await updateDashboard();
         await updateNextNumbers();
     } catch (refreshError) {
-
         console.error(
             "Booking saved, but refresh failed:",
             refreshError
         );
-
     }
-
 } catch (error) {
-
     console.error(
         "Booking Save Error:",
         error
     );
-
     alert(
         "❌ Booking could not be saved.\n\n" +
         error.message
     );
-
     return;
 }
-
-  document.getElementById("bookingForm").reset();
-
+ document.getElementById("bookingForm").reset();
 document.getElementById("bookingStatus").value = "Confirmed";
-
 document.getElementById("cancelSection").style.display = "none";
 document.getElementById("postponeSection").style.display = "none";
-
 await updateNextNumbers();
-
 setToday();
-
 document.getElementById("totalPax").value = "";
 document.getElementById("balanceAmount").value = "";
-
 document.getElementById("guestName").focus();
 }
 // =====================================
 // SELECT ROW
 // =====================================
-
 function selectRow(row){
-
     selectedRow = row;
-
     let firebaseId = row.dataset.firebaseId;
-
     let booking = currentBookings.find(b => b.firebaseId === firebaseId);
-
     if(!booking) return;
-
 document.getElementById("bookingId").value = booking.bookingId || "";
-
 document.getElementById("travelPartner").value =
     booking.travelPartner || "";
     document.getElementById("voucherBrand").value =
     booking.voucherBrand || "Aronee";
-
 document.getElementById("bookingDate").value = booking.bookingDate || "";
-
 document.getElementById("guestName").value = booking.guestName || "";
-
 document.getElementById("guestPrefix").value =
     booking.guestPrefix || "";
-
 document.getElementById("mobile").value = booking.mobile || "";
-
     document.getElementById("address").value = booking.address || "";
-
     document.getElementById("cruiseDate").value =
     booking.cruiseDate || "";
-
 // ======================================
 // LOAD PACKAGE
 // ======================================
-
 const standardPackages = [
     "Day Cruise",
     "Sunset Cruise",
@@ -1074,34 +746,22 @@ const standardPackages = [
     "Breakfast Cruise",
     "3 Hour Cruise"
 ];
-
 if (standardPackages.includes(booking.package)) {
-
     document.getElementById("package").value =
         booking.package;
-
     document.getElementById("customPackage").value = "";
-
 } else if (booking.package) {
-
     document.getElementById("package").value =
         "Customised";
-
     document.getElementById("customPackage").value =
         booking.package;
-
 } else {
-
     document.getElementById("package").value = "";
-
     document.getElementById("customPackage").value = "";
 }
-
 toggleCustomPackageType();
-
 document.getElementById("checkInPoint").value =
     booking.checkInPoint || "";
-
 const standardHouseboatNames = [
     "Arabian Palace",
     "Madhuwahini",
@@ -1118,58 +778,37 @@ const standardHouseboatNames = [
     "Atlanta",
     "Lotus"
 ];
-
 if (standardHouseboatNames.includes(booking.houseboatName)) {
-
     document.getElementById("houseboatName").value =
         booking.houseboatName;
-
     document.getElementById("customHouseboatName").value = "";
-
 } else if (booking.houseboatName) {
-
     document.getElementById("houseboatName").value = "Others";
-
     document.getElementById("customHouseboatName").value =
         booking.houseboatName;
-
 } else {
-
     document.getElementById("houseboatName").value = "";
-
     document.getElementById("customHouseboatName").value = "";
 }
-
 toggleCustomHouseboatName();
-
 const standardHouseboatTypes = [
     "1 Bedroom Standard Houseboat",
     "2 Bedroom Standard Houseboat",
     "3 Bedroom Standard Houseboat"
 ];
-
 if (standardHouseboatTypes.includes(booking.houseboatType)) {
-
     document.getElementById("houseboatType").value =
         booking.houseboatType;
-
     document.getElementById("customHouseboatType").value = "";
-
 } else if (booking.houseboatType) {
-
     document.getElementById("houseboatType").value =
         "Customised";
-
     document.getElementById("customHouseboatType").value =
         booking.houseboatType;
-
 } else {
-
     document.getElementById("houseboatType").value = "";
-
     document.getElementById("customHouseboatType").value = "";
 }
-
 toggleCustomHouseboatType();
     document.getElementById("checkIn").value = booking.checkIn || "";
     document.getElementById("checkOut").value = booking.checkOut || "";
@@ -1179,130 +818,90 @@ toggleCustomHouseboatType();
     document.getElementById("adults").value = booking.adults || "";
     document.getElementById("children").value = booking.children || "";
     document.getElementById("kids").value = booking.kids || "";
-
     calculateTotalPax();
-
     document.getElementById("packageAmount").value = booking.packageAmount || "";
     document.getElementById("advanceReceived").value = booking.advanceReceived || "";
     document.getElementById("balanceAmount").value = booking.balanceAmount || "";
-
     document.getElementById("advanceMode").value = booking.advanceMode || "";
-
     document.getElementById("transactionRef").value = booking.transactionRef || "";
-
     document.getElementById("bookingStatus").value = booking.bookingStatus || "";
     document.getElementById("cancelDate").value =
     booking.cancelDate || "";
-
 document.getElementById("cancelReason").value =
     booking.cancelReason || "";
-
 document.getElementById("newCruiseDate").value =
     booking.newCruiseDate || "";
-
 document.getElementById("postponeReason").value =
     booking.postponeReason || "";
-
 bookingStatusChanged();
     // ======================================
 // LOAD TAXI SERVICE DETAILS
 // ======================================
-
 document.getElementById("taxiRequired").value =
     booking.taxiRequired || "No";
-
 document.getElementById("taxiServiceType").value =
     booking.taxiServiceType || "";
-
 document.getElementById("taxiVehicleType").value =
     booking.taxiVehicleType || "";
-
 document.getElementById("taxiPassengers").value =
     booking.taxiPassengers || "";
-
 document.getElementById("taxiItinerary").value =
     booking.taxiItinerary || "";
-
 document.getElementById("taxiAmount").value =
     booking.taxiAmount || "";
-
 document.getElementById("taxiAdvance").value =
     booking.taxiAdvance || "";
-
 document.getElementById("taxiBalance").value =
     booking.taxiBalance || "";
-
 document.getElementById("taxiPaymentMode").value =
     booking.taxiPaymentMode || "";
-
 document.getElementById("taxiStatus").value =
     booking.taxiStatus || "Pending";
-
 document.getElementById("taxiRemarks").value =
     booking.taxiRemarks || "";
-
-
 // Show / hide Taxi section
 toggleTaxiSection();
 // Recalculate Taxi balance
 calculateTaxiBalance();
-
 // Recalculate Total Amount and Total Balance
 calculateBalance();
 }
 // =====================================
 // UPDATE BOOKING
 // =====================================
-
 async function updateBooking(){
-
     if(selectedRow == null){
         alert("Please select a booking first.");
         return;
     }
-
     // 🔥 GET FIREBASE ID FROM ROW
     let firebaseId = selectedRow.dataset.firebaseId;
-
     const bookingRef = doc(db, "bookings", firebaseId);
-
     try {
-
         await updateDoc(bookingRef, {
-
    guestName: document.getElementById("guestName").value,
-
 guestPrefix: document.getElementById("guestPrefix").value,
-
 travelPartner:
     document.getElementById("travelPartner").value.trim(),
-
 voucherBrand:
     document.getElementById("voucherBrand").value,
-
 mobile: document.getElementById("mobile").value,
-
     address: document.getElementById("address").value,
             cruiseDate: document.getElementById("cruiseDate").value,
-
 package:
     document.getElementById("package").value === "Customised"
         ? document.getElementById("customPackage").value.trim()
         : document.getElementById("package").value,
-
 checkInPoint:
     document.getElementById("checkInPoint").value,
-
           houseboatName:
     document.getElementById("houseboatName").value === "Others"
         ? document.getElementById("customHouseboatName").value.trim()
         : document.getElementById("houseboatName").value,
-
 houseboatType:
     document.getElementById("houseboatType").value === "Customised"
         ? document.getElementById("customHouseboatType").value.trim()
         : document.getElementById("houseboatType").value,
-
             checkIn: document.getElementById("checkIn").value,
             checkOut: document.getElementById("checkOut").value,
             foodMenu: document.getElementById("foodMenu").value,
@@ -1311,30 +910,21 @@ houseboatType:
             children: document.getElementById("children").value,
             kids: document.getElementById("kids").value,
             totalPax: document.getElementById("totalPax").value,
-
             packageAmount: document.getElementById("packageAmount").value,
             advanceReceived: document.getElementById("advanceReceived").value,
             balanceAmount: document.getElementById("balanceAmount").value,
             totalAmount: document.getElementById("totalAmount").value,
             totalBalance: document.getElementById("totalBalance").value,
             advanceMode: document.getElementById("advanceMode").value,
-
 bookingStatus: document.getElementById("bookingStatus").value,
-
 cancelDate: document.getElementById("cancelDate").value,
-
 refundAmount: document.getElementById("refundAmount").value,
-
 cancelReason: document.getElementById("cancelReason").value,
-
 newCruiseDate: document.getElementById("newCruiseDate").value,
-
 postponeReason: document.getElementById("postponeReason").value,
-
 // ======================================
 // TAXI SERVICE DETAILS
 // ======================================
-
 taxiRequired: document.getElementById("taxiRequired").value,
 taxiServiceType: document.getElementById("taxiServiceType").value,
 taxiVehicleType: document.getElementById("taxiVehicleType").value,
@@ -1346,14 +936,10 @@ taxiBalance: document.getElementById("taxiBalance").value,
 taxiPaymentMode: document.getElementById("taxiPaymentMode").value,
 taxiStatus: document.getElementById("taxiStatus").value,
 taxiRemarks: document.getElementById("taxiRemarks").value
-
 });
-
         await loadBookings();
         await updateDashboard();
-
         alert("Booking Updated Successfully");
-
     } catch(error){
         console.error(error);
         alert(error.message);
@@ -1362,296 +948,194 @@ taxiRemarks: document.getElementById("taxiRemarks").value
 // =====================================
 // DELETE BOOKING
 // =====================================
-
 async function deleteBooking(){
     if(selectedRow==null){
-
         alert("Please select a booking.");
-
         return;
-
     }
-
     if(confirm("Delete this booking?")){
 let bookings = await getBookings();
-
 let bookingId = selectedRow.cells[0].innerHTML;
-
 let booking = bookings.find(function(b){
     return b.bookingId === bookingId;
 });
-
 console.log("Deleting:", booking);
-
 if(booking && booking.firebaseId){
-
     await deleteDoc(
         doc(db, "bookings", booking.firebaseId)
     );
-
 }
 // Firebase delete will be added here
 await loadBookings();
 await updateDashboard();
 await updateNextNumbers();
-
         selectedRow = null;
-
         document.getElementById("bookingForm").reset();
-
         generateBookingID();
         generateCustomerID();
         generateReceiptNo();
         setToday();
-
         alert("Booking Deleted.");
-
     }
-
-}
-// =====================================
+}// =====================================
 // EXPORT TO CSV
 // =====================================
-
 function exportToExcel(){
-
     let table = document.getElementById("bookingTable");
-
     let csv = [];
-
     for(let i=0;i<table.rows.length;i++){
-
         let row=[];
-
         for(let j=0;j<table.rows[i].cells.length;j++){
-
             row.push(table.rows[i].cells[j].innerText);
-
         }
-
         csv.push(row.join(","));
-
     }
-
     let csvFile = new Blob([csv.join("\n")],{type:"text/csv"});
-
     let downloadLink = document.createElement("a");
-
     downloadLink.download = "Houseboat_Bookings.csv";
-
     downloadLink.href = window.URL.createObjectURL(csvFile);
-
     downloadLink.click();
-
 }
-
 // ==========================================
 // OPEN GUEST VOUCHER
 // ==========================================
-
 function openGuestVoucher(){
-
     if(selectedRow == null){
-
         alert("Please select a booking.");
-
         return;
-
     }
-
     let firebaseId = selectedRow.dataset.firebaseId;
-
     let booking = currentBookings.find(
         b => b.firebaseId === firebaseId
     );
-
     if(!booking){
-
         alert("Booking not found.");
-
         return;
-
-    }
-
+   }
     localStorage.setItem(
         "selectedBooking",
         JSON.stringify(booking)
     );
-
     window.open(
         "guestVoucher.html",
         "_blank"
     );
-
 }
 // ==========================================
 // SEND BOOKING CONFIRMATION VIA WHATSAPP
 // ==========================================
-
 function sendBookingWhatsApp() {
-
     // --------------------------------------
     // Make sure a booking is selected
     // --------------------------------------
-
     if (selectedRow == null) {
-
         alert("Please select a booking first.");
-
         return;
     }
-
     // --------------------------------------
     // Get selected booking from Firebase data
     // --------------------------------------
-
     let firebaseId = selectedRow.dataset.firebaseId;
-
     let booking = currentBookings.find(
         b => b.firebaseId === firebaseId
     );
-
     if (!booking) {
-
         alert("Booking not found.");
-
         return;
     }
-
     // --------------------------------------
     // Get guest details
     // --------------------------------------
-
     let guestPrefix = booking.guestPrefix || "";
     let guestName = booking.guestName || "";
     let mobile = booking.mobile || "";
-
     let customerId = booking.customerId || "";
     let bookingId = booking.bookingId || "";
     let cruiseDateValue = booking.cruiseDate || "";
-
     let houseboatType = booking.houseboatType || "";
     let packageName = booking.package || "";
-
     // --------------------------------------
     // Check mobile number
     // --------------------------------------
-
     if (!mobile) {
-
         alert(
             "WhatsApp / Mobile number is missing for this booking."
         );
-
         return;
     }
-
     // --------------------------------------
     // Format guest name
     // --------------------------------------
-
     let fullGuestName = guestName;
-
     if (guestPrefix) {
-
         fullGuestName =
             guestPrefix + " " + guestName;
     }
-
     // --------------------------------------
     // Format cruise date
     // --------------------------------------
-
     let formattedCruiseDate = cruiseDateValue;
-
     if (cruiseDateValue) {
-
         let dateObject =
             new Date(cruiseDateValue + "T00:00:00");
-
         if (!isNaN(dateObject.getTime())) {
-
             formattedCruiseDate =
                 dateObject.toLocaleDateString("en-GB", {
-
                     day: "numeric",
                     month: "long",
                     year: "numeric"
-
                 });
         }
     }
-
     // --------------------------------------
     // Voucher Brand
     // --------------------------------------
-
     let voucherBrand =
         booking.voucherBrand || "Aronee";
-
     let brandName =
         "Aronee Tours & Travels";
-
     if (voucherBrand === "KBH") {
-
         brandName =
             "Kerala Bekal Houseboat";
-
     } else if (voucherBrand === "Nileshwar") {
-
         brandName =
             "Nileshwar Houseboat";
-
     } else if (voucherBrand === "Aronee") {
-
         brandName =
             "Aronee Tours & Travels";
     }
-
     // --------------------------------------
     // Create WhatsApp Message
     // --------------------------------------
-
     let message =
 `Dear ${fullGuestName},
-
 Your houseboat booking is confirmed.
-
 Customer ID: ${customerId}
 Booking ID: ${bookingId}
 Cruise Date: ${formattedCruiseDate}
 Houseboat Type: ${houseboatType}
 Package: ${packageName}
-
 Thank you for choosing ${brandName}.`;
-
     // --------------------------------------
     // Clean WhatsApp number
     // --------------------------------------
-
     let whatsappNumber =
         mobile.replace(/\D/g, "");
-
     // --------------------------------------
     // Add India country code
     // --------------------------------------
-
     if (whatsappNumber.length === 10) {
-
         whatsappNumber =
             "91" + whatsappNumber;
     }
-
     // --------------------------------------
     // Open WhatsApp
     // --------------------------------------
-
     let whatsappURL =
         "https://wa.me/" +
         whatsappNumber +
         "?text=" +
         encodeURIComponent(message);
-
     window.open(
         whatsappURL,
         "_blank"
@@ -1660,156 +1144,113 @@ Thank you for choosing ${brandName}.`;
 // =====================================
 // SEARCH BOOKINGS
 // =====================================
-
 function searchBookings(){
-
     let keyword = document.getElementById("searchText").value.toLowerCase();
     let date = document.getElementById("searchDate").value;
     let status = document.getElementById("searchStatus").value;
     let boat = document.getElementById("searchBoat").value.trim().toLowerCase();
-
     let rows = document.getElementById("bookingTable")
         .getElementsByTagName("tbody")[0]
         .rows;
-
     for(let i = 0; i < rows.length; i++){
-
         let row = rows[i];
         let text = row.innerText.toLowerCase();
        let rowDate = row.cells[1].innerHTML;
         let rowBoat = row.cells[7].textContent.trim().toLowerCase();
-
         // Get booking status from currentBookings using Firebase ID
         let firebaseId = row.dataset.firebaseId;
         let booking = currentBookings.find(b => b.firebaseId === firebaseId);
         let rowStatus = booking?.bookingStatus || "";
-
         let show = true;
-
         if(keyword !== "" && !text.includes(keyword))
             show = false;
-
         if(date !== "" && rowDate !== date)
             show = false;
-
         if(boat !== "" && rowBoat !== boat)
             show = false;
-
         if(status !== "" && rowStatus !== status)
             show = false;
-
         row.style.display = show ? "" : "none";
     }
 }
 // =====================================
 // CLEAR SEARCH
 // =====================================
-
 function clearSearch(){
-
     document.getElementById("searchText").value="";
     document.getElementById("searchDate").value="";
     document.getElementById("searchStatus").value="";
     document.getElementById("searchBoat").value="";
-
     searchBookings();
-
 }
 // =====================================
 // DASHBOARD
 // =====================================
-
-
 async function updateDashboard() {
-
     let bookings = await getBookings();
-
     // Use local date instead of UTC date
     function formatLocalDate(date) {
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, "0");
         const day = String(date.getDate()).padStart(2, "0");
-
         return `${year}-${month}-${day}`;
     }
-
     const today = formatLocalDate(new Date());
-
     const tomorrowDate = new Date();
     tomorrowDate.setDate(tomorrowDate.getDate() + 1);
     const tomorrow = formatLocalDate(tomorrowDate);
-
     let todayCount = 0;
     let tomorrowCount = 0;
     let confirmed = 0;
     let cancelled = 0;
     let postponed = 0;
-
     bookings.forEach(function (b) {
-
         const status = b.bookingStatus || "";
-
         // Cancelled bookings
         if (status === "Cancelled") {
             cancelled++;
             return;
         }
-
         // Postponed bookings:
         // Count against the new cruise date
         if (status === "Postponed") {
-
             postponed++;
-
             if (b.newCruiseDate === today) {
                 todayCount++;
             }
-
             if (b.newCruiseDate === tomorrow) {
                 tomorrowCount++;
             }
-
             return;
         }
-
         // Confirmed bookings
         if (status === "Confirmed") {
-
             confirmed++;
-
             if (b.cruiseDate === today) {
                 todayCount++;
             }
-
             if (b.cruiseDate === tomorrow) {
                 tomorrowCount++;
             }
         }
     });
-
     // Update dashboard cards
     document.getElementById("todayBookings").innerHTML =
         todayCount;
-
     document.getElementById("tomorrowBookings").innerHTML =
         tomorrowCount;
-
     document.getElementById("totalBookings").innerHTML =
         bookings.length;
-
     document.getElementById("confirmedBookings").innerHTML =
         confirmed;
-
     document.getElementById("cancelledBookings").innerHTML =
         cancelled;
-
     document.getElementById("postponedBookings").innerHTML =
         postponed;
 }
 // ============================================
 // MAKE FUNCTIONS AVAILABLE TO HTML BUTTONS
 // ============================================
-
 window.saveBooking = saveBooking;
 window.updateBooking = updateBooking;
 window.deleteBooking = deleteBooking;
