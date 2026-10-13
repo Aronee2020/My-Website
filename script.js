@@ -1021,6 +1021,31 @@ function openGuestVoucher(){
         "_blank"
     );
 }
+
+function openAdvanceReceipt() {
+
+    if (!selectedRow) {
+        alert("Please select a booking first.");
+        return;
+    }
+
+    const booking = currentBookings.find(
+        b => b.firebaseId === selectedRow
+    );
+
+    if (!booking) {
+        alert("Booking not found.");
+        return;
+    }
+
+    localStorage.setItem(
+        "selectedBooking",
+        JSON.stringify(booking)
+    );
+
+    window.open("advanceReceipt.html", "_blank");
+}
+
 // ==========================================
 // SEND BOOKING CONFIRMATION VIA WHATSAPP
 // ==========================================
@@ -1253,6 +1278,7 @@ async function updateDashboard() {
 // ============================================
 window.saveBooking = saveBooking;
 window.updateBooking = updateBooking;
+window.openAdvanceReceipt = openAdvanceReceipt;
 window.deleteBooking = deleteBooking;
 window.exportToExcel = exportToExcel;
 window.openGuestVoucher = openGuestVoucher;
