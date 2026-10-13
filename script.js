@@ -1021,7 +1021,6 @@ function openGuestVoucher(){
         "_blank"
     );
 }
-```javascript
 function openAdvanceReceipt() {
 
     if (selectedRow == null) {
