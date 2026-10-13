@@ -1021,16 +1021,18 @@ function openGuestVoucher(){
         "_blank"
     );
 }
-
+```javascript
 function openAdvanceReceipt() {
 
-    if (!selectedRow) {
-        alert("Please select a booking first.");
+    if (selectedRow == null) {
+        alert("Please select a booking.");
         return;
     }
 
-    const booking = currentBookings.find(
-        b => b.firebaseId === selectedRow
+    let firebaseId = selectedRow.dataset.firebaseId;
+
+    let booking = currentBookings.find(
+        b => b.firebaseId === firebaseId
     );
 
     if (!booking) {
@@ -1043,10 +1045,12 @@ function openAdvanceReceipt() {
         JSON.stringify(booking)
     );
 
-    window.open("advanceReceipt.html", "_blank");
+    window.open(
+        "advanceReceipt.html",
+        "_blank"
+    );
 }
-
-// ==========================================
+```// ==========================================
 // SEND BOOKING CONFIRMATION VIA WHATSAPP
 // ==========================================
 function sendBookingWhatsApp() {
