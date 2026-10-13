@@ -1,1 +1,131 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advance Payment Receipt</title>
+    <link rel="stylesheet" href="advanceReceipt.css">
+</head>
+<body>
 
+    <div class="receipt">
+
+        <div class="company-header">
+            <img id="receiptLogo" src="logo.png" alt="Company Logo">
+
+            <div class="company-details">
+                <h2 id="receiptCompanyName">ARONEE TOURS & TRAVELS PVT. LTD</h2>
+                <div id="receiptAddress"></div>
+            </div>
+        </div>
+
+        <hr>
+
+        <h1>ADVANCE PAYMENT RECEIPT</h1>
+
+        <div class="receipt-meta">
+            <p><strong>Receipt No:</strong> <span id="receiptNumber"></span></p>
+            <p><strong>Receipt Date:</strong> <span id="receiptDate"></span></p>
+        </div>
+
+        <h3>Guest Details</h3>
+
+        <table>
+            <tr>
+                <th>Guest Name</th>
+                <td id="guestName"></td>
+            </tr>
+            <tr>
+                <th>Customer ID</th>
+                <td id="customerId"></td>
+            </tr>
+            <tr>
+                <th>Mobile Number</th>
+                <td id="mobile"></td>
+            </tr>
+            <tr>
+                <th>Booking ID</th>
+                <td id="bookingId"></td>
+            </tr>
+        </table>
+
+        <h3>Booking Details</h3>
+
+        <table>
+            <tr>
+                <th>Cruise Date</th>
+                <td id="cruiseDate"></td>
+            </tr>
+            <tr>
+                <th>Houseboat</th>
+                <td id="houseboat"></td>
+            </tr>
+            <tr>
+                <th>Package</th>
+                <td id="packageName"></td>
+            </tr>
+            <tr>
+                <th>Boarding Point</th>
+                <td id="boardingPoint"></td>
+            </tr>
+            <tr>
+                <th>Guest Count</th>
+                <td id="guestCount"></td>
+            </tr>
+        </table>
+
+        <h3>Payment Details</h3>
+
+        <table>
+            <tr>
+                <th>Package Amount</th>
+                <td id="packageAmount"></td>
+            </tr>
+            <tr id="taxiRow">
+                <th>Transportation Charges</th>
+                <td id="taxiAmount"></td>
+            </tr>
+            <tr>
+                <th>Total Booking Amount</th>
+                <td id="totalAmount"></td>
+            </tr>
+            <tr class="advance-row">
+                <th>Advance Payment Received</th>
+                <td id="advanceAmount"></td>
+            </tr>
+            <tr>
+                <th>Balance Amount</th>
+                <td id="balanceAmount"></td>
+            </tr>
+            <tr>
+                <th>Payment Mode</th>
+                <td id="paymentMode"></td>
+            </tr>
+            <tr id="transactionRow">
+                <th>Transaction Reference</th>
+                <td id="transactionReference"></td>
+            </tr>
+        </table>
+
+        <p class="thank-you">
+            Thank you for your payment. We appreciate your booking.
+        </p>
+
+        <div class="signature">
+            <p>Authorized Signatory</p>
+            <strong id="footerCompanyName"></strong>
+        </div>
+
+        <div class="buttons">
+            <button type="button" onclick="printReceipt()">Print / Save as PDF</button>
+            <button type="button" class="close-button" onclick="closeReceipt()">Close</button>
+        </div>
+
+    </div>
+
+    <script src="advanceReceipt.js"></script>
+
+</body>
+</html>
+```
