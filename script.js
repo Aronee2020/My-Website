@@ -1049,7 +1049,7 @@ function openAdvanceReceipt() {
         "_blank"
     );
 }
-```// ==========================================
+// ==========================================
 // SEND BOOKING CONFIRMATION VIA WHATSAPP
 // ==========================================
 function sendBookingWhatsApp() {
