@@ -1351,9 +1351,20 @@ function renderBookingPage(resetPage = false) {
     const info = document.createElement("span");
     info.className = "small text-muted";
 
-   info.textContent = totalBookings === 0
-    ? "No bookings found"
-    : `Showing ${startIndex + 1}–${endIndex} of ${totalBookings} bookings`;
+
+if (totalBookings === 0) {
+    info.textContent = "No bookings found";
+} else {
+    info.textContent =
+        "Showing " +
+        (startIndex + 1) +
+        "-" +
+        endIndex +
+        " of " +
+        totalBookings +
+        " bookings";
+}
+
 
     pagination.appendChild(info);
 
