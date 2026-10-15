@@ -1116,11 +1116,10 @@ Booking List
 
 <div class="card-body">
 
-<!-- ================= SEARCH AREA ================= -->
 
-<div class="row mb-3 g-2 align-items-end">
+<div class="booking-search-filters mb-3">
 
-    <div class="col-md-3">
+    <div class="filter-search">
         <label for="searchText">Search Booking / Guest / Mobile</label>
         <input type="text"
                id="searchText"
@@ -1129,7 +1128,7 @@ Booking List
                onkeyup="searchBookings()">
     </div>
 
-    <div class="col-md-2">
+    <div>
         <label for="searchStatus">Status</label>
         <select id="searchStatus"
                 class="form-select"
@@ -1141,7 +1140,7 @@ Booking List
         </select>
     </div>
 
-    <div class="col-md-2">
+    <div>
         <label for="searchBoat">Houseboat</label>
         <select id="searchBoat"
                 class="form-select"
@@ -1162,7 +1161,8 @@ Booking List
             <option>Lotus</option>
         </select>
     </div>
-   <div class="col-md-3">
+
+    <div>
         <label for="searchFromDate">From Date</label>
         <input type="date"
                id="searchFromDate"
@@ -1170,13 +1170,18 @@ Booking List
                onchange="searchBookings()">
     </div>
 
-    <div class="col-md-3">
+    <div>
         <label for="searchToDate">To Date</label>
         <input type="date"
                id="searchToDate"
                class="form-control"
                onchange="searchBookings()">
     </div>
+
+</div>
+
+<!-- SECOND ROW: PAGE SIZE AND BUTTONS -->
+<div class="row mb-3 g-2 align-items-end">
 
     <div class="col-md-3">
         <label for="pageSize">Bookings per page</label>
@@ -1207,7 +1212,6 @@ Booking List
     </div>
 
 </div>
-
 <!-- ================= END SEARCH AREA ================= -->
 
 <div class="table-responsive">
