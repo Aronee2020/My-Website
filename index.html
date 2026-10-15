@@ -1114,25 +1114,19 @@ Booking List
 
 </div>
 
-<div class="card-body">
-
-
+<!-- SEARCH FILTERS - ONE HORIZONTAL LINE -->
 <div class="booking-search-filters mb-3">
 
-    <div class="filter-search">
+    <div>
         <label for="searchText">Search Booking / Guest / Mobile</label>
-        <input type="text"
-               id="searchText"
-               class="form-control"
-               placeholder="Search Booking / Guest / Mobile"
+        <input type="text" id="searchText" class="form-control"
+               placeholder="Booking / Guest / Mobile"
                onkeyup="searchBookings()">
     </div>
 
     <div>
         <label for="searchStatus">Status</label>
-        <select id="searchStatus"
-                class="form-select"
-                onchange="searchBookings()">
+        <select id="searchStatus" class="form-select" onchange="searchBookings()">
             <option value="">All Status</option>
             <option>Confirmed</option>
             <option>Cancelled</option>
@@ -1142,9 +1136,7 @@ Booking List
 
     <div>
         <label for="searchBoat">Houseboat</label>
-        <select id="searchBoat"
-                class="form-select"
-                onchange="searchBookings()">
+        <select id="searchBoat" class="form-select" onchange="searchBookings()">
             <option value="">All Houseboats</option>
             <option>Dreampalace</option>
             <option>Madhuwahini</option>
@@ -1164,55 +1156,19 @@ Booking List
 
     <div>
         <label for="searchFromDate">From Date</label>
-        <input type="date"
-               id="searchFromDate"
-               class="form-control"
+        <input type="date" id="searchFromDate" class="form-control"
                onchange="searchBookings()">
     </div>
 
     <div>
         <label for="searchToDate">To Date</label>
-        <input type="date"
-               id="searchToDate"
-               class="form-control"
+        <input type="date" id="searchToDate" class="form-control"
                onchange="searchBookings()">
     </div>
 
 </div>
+<!-- END SEARCH FILTERS -->
 
-<!-- SECOND ROW: PAGE SIZE AND BUTTONS -->
-<div class="row mb-3 g-2 align-items-end">
-
-    <div class="col-md-3">
-        <label for="pageSize">Bookings per page</label>
-        <select id="pageSize"
-                class="form-select"
-                onchange="changePageSize()">
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="50">50</option>
-            <option value="all">All</option>
-        </select>
-    </div>
-
-    <div class="col-md-3">
-        <button type="button"
-                class="btn btn-primary w-100"
-                onclick="searchBookings()">
-            Search
-        </button>
-    </div>
-
-    <div class="col-md-3">
-        <button type="button"
-                class="btn btn-secondary w-100"
-                onclick="clearSearch()">
-            Clear Search
-        </button>
-    </div>
-
-</div>
-<!-- ================= END SEARCH AREA ================= -->
 
 <div class="table-responsive">
 
