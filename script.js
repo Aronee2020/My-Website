@@ -1573,27 +1573,4 @@ window.toggleCustomPackageType =
 window.toggleCustomHouseboatName =
     toggleCustomHouseboatName;
 
-function renderBookingPage(resetPage = false) {
-    const tbody = document.querySelector("#bookingTable tbody");
 
-    if (!tbody) {
-        console.error("Booking table tbody not found.");
-        return;
-    }
-
-    const rows = Array.from(tbody.querySelectorAll("tr"));
-
-    rows.forEach(row => {
-        row.style.display = "";
-    });
-
-    const pagination = document.getElementById("bookingPagination");
-
-    if (pagination) {
-        pagination.textContent = rows.length === 0
-            ? "No bookings found"
-            : rows.length + " bookings loaded";
-    }
-}
-
-window.renderBookingPage = renderBookingPage;
