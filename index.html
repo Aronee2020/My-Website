@@ -1115,114 +1115,83 @@ Booking List
 </div>
 
 <div class="card-body">
+```html
 <!-- ================= SEARCH AREA ================= -->
 
-<div class="row mb-3">
+<div class="row mb-3 g-2 align-items-end">
 
     <div class="col-md-3">
-        <input
-            type="text"
-            id="searchText"
-            class="form-control"
-            placeholder="Search Booking / Guest / Mobile"
-            onkeyup="searchBookings()">
+        <label for="searchText">Search Booking / Guest / Mobile</label>
+        <input type="text"
+               id="searchText"
+               class="form-control"
+               placeholder="Search Booking / Guest / Mobile"
+               onkeyup="searchBookings()">
     </div>
 
     <div class="col-md-2">
-        <input
-            type="date"
-            id="searchDate"
-            class="form-control"
-            onchange="searchBookings()">
-    </div>
-
-    <div class="col-md-2">
-        <select
-            id="searchStatus"
-            class="form-select"
-            onchange="searchBookings()">
-
+        <label for="searchStatus">Status</label>
+        <select id="searchStatus"
+                class="form-select"
+                onchange="searchBookings()">
             <option value="">All Status</option>
             <option>Confirmed</option>
             <option>Cancelled</option>
             <option>Postponed</option>
-
         </select>
     </div>
 
     <div class="col-md-2">
-        <select
-            id="searchBoat"
-            class="form-select"
-            onchange="searchBookings()">
-
+        <label for="searchBoat">Houseboat</label>
+        <select id="searchBoat"
+                class="form-select"
+                onchange="searchBookings()">
             <option value="">All Houseboats</option>
             <option>Dreampalace</option>
-<option>Madhuwahini</option>
-<option>Arabian palace</option>
-<option>Lakepalace</option>
-<option>Meadows</option>
-<option>Rainbow</option>
-<option>Jalarani</option>    
-<option>Jalakanyaka</option>
-<option>KL 14</option>
-<option>Valiyaparamba</option>
-<option>Bekal Riveria</option>
-<option>Atlanta</option>
-<option>Lotus</option>
-
+            <option>Madhuwahini</option>
+            <option>Arabian palace</option>
+            <option>Lakepalace</option>
+            <option>Meadows</option>
+            <option>Rainbow</option>
+            <option>Jalarani</option>
+            <option>Jalakanyaka</option>
+            <option>KL 14</option>
+            <option>Valiyaparamba</option>
+            <option>Bekal Riveria</option>
+            <option>Atlanta</option>
+            <option>Lotus</option>
         </select>
     </div>
 
-    <div class="col-md-3">
-
-        <button
-            class="btn btn-secondary w-100"
-            onclick="clearSearch()">
-
-            Clear Search
-
-        </button>
-
-    </div>
-
-<button
-    type="button"
-    class="btn btn-primary w-100"
-    onclick="searchBookings()">
-    Search
-</button>
-
-</div>
-    
-<!-- DATE RANGE AND PAGINATION FILTERS -->
-
-<div class="row mb-3 align-items-end">
-
-    <div class="col-md-3">
-        <label for="searchFromDate">From Date:</label>
-        <input
-            type="date"
-            id="searchFromDate"
-            class="form-control"
-            onchange="searchBookings()">
+    <div class="col-md-2">
+        <label for="searchDate">Cruise Date</label>
+        <input type="date"
+               id="searchDate"
+               class="form-control"
+               onchange="searchBookings()">
     </div>
 
     <div class="col-md-3">
-        <label for="searchToDate">To Date:</label>
-        <input
-            type="date"
-            id="searchToDate"
-            class="form-control"
-            onchange="searchBookings()">
+        <label for="searchFromDate">From Date</label>
+        <input type="date"
+               id="searchFromDate"
+               class="form-control"
+               onchange="searchBookings()">
     </div>
 
     <div class="col-md-3">
-        <label for="pageSize">Bookings per page:</label>
-        <select
-            id="pageSize"
-            class="form-select"
-            onchange="changePageSize()">
+        <label for="searchToDate">To Date</label>
+        <input type="date"
+               id="searchToDate"
+               class="form-control"
+               onchange="searchBookings()">
+    </div>
+
+    <div class="col-md-3">
+        <label for="pageSize">Bookings per page</label>
+        <select id="pageSize"
+                class="form-select"
+                onchange="changePageSize()">
             <option value="10">10</option>
             <option value="20">20</option>
             <option value="50">50</option>
@@ -1230,9 +1199,26 @@ Booking List
         </select>
     </div>
 
-</div>
-<!-- END DATE RANGE AND PAGINATION FILTERS -->
+    <div class="col-md-3">
+        <button type="button"
+                class="btn btn-primary w-100"
+                onclick="searchBookings()">
+            Search
+        </button>
+    </div>
 
+    <div class="col-md-3">
+        <button type="button"
+                class="btn btn-secondary w-100"
+                onclick="clearSearch()">
+            Clear Search
+        </button>
+    </div>
+
+</div>
+
+<!-- ================= END SEARCH AREA ================= -->
+```
 <div class="table-responsive">
 
 <table
