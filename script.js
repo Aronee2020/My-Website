@@ -1250,8 +1250,6 @@ Thank you for choosing ${brandName}.`;
 function getFilteredBookingRows() {
     const keyword = document.getElementById("searchText")
         .value.trim().toLowerCase();
-
-    const date = document.getElementById("searchDate").value;
     const status = document.getElementById("searchStatus").value;
 
     const boat = document.getElementById("searchBoat")
@@ -1289,8 +1287,7 @@ function getFilteredBookingRows() {
 
         return (
             (!keyword || searchableText.includes(keyword)) &&
-            (!date || cruiseDate === date) &&
-            (!status || bookingStatus === status) &&
+                (!status || bookingStatus === status) &&
             (!boat || houseboat === boat) &&
             (!fromDate || cruiseDate >= fromDate) &&
             (!toDate || cruiseDate <= toDate)
@@ -1463,7 +1460,6 @@ function goToBookingPage(page) {
 
 function clearSearch() {
     document.getElementById("searchText").value = "";
-    document.getElementById("searchDate").value = "";
     document.getElementById("searchStatus").value = "";
     document.getElementById("searchBoat").value = "";
     document.getElementById("searchFromDate").value = "";
