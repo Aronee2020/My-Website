@@ -1187,6 +1187,45 @@ Booking List
     </div>
 
 </div>
+    
+<!-- DATE RANGE AND PAGINATION FILTERS -->
+
+<div class="row mb-3 align-items-end">
+
+    <div class="col-md-3">
+        <label for="searchFromDate">From Date:</label>
+        <input
+            type="date"
+            id="searchFromDate"
+            class="form-control"
+            onchange="searchBookings()">
+    </div>
+
+    <div class="col-md-3">
+        <label for="searchToDate">To Date:</label>
+        <input
+            type="date"
+            id="searchToDate"
+            class="form-control"
+            onchange="searchBookings()">
+    </div>
+
+    <div class="col-md-3">
+        <label for="pageSize">Bookings per page:</label>
+        <select
+            id="pageSize"
+            class="form-select"
+            onchange="changePageSize()">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="all">All</option>
+        </select>
+    </div>
+
+</div>
+<!-- END DATE RANGE AND PAGINATION FILTERS -->
+
 <div class="table-responsive">
 
 <table
