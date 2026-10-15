@@ -20,7 +20,7 @@ let receiptNo = 1;
 let currentBookings = [];
 // Pagination: show 10 bookings per page
 let currentPage = 1;
-const BOOKINGS_PER_PAGE = 10;
+let BOOKINGS_PER_PAGE = 10;
 // ======================================
 // LOCAL STORAGE FUNCTIONS
 // ======================================
@@ -1563,6 +1563,7 @@ window.deleteBooking = deleteBooking;
 window.exportToExcel = exportToExcel;
 window.openGuestVoucher = openGuestVoucher;
 window.searchBookings = searchBookings;
+window.changePageSize = changePageSize;
 window.sendBookingWhatsApp = sendBookingWhatsApp;
 window.clearSearch = clearSearch;
 window.bookingStatusChanged = bookingStatusChanged;
