@@ -1472,9 +1472,20 @@ function clearSearch() {
 // KEEP EXISTING FUNCTION COMPATIBLE
 // =====================================
 
+
 function changePageSize() {
+    const pageSizeSelect = document.getElementById("pageSize");
+    const selectedValue = pageSizeSelect.value;
+
+    if (selectedValue === "all") {
+        BOOKINGS_PER_PAGE = Infinity;
+    } else {
+        BOOKINGS_PER_PAGE = parseInt(selectedValue, 10) || 10;
+    }
+
     renderBookingPage(true);
 }
+
 
 window.goToBookingPage = goToBookingPage;
 // =====================================
