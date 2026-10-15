@@ -1481,7 +1481,6 @@ function changePageSize() {
 }
 
 window.goToBookingPage = goToBookingPage;
-```
 // =====================================
 // DASHBOARD
 // =====================================
