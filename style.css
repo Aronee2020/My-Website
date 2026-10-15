@@ -461,3 +461,36 @@ input[readonly]{
         overflow-x: auto;
     }
 }
+
+/* Booking search filters: five fields in one desktop row */
+.booking-search-filters {
+    display: grid;
+    grid-template-columns: minmax(260px, 2fr) minmax(120px, 0.9fr) minmax(150px, 1.1fr) minmax(140px, 1fr) minmax(140px, 1fr);
+    gap: 12px;
+    align-items: end;
+    width: 100%;
+}
+
+.booking-search-filters > div {
+    min-width: 0;
+}
+
+.booking-search-filters label {
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.booking-search-filters input,
+.booking-search-filters select {
+    width: 100%;
+    min-width: 0;
+    height: 40px;
+    font-size: 13px;
+}
+
+@media (max-width: 900px) {
+    .booking-search-filters {
+        grid-template-columns: repeat(5, minmax(140px, 1fr));
+        overflow-x: auto;
+    }
+}
