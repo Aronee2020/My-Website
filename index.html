@@ -1169,6 +1169,23 @@ Booking List
 </div>
 <!-- END SEARCH FILTERS -->
 
+<!-- BOOKINGS PER PAGE -->
+<div class="d-flex align-items-center gap-2 mb-3">
+    <label for="pageSize" class="mb-0 text-nowrap">
+        Bookings per page:
+    </label>
+
+    <select id="pageSize"
+            class="form-select"
+            style="width: 100px;"
+            onchange="changePageSize()">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="all">All</option>
+    </select>
+</div>
+
 
 <div class="table-responsive">
 
