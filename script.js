@@ -18,6 +18,9 @@ let bookingNo = 1;
 let customerNo = 1;
 let receiptNo = 1;
 let currentBookings = [];
+// Pagination: show 10 bookings per page
+let currentPage = 1;
+const BOOKINGS_PER_PAGE = 10;
 // ======================================
 // LOCAL STORAGE FUNCTIONS
 // ======================================
@@ -99,36 +102,49 @@ window.calculateAccommodationBalance = function () {
     document.getElementById("accommodationBalance").value =
         balance >= 0 ? balance.toFixed(2) : "0.00";
 };
+
 async function loadBookings() {
-currentBookings = await getBookings();
-let bookings = [...currentBookings];
-bookings.sort((a, b) => {
-    return new Date(b.cruiseDate) - new Date(a.cruiseDate);
-});
-    let tbody = document.querySelector("#bookingTable tbody");
+    currentBookings = await getBookings();
+
+    const bookings = [...currentBookings].sort((a, b) => {
+        if (!a.cruiseDate) return 1;
+        if (!b.cruiseDate) return -1;
+        return b.cruiseDate.localeCompare(a.cruiseDate);
+    });
+
+    const tbody = document.querySelector("#bookingTable tbody");
+    if (!tbody) return;
+
     tbody.innerHTML = "";
-    bookings.forEach(function(b){
-        let row = tbody.insertRow();
+
+    bookings.forEach(function (b) {
+        const row = tbody.insertRow();
+
         row.dataset.firebaseId = b.firebaseId || "";
-        row.onclick = function(){
+
+        row.onclick = function () {
             selectRow(this);
         };
-        row.insertCell(0).innerHTML = b.customerId || "";
-        row.insertCell(1).innerHTML = b.cruiseDate || "";
-        row.insertCell(2).innerHTML = b.guestName || "";
-        row.insertCell(3).innerHTML = b.mobile || "";
-        row.insertCell(4).innerHTML = b.bookingDate || "";        
-        row.insertCell(5).innerHTML = b.package || "";
-        row.insertCell(6).innerHTML = b.checkInPoint || "";
-        row.insertCell(7).innerHTML = b.houseboatName || "";
-row.insertCell(8).innerHTML = b.houseboatType || "";
-row.insertCell(9).innerHTML = b.checkIn || "";
-row.insertCell(10).innerHTML = b.checkOut || "";
-row.insertCell(11).innerHTML = b.totalPax || "";
-row.insertCell(12).innerHTML = "₹ " + (b.packageAmount || 0);
-row.insertCell(13).innerHTML = "₹ " + (b.advanceReceived || 0);
-row.insertCell(14).innerHTML = "₹ " + (b.balanceAmount || 0);
-row.insertCell(15).innerHTML = b.advanceMode || "";            });
+
+        row.insertCell(0).textContent = b.customerId || "";
+        row.insertCell(1).textContent = b.cruiseDate || "";
+        row.insertCell(2).textContent = b.guestName || "";
+        row.insertCell(3).textContent = b.mobile || "";
+        row.insertCell(4).textContent = b.bookingDate || "";
+        row.insertCell(5).textContent = b.package || "";
+        row.insertCell(6).textContent = b.checkInPoint || "";
+        row.insertCell(7).textContent = b.houseboatName || "";
+        row.insertCell(8).textContent = b.houseboatType || "";
+        row.insertCell(9).textContent = b.checkIn || "";
+        row.insertCell(10).textContent = b.checkOut || "";
+        row.insertCell(11).textContent = b.totalPax || "";
+        row.insertCell(12).textContent = "₹ " + (b.packageAmount || 0);
+        row.insertCell(13).textContent = "₹ " + (b.advanceReceived || 0);
+        row.insertCell(14).textContent = "₹ " + (b.balanceAmount || 0);
+        row.insertCell(15).textContent = b.advanceMode || "";
+    });
+
+    renderBookingPage(true);
 }
 // ======================================
 // Update Next Auto Numbers
@@ -1172,36 +1188,36 @@ Thank you for choosing ${brandName}.`;
     );
 }
 
- // =====================================
- // SEARCH AND FILTER BOOKINGS
- // =====================================
-function searchBookings() {
+```javascript
+// =====================================
+// SEARCH, FILTER AND PAGINATION
+// =====================================
+
+function getFilteredBookingRows() {
     const keyword = document.getElementById("searchText")
         .value.trim().toLowerCase();
 
     const date = document.getElementById("searchDate").value;
     const status = document.getElementById("searchStatus").value;
+
     const boat = document.getElementById("searchBoat")
         .value.trim().toLowerCase();
 
     const fromDate = document.getElementById("searchFromDate").value;
     const toDate = document.getElementById("searchToDate").value;
 
-    const rows = document.querySelectorAll(
-        "#bookingTable tbody tr"
+    const rows = Array.from(
+        document.querySelectorAll("#bookingTable tbody tr")
     );
 
-    rows.forEach(row => {
+    return rows.filter(row => {
         const firebaseId = row.dataset.firebaseId;
 
         const booking = currentBookings.find(
             b => b.firebaseId === firebaseId
         );
 
-        if (!booking) {
-            row.style.display = "none";
-            return;
-        }
+        if (!booking) return false;
 
         const searchableText = [
             booking.bookingId,
@@ -1211,42 +1227,175 @@ function searchBookings() {
         ].join(" ").toLowerCase();
 
         const cruiseDate = booking.cruiseDate || "";
+
         const houseboat = (booking.houseboatName || "")
             .trim().toLowerCase();
+
         const bookingStatus = booking.bookingStatus || "";
 
-        const matchesKeyword =
-            !keyword || searchableText.includes(keyword);
-
-        const matchesDate =
-            !date || cruiseDate === date;
-
-        const matchesStatus =
-            !status || bookingStatus === status;
-
-        const matchesBoat =
-            !boat || houseboat === boat;
-
-        const matchesFromDate =
-            !fromDate || cruiseDate >= fromDate;
-
-        const matchesToDate =
-            !toDate || cruiseDate <= toDate;
-
-        row.style.display = (
-            matchesKeyword &&
-            matchesDate &&
-            matchesStatus &&
-            matchesBoat &&
-            matchesFromDate &&
-            matchesToDate
-        ) ? "" : "none";
+        return (
+            (!keyword || searchableText.includes(keyword)) &&
+            (!date || cruiseDate === date) &&
+            (!status || bookingStatus === status) &&
+            (!boat || houseboat === boat) &&
+            (!fromDate || cruiseDate >= fromDate) &&
+            (!toDate || cruiseDate <= toDate)
+        );
     });
+}
+
+// =====================================
+// DISPLAY BOOKINGS AND PAGE NUMBERS
+// =====================================
+
+function renderBookingPage(resetPage = false) {
+    if (resetPage) {
+        currentPage = 1;
+    }
+
+    const allRows = Array.from(
+        document.querySelectorAll("#bookingTable tbody tr")
+    );
+
+    const filteredRows = getFilteredBookingRows();
+    const totalBookings = filteredRows.length;
+
+    const totalPages = Math.max(
+        1,
+        Math.ceil(totalBookings / BOOKINGS_PER_PAGE)
+    );
+
+    currentPage = Math.min(
+        Math.max(1, currentPage),
+        totalPages
+    );
+
+    const startIndex = (currentPage - 1) * BOOKINGS_PER_PAGE;
+
+    const endIndex = Math.min(
+        startIndex + BOOKINGS_PER_PAGE,
+        totalBookings
+    );
+
+    const visibleRows = new Set(
+        filteredRows.slice(startIndex, endIndex)
+    );
+
+    // Hide rows outside the current page or search results.
+    // Do not remove rows, because other functions may need them.
+    allRows.forEach(row => {
+        row.style.display = visibleRows.has(row) ? "" : "none";
+    });
+
+    const pagination = document.getElementById("bookingPagination");
+
+    if (!pagination) return;
+
+    pagination.innerHTML = "";
+
+    const info = document.createElement("span");
+    info.className = "small text-muted";
+
+    info.textContent = totalBookings === 0
+        ? "No bookings found"
+        : `Showing ${startIndex + 1}–${endIndex} of ${totalBookings} bookings`;
+
+    pagination.appendChild(info);
+
+    const controls = document.createElement("div");
+
+    controls.className =
+        "d-flex flex-wrap align-items-center gap-1";
+
+    function addButton(label, page, disabled, active = false) {
+        const button = document.createElement("button");
+
+        button.type = "button";
+        button.className = active
+            ? "btn btn-primary btn-sm"
+            : "btn btn-outline-secondary btn-sm";
+
+        button.textContent = label;
+        button.disabled = disabled;
+
+        button.addEventListener("click", function () {
+            goToBookingPage(page);
+        });
+
+        controls.appendChild(button);
+    }
+
+    // Previous button
+    addButton(
+        "Previous",
+        currentPage - 1,
+        currentPage === 1
+    );
+
+    // Display first, nearby and last page numbers
+    const pages = new Set([1, totalPages]);
+
+    for (
+        let page = Math.max(1, currentPage - 2);
+        page <= Math.min(totalPages, currentPage + 2);
+        page++
+    ) {
+        pages.add(page);
+    }
+
+    let previousPage = 0;
+
+    [...pages].sort((a, b) => a - b).forEach(page => {
+        if (previousPage && page - previousPage > 1) {
+            const dots = document.createElement("span");
+
+            dots.className = "px-1";
+            dots.textContent = "...";
+
+            controls.appendChild(dots);
+        }
+
+        addButton(
+            String(page),
+            page,
+            false,
+            page === currentPage
+        );
+
+        previousPage = page;
+    });
+
+    // Next button
+    addButton(
+        "Next",
+        currentPage + 1,
+        currentPage === totalPages
+    );
+
+    pagination.appendChild(controls);
+}
+
+// =====================================
+// SEARCH BUTTON
+// =====================================
+
+function searchBookings() {
+    renderBookingPage(true);
+}
+
+// =====================================
+// GO TO A SELECTED PAGE
+// =====================================
+
+function goToBookingPage(page) {
+    currentPage = page;
+    renderBookingPage(false);
 }
 
 // =====================================
 // CLEAR ALL SEARCH FILTERS
 // =====================================
+
 function clearSearch() {
     document.getElementById("searchText").value = "";
     document.getElementById("searchDate").value = "";
@@ -1255,14 +1404,19 @@ function clearSearch() {
     document.getElementById("searchFromDate").value = "";
     document.getElementById("searchToDate").value = "";
 
-    searchBookings();
+    renderBookingPage(true);
 }
 
-// Called by the existing page-size dropdown.
-// Pagination itself needs separate page controls.
+// =====================================
+// KEEP EXISTING FUNCTION COMPATIBLE
+// =====================================
+
 function changePageSize() {
-    searchBookings();
+    renderBookingPage(true);
 }
+
+window.goToBookingPage = goToBookingPage;
+```
 // =====================================
 // DASHBOARD
 // =====================================
