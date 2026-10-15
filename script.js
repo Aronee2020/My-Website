@@ -1171,46 +1171,96 @@ Thank you for choosing ${brandName}.`;
         "_blank"
     );
 }
-// =====================================
-// SEARCH BOOKINGS
-// =====================================
-function searchBookings(){
-    let keyword = document.getElementById("searchText").value.toLowerCase();
-    let date = document.getElementById("searchDate").value;
-    let status = document.getElementById("searchStatus").value;
-    let boat = document.getElementById("searchBoat").value.trim().toLowerCase();
-    let rows = document.getElementById("bookingTable")
-        .getElementsByTagName("tbody")[0]
-        .rows;
-    for(let i = 0; i < rows.length; i++){
-        let row = rows[i];
-        let text = row.innerText.toLowerCase();
-       let rowDate = row.cells[1].innerHTML;
-        let rowBoat = row.cells[7].textContent.trim().toLowerCase();
-        // Get booking status from currentBookings using Firebase ID
-        let firebaseId = row.dataset.firebaseId;
-        let booking = currentBookings.find(b => b.firebaseId === firebaseId);
-        let rowStatus = booking?.bookingStatus || "";
-        let show = true;
-        if(keyword !== "" && !text.includes(keyword))
-            show = false;
-        if(date !== "" && rowDate !== date)
-            show = false;
-        if(boat !== "" && rowBoat !== boat)
-            show = false;
-        if(status !== "" && rowStatus !== status)
-            show = false;
-        row.style.display = show ? "" : "none";
-    }
+
+ // =====================================
+ // SEARCH AND FILTER BOOKINGS
+ // =====================================
+function searchBookings() {
+    const keyword = document.getElementById("searchText")
+        .value.trim().toLowerCase();
+
+    const date = document.getElementById("searchDate").value;
+    const status = document.getElementById("searchStatus").value;
+    const boat = document.getElementById("searchBoat")
+        .value.trim().toLowerCase();
+
+    const fromDate = document.getElementById("searchFromDate").value;
+    const toDate = document.getElementById("searchToDate").value;
+
+    const rows = document.querySelectorAll(
+        "#bookingTable tbody tr"
+    );
+
+    rows.forEach(row => {
+        const firebaseId = row.dataset.firebaseId;
+
+        const booking = currentBookings.find(
+            b => b.firebaseId === firebaseId
+        );
+
+        if (!booking) {
+            row.style.display = "none";
+            return;
+        }
+
+        const searchableText = [
+            booking.bookingId,
+            booking.customerId,
+            booking.guestName,
+            booking.mobile
+        ].join(" ").toLowerCase();
+
+        const cruiseDate = booking.cruiseDate || "";
+        const houseboat = (booking.houseboatName || "")
+            .trim().toLowerCase();
+        const bookingStatus = booking.bookingStatus || "";
+
+        const matchesKeyword =
+            !keyword || searchableText.includes(keyword);
+
+        const matchesDate =
+            !date || cruiseDate === date;
+
+        const matchesStatus =
+            !status || bookingStatus === status;
+
+        const matchesBoat =
+            !boat || houseboat === boat;
+
+        const matchesFromDate =
+            !fromDate || cruiseDate >= fromDate;
+
+        const matchesToDate =
+            !toDate || cruiseDate <= toDate;
+
+        row.style.display = (
+            matchesKeyword &&
+            matchesDate &&
+            matchesStatus &&
+            matchesBoat &&
+            matchesFromDate &&
+            matchesToDate
+        ) ? "" : "none";
+    });
 }
+
 // =====================================
-// CLEAR SEARCH
+// CLEAR ALL SEARCH FILTERS
 // =====================================
-function clearSearch(){
-    document.getElementById("searchText").value="";
-    document.getElementById("searchDate").value="";
-    document.getElementById("searchStatus").value="";
-    document.getElementById("searchBoat").value="";
+function clearSearch() {
+    document.getElementById("searchText").value = "";
+    document.getElementById("searchDate").value = "";
+    document.getElementById("searchStatus").value = "";
+    document.getElementById("searchBoat").value = "";
+    document.getElementById("searchFromDate").value = "";
+    document.getElementById("searchToDate").value = "";
+
+    searchBookings();
+}
+
+// Called by the existing page-size dropdown.
+// Pagination itself needs separate page controls.
+function changePageSize() {
     searchBookings();
 }
 // =====================================
