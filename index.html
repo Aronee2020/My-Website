@@ -1168,7 +1168,20 @@ Booking List
 
 </div>
 <!-- END SEARCH FILTERS -->
+<!-- SEARCH AND CLEAR BUTTONS -->
+<div class="d-flex gap-2 mb-3">
+    <button type="button"
+            class="btn btn-primary"
+            onclick="searchBookings()">
+        Search
+    </button>
 
+    <button type="button"
+            class="btn btn-secondary"
+            onclick="clearSearch()">
+        Clear Search
+    </button>
+</div>
 <!-- BOOKINGS PER PAGE -->
 <div class="d-flex align-items-center gap-2 mb-3">
     <label for="pageSize" class="mb-0 text-nowrap">
