@@ -494,3 +494,50 @@ input[readonly]{
         overflow-x: auto;
     }
 }
+
+/* Keep all five search filters on one horizontal line */
+.booking-search-filters {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.2fr 1fr 1fr;
+    gap: 10px;
+    align-items: end;
+    width: 100%;
+}
+
+.booking-search-filters > div {
+    min-width: 0;
+}
+
+.booking-search-filters label {
+    display: block;
+    font-size: 13px;
+    white-space: nowrap;
+    margin-bottom: 5px;
+}
+
+.booking-search-filters input,
+.booking-search-filters select {
+    width: 100%;
+    min-width: 0;
+    height: 40px;
+    box-sizing: border-box;
+    font-size: 13px;
+}
+
+/* Keep one line on smaller screens, with horizontal scrolling */
+@media (max-width: 900px) {
+    .booking-search-filters {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 8px;
+    }
+
+    .booking-search-filters > div {
+        flex: 0 0 150px;
+    }
+
+    .booking-search-filters > div:first-child {
+        flex-basis: 260px;
+    }
+}
