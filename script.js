@@ -103,48 +103,103 @@ window.calculateAccommodationBalance = function () {
         balance >= 0 ? balance.toFixed(2) : "0.00";
 };
 
+
 async function loadBookings() {
-    currentBookings = await getBookings();
-
-    const bookings = [...currentBookings].sort((a, b) => {
-        if (!a.cruiseDate) return 1;
-        if (!b.cruiseDate) return -1;
-        return b.cruiseDate.localeCompare(a.cruiseDate);
-    });
-
     const tbody = document.querySelector("#bookingTable tbody");
-    if (!tbody) return;
 
-    tbody.innerHTML = "";
+    if (!tbody) {
+        console.error(
+            "Booking table not found. Check the ID and tbody in index.html."
+        );
+        alert("Booking table not found. Please check index.html.");
+        return;
+    }
 
-    bookings.forEach(function (b) {
-        const row = tbody.insertRow();
+    try {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="16" class="text-center">
+                    Loading bookings...
+                </td>
+            </tr>
+        `;
 
-        row.dataset.firebaseId = b.firebaseId || "";
+        currentBookings = await getBookings();
 
-        row.onclick = function () {
-            selectRow(this);
-        };
+        console.log(
+            "Firebase bookings retrieved:",
+            currentBookings.length
+        );
+        console.log("Bookings data:", currentBookings);
 
-        row.insertCell(0).textContent = b.customerId || "";
-        row.insertCell(1).textContent = b.cruiseDate || "";
-        row.insertCell(2).textContent = b.guestName || "";
-        row.insertCell(3).textContent = b.mobile || "";
-        row.insertCell(4).textContent = b.bookingDate || "";
-        row.insertCell(5).textContent = b.package || "";
-        row.insertCell(6).textContent = b.checkInPoint || "";
-        row.insertCell(7).textContent = b.houseboatName || "";
-        row.insertCell(8).textContent = b.houseboatType || "";
-        row.insertCell(9).textContent = b.checkIn || "";
-        row.insertCell(10).textContent = b.checkOut || "";
-        row.insertCell(11).textContent = b.totalPax || "";
-        row.insertCell(12).textContent = "₹ " + (b.packageAmount || 0);
-        row.insertCell(13).textContent = "₹ " + (b.advanceReceived || 0);
-        row.insertCell(14).textContent = "₹ " + (b.balanceAmount || 0);
-        row.insertCell(15).textContent = b.advanceMode || "";
-    });
+        const bookings = [...currentBookings].sort((a, b) => {
+            if (!a.cruiseDate) return 1;
+            if (!b.cruiseDate) return -1;
+            return b.cruiseDate.localeCompare(a.cruiseDate);
+        });
 
-    renderBookingPage(true);
+        tbody.innerHTML = "";
+
+        if (bookings.length === 0) {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="16" class="text-center">
+                        No bookings found in the connected Firebase collection.
+                    </td>
+                </tr>
+            `;
+            renderBookingPage(true);
+            return;
+        }
+
+        bookings.forEach(function (b) {
+            const row = tbody.insertRow();
+            row.dataset.firebaseId = b.firebaseId || "";
+
+            row.onclick = function () {
+                selectRow(this);
+            };
+
+            row.insertCell(0).textContent = b.customerId || "";
+            row.insertCell(1).textContent = b.cruiseDate || "";
+            row.insertCell(2).textContent = b.guestName || "";
+            row.insertCell(3).textContent = b.mobile || "";
+            row.insertCell(4).textContent = b.bookingDate || "";
+            row.insertCell(5).textContent = b.package || "";
+            row.insertCell(6).textContent = b.checkInPoint || "";
+            row.insertCell(7).textContent = b.houseboatName || "";
+            row.insertCell(8).textContent = b.houseboatType || "";
+            row.insertCell(9).textContent = b.checkIn || "";
+            row.insertCell(10).textContent = b.checkOut || "";
+            row.insertCell(11).textContent = b.totalPax || "";
+            row.insertCell(12).textContent =
+                "₹ " + (b.packageAmount || 0);
+            row.insertCell(13).textContent =
+                "₹ " + (b.advanceReceived || 0);
+            row.insertCell(14).textContent =
+                "₹ " + (b.balanceAmount || 0);
+            row.insertCell(15).textContent = b.advanceMode || "";
+        });
+
+        renderBookingPage(true);
+
+    } catch (error) {
+        console.error("Failed to load bookings:", error);
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="16" class="text-center text-danger">
+                    Unable to load bookings. Check Firebase connection
+                    and browser console.
+                </td>
+            </tr>
+        `;
+
+        alert(
+            "Unable to load bookings from Firebase.\n\n" +
+            error.message
+        );
+    }
 }
 // ======================================
 // Update Next Auto Numbers
