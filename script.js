@@ -1243,7 +1243,6 @@ Thank you for choosing ${brandName}.`;
     );
 }
 
-```javascript
 // =====================================
 // SEARCH, FILTER AND PAGINATION
 // =====================================
@@ -1572,5 +1571,7 @@ window.toggleCustomPackageType =
     toggleCustomPackageType;
 window.toggleCustomHouseboatName =
     toggleCustomHouseboatName;
+
+window.renderBookingPage = renderBookingPage;
 
 
