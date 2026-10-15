@@ -433,3 +433,31 @@ input[readonly]{
     margin-top: 10px;
     margin-bottom: 15px;
 }
+
+/* Keep all booking filters in one line */
+.search-filter-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.2fr 1fr 1fr;
+    gap: 10px;
+    align-items: end;
+    width: 100%;
+}
+
+.search-filter-container > div {
+    min-width: 0;
+}
+
+.search-filter-container input,
+.search-filter-container select {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+/* Allow horizontal scrolling on smaller screens */
+@media (max-width: 768px) {
+    .search-filter-container {
+        grid-template-columns: 220px 130px 150px 140px 140px;
+        overflow-x: auto;
+    }
+}
