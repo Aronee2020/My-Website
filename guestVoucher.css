@@ -1321,3 +1321,30 @@ white-space: nowrap;
 text-align: center;
 padding: 0;
 }
+
+/* ================= SPECIAL NOTE ================= */
+
+.specialNoteBox {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #d6d6d6;
+    border-radius: 5px;
+    padding: 8px 12px;
+    margin: 12px 0;
+    background: #fff;
+    color: #333;
+    overflow-wrap: anywhere;
+}
+
+.specialNoteBox h3 {
+    margin: 0 0 5px;
+    font-size: 14px;
+    color: inherit;
+}
+
+.specialNoteBox p {
+    margin: 0;
+    white-space: pre-wrap;
+    font-size: 12px;
+    line-height: 1.5;
+}
