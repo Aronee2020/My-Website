@@ -241,6 +241,27 @@ setValue(
 
     }
 
+    // ==========================================
+    // SPECIAL NOTE
+    // ==========================================
+
+    const specialNoteElement =
+        document.getElementById("specialNote");
+
+    if (specialNoteElement) {
+        const specialNote = booking.specialNote || "";
+
+        specialNoteElement.textContent = specialNote;
+
+        const specialNoteSection =
+            document.getElementById("specialNoteSection");
+
+        if (specialNoteSection) {
+            specialNoteSection.style.display =
+                specialNote.trim() ? "block" : "none";
+        }
+    }
+
 
     // ==========================================
     // TAXI DETAILS
