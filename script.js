@@ -723,6 +723,7 @@ taxiPaymentMode: document.getElementById("taxiPaymentMode").value,
 taxiStatus: document.getElementById("taxiStatus").value,
 taxiRemarks: document.getElementById("taxiRemarks").value,
 foodMenu: document.getElementById("foodMenu").value,
+specialNote: document.getElementById("specialNote").value,
 specialInstruction: document.getElementById("specialInstruction").value
 };
 // // Save booking into Firebase
@@ -884,7 +885,11 @@ toggleCustomHouseboatType();
     document.getElementById("checkIn").value = booking.checkIn || "";
     document.getElementById("checkOut").value = booking.checkOut || "";
     document.getElementById("foodMenu").value = booking.foodMenu || "";
-    document.getElementById("specialInstruction").value =
+
+document.getElementById("specialNote").value =
+    booking.specialNote || "";
+
+document.getElementById("specialInstruction").value =
     booking.specialInstruction || "";
     document.getElementById("adults").value = booking.adults || "";
     document.getElementById("children").value = booking.children || "";
@@ -975,8 +980,9 @@ houseboatType:
         : document.getElementById("houseboatType").value,
             checkIn: document.getElementById("checkIn").value,
             checkOut: document.getElementById("checkOut").value,
-            foodMenu: document.getElementById("foodMenu").value,
-            specialInstruction: document.getElementById("specialInstruction").value,
+          foodMenu: document.getElementById("foodMenu").value,
+specialNote: document.getElementById("specialNote").value,
+specialInstruction: document.getElementById("specialInstruction").value,
             adults: document.getElementById("adults").value,
             children: document.getElementById("children").value,
             kids: document.getElementById("kids").value,
