@@ -946,58 +946,43 @@ readonly>
 
 </div>
 
+
 <!-- ================= CANCELLATION DETAILS ================= -->
 
-<div class="row mt-3">
+<div id="cancellationFields" class="row mt-3">
 
     <div class="col-md-4">
         <label>Cancellation Date</label>
-        <input
-            type="date"
-            id="cancelDate"
-            class="form-control">
+        <input type="date" id="cancelDate" class="form-control">
     </div>
 
     <div class="col-md-4">
         <label>Refund Amount</label>
-        <input
-            type="number"
-            id="refundAmount"
-            class="form-control"
-            min="0"
-            value="0">
+        <input type="number" id="refundAmount"
+               class="form-control" min="0" value="0">
     </div>
 
     <div class="col-md-4">
         <label>Cancellation Reason</label>
-        <textarea
-            id="cancelReason"
-            class="form-control"
-            rows="2"
-            placeholder="Enter cancellation reason..."></textarea>
+        <textarea id="cancelReason" class="form-control"
+                  rows="2" placeholder="Enter cancellation reason..."></textarea>
     </div>
 
 </div>
 
 <!-- ================= POSTPONEMENT DETAILS ================= -->
 
-<div class="row mt-3">
+<div id="postponementFields" class="row mt-3">
 
     <div class="col-md-6">
         <label>New Cruise Date</label>
-        <input
-            type="date"
-            id="newCruiseDate"
-            class="form-control">
+        <input type="date" id="newCruiseDate" class="form-control">
     </div>
 
     <div class="col-md-6">
         <label>Postponement Reason</label>
-        <textarea
-            id="postponeReason"
-            class="form-control"
-            rows="2"
-            placeholder="Enter postponement reason..."></textarea>
+        <textarea id="postponeReason" class="form-control"
+                  rows="2" placeholder="Enter postponement reason..."></textarea>
     </div>
 
 </div>
