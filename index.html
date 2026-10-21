@@ -916,39 +916,88 @@ readonly>
 </div>
 
 
+
 <!-- ================= BOOKING STATUS + FOOD MENU ================= -->
 
 <div class="row mt-3">
 
     <!-- BOOKING STATUS -->
     <div class="col-md-4">
-
         <label>Booking Status</label>
-
         <select
             id="bookingStatus"
             class="form-select"
             onchange="bookingStatusChanged()">
-
             <option>Confirmed</option>
             <option>Cancelled</option>
             <option>Postponed</option>
-
         </select>
-
     </div>
 
     <!-- FOOD MENU -->
     <div class="col-md-8">
-
         <label><b>Food Menu</b></label>
-
         <textarea
             id="foodMenu"
             class="form-control"
             rows="2"
             placeholder="Type the complete food menu here..."></textarea>
+    </div>
 
+</div>
+
+<!-- ================= CANCELLATION DETAILS ================= -->
+
+<div class="row mt-3">
+
+    <div class="col-md-4">
+        <label>Cancellation Date</label>
+        <input
+            type="date"
+            id="cancelDate"
+            class="form-control">
+    </div>
+
+    <div class="col-md-4">
+        <label>Refund Amount</label>
+        <input
+            type="number"
+            id="refundAmount"
+            class="form-control"
+            min="0"
+            value="0">
+    </div>
+
+    <div class="col-md-4">
+        <label>Cancellation Reason</label>
+        <textarea
+            id="cancelReason"
+            class="form-control"
+            rows="2"
+            placeholder="Enter cancellation reason..."></textarea>
+    </div>
+
+</div>
+
+<!-- ================= POSTPONEMENT DETAILS ================= -->
+
+<div class="row mt-3">
+
+    <div class="col-md-6">
+        <label>New Cruise Date</label>
+        <input
+            type="date"
+            id="newCruiseDate"
+            class="form-control">
+    </div>
+
+    <div class="col-md-6">
+        <label>Postponement Reason</label>
+        <textarea
+            id="postponeReason"
+            class="form-control"
+            rows="2"
+            placeholder="Enter postponement reason..."></textarea>
     </div>
 
 </div>
@@ -957,28 +1006,31 @@ readonly>
 
 <div class="row mt-3">
 
-    <div class="col-md-6">
-
+    <div class="col-md-4">
         <label><b>Special Note</b></label>
-
         <textarea
             id="specialNote"
             class="form-control"
             rows="3"
             placeholder="Enter special note..."></textarea>
-
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-4">
+        <label><b>Special Instruction</b></label>
+        <textarea
+            id="specialInstruction"
+            class="form-control"
+            rows="3"
+            placeholder="Enter special instructions for the guest..."></textarea>
+    </div>
 
+    <div class="col-md-4">
         <label><b>Office Use</b></label>
-
         <textarea
             id="officeUse"
             class="form-control"
             rows="3"
             placeholder="For office use only..."></textarea>
-
     </div>
 
 </div>
