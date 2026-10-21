@@ -500,24 +500,18 @@ function validateMobile() {
 // ------------------------
 // Booking Status
 // ------------------------
-function bookingStatusChanged(){
-    let status = document.getElementById("bookingStatus").value;
-    // Hide both sections first
-    document.getElementById("cancelSection").style.display = "none";
-    document.getElementById("postponeSection").style.display = "none";
-    // Show Cancellation Details
-    if(status === "Cancelled"){
-        document.getElementById("cancelSection").style.display = "flex";
-        // Automatically fill today's date
-        if(document.getElementById("cancelDate").value == ""){
-            document.getElementById("cancelDate").value =
-                new Date().toISOString().split("T")[0];
-       }
-    }
-    // Show Postponement Details
-    if(status === "Postponed"){
-        document.getElementById("postponeSection").style.display = "flex";
-    }
+
+function bookingStatusChanged() {
+    const status = document.getElementById("bookingStatus").value;
+
+    const cancellationFields = document.getElementById("cancellationFields");
+    const postponementFields = document.getElementById("postponementFields");
+
+    cancellationFields.style.display =
+        status === "Cancelled" ? "flex" : "none";
+
+    postponementFields.style.display =
+        status === "Postponed" ? "flex" : "none";
 }
 // ======================================
 // CUSTOMISED HOUSEBOAT TYPE
