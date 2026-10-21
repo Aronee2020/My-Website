@@ -541,3 +541,9 @@ input[readonly]{
         flex-basis: 260px;
     }
 }
+
+/* Hide cancellation and postponement fields by default */
+#cancellationFields,
+#postponementFields {
+    display: none;
+}
