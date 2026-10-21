@@ -922,10 +922,12 @@ readonly>
 
 </div>
 
-<!-- ================= BOOKING STATUS ================= -->
+
+<!-- ================= BOOKING STATUS + FOOD MENU ================= -->
 
 <div class="row mt-3">
 
+    <!-- BOOKING STATUS -->
     <div class="col-md-4">
 
         <label>Booking Status</label>
@@ -943,100 +945,20 @@ readonly>
 
     </div>
 
-</div>
-
-
-<!-- ================= CANCELLED DETAILS ================= -->
-
-<div
-class="row mt-3"
-id="cancelSection"
-style="display:none;">
-
-    <div class="col-md-4">
-
-        <label>Cancelled Date</label>
-
-        <input
-        type="date"
-        id="cancelDate"
-        class="form-control">
-
-    </div>
-
-    <div class="col-md-4">
-
-        <label>Refund Amount (₹)</label>
-
-        <input
-        type="number"
-        id="refundAmount"
-        class="form-control">
-
-    </div>
-
-    <div class="col-md-4">
-
-        <label>Cancellation Reason</label>
-
-        <input
-        type="text"
-        id="cancelReason"
-        class="form-control">
-
-    </div>
-
-</div>
-
-
-<!-- ================= POSTPONED DETAILS ================= -->
-
-<div
-class="row mt-3"
-id="postponeSection"
-style="display:none;">
-
-    <div class="col-md-4">
-
-        <label>Postponed Date</label>
-
-        <input
-        type="date"
-        id="newCruiseDate"
-        class="form-control">
-
-    </div>
-
+    <!-- FOOD MENU -->
     <div class="col-md-8">
-
-        <label>Postponement Reason</label>
-
-        <input
-        type="text"
-        id="postponeReason"
-        class="form-control">
-
-    </div>
-
-</div>
-<!-- ================= FOOD MENU ================= -->
-
-<div class="row mt-3">
-
-    <div class="col-md-12">
 
         <label><b>Food Menu</b></label>
 
         <textarea
             id="foodMenu"
             class="form-control"
-            rows="8"
+            rows="2"
             placeholder="Type the complete food menu here..."></textarea>
 
     </div>
 
 </div>
-
 <!-- ================= SPECIAL NOTE ================= -->
 
 <div class="row mt-3">
