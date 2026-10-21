@@ -661,7 +661,72 @@ document.getElementById("customerId").value =
     "ARN-KBH-" + bookingNumber + "-2026";
     console.log("Generated Booking ID:", bookingId);
 console.log("Textbox Booking ID:", document.getElementById("bookingId").value);
-// Save current booking for Guest Voucher
+// Check for missing form fields before saving
+const requiredFieldIds = [
+    "bookingId",
+    "customerId",
+    "travelPartner",
+    "voucherBrand",
+    "receiptNo",
+    "bookingDate",
+    "guestName",
+    "guestPrefix",
+    "mobile",
+    "address",
+    "cruiseDate",
+    "package",
+    "checkInPoint",
+    "houseboatName",
+    "houseboatType",
+    "checkIn",
+    "checkOut",
+    "adults",
+    "children",
+    "kids",
+    "totalPax",
+    "packageAmount",
+    "advanceReceived",
+    "balanceAmount",
+    "totalAmount",
+    "totalBalance",
+    "advanceMode",
+    "transactionRef",
+    "bookingStatus",
+    "cancelDate",
+    "refundAmount",
+    "cancelReason",
+    "newCruiseDate",
+    "postponeReason",
+    "taxiRequired",
+    "taxiServiceType",
+    "taxiVehicleType",
+    "taxiPassengers",
+    "taxiItinerary",
+    "taxiAmount",
+    "taxiAdvance",
+    "taxiBalance",
+    "taxiPaymentMode",
+    "taxiStatus",
+    "taxiRemarks",
+    "foodMenu",
+    "specialNote",
+    "specialInstruction"
+];
+
+const missingFields = requiredFieldIds.filter(
+    id => !document.getElementById(id)
+);
+
+if (missingFields.length > 0) {
+    alert(
+        "These form fields are missing from index.html:\n\n" +
+        missingFields.join(", ") +
+        "\n\nPlease inform your developer before saving."
+    );
+    console.error("Missing form fields:", missingFields);
+    return;
+}
+    // Save current booking for Guest Voucher
 let bookingObject = {
     bookingId: document.getElementById("bookingId").value,
     customerId: document.getElementById("customerId").value,
