@@ -1645,5 +1645,7 @@ window.toggleCustomHouseboatName =
     toggleCustomHouseboatName;
 
 window.renderBookingPage = renderBookingPage;
-
+document.addEventListener("DOMContentLoaded", function () {
+    bookingStatusChanged();
+});
 
