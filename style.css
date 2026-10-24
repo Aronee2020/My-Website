@@ -561,13 +561,14 @@ input[readonly]{
     }
 }
 
+
 /* FINAL BUTTON SIZE FIX */
 .button-area .btn {
     min-width: 0 !important;
-    height: 34px !important;
+    height: 42px !important;
     margin: 2px !important;
-    padding: 5px 7px !important;
-    font-size: 11px !important;
+    padding: 8px 10px !important;
+    font-size: 13px !important;
     white-space: nowrap !important;
     flex: 0 0 auto !important;
 }
@@ -576,22 +577,22 @@ input[readonly]{
     display: flex !important;
     flex-wrap: nowrap !important;
     justify-content: flex-start !important;
-    gap: 3px !important;
+    gap: 4px !important;
     width: 100% !important;
     overflow-x: auto !important;
 }
 
 @media (max-width: 768px) {
     .button-area .btn {
-        height: 30px !important;
-        padding: 4px 5px !important;
-        font-size: 10px !important;
+        height: 36px !important;
+        padding: 6px 7px !important;
+        font-size: 11px !important;
     }
 
     .button-area .update-btn,
     .button-area .delete-btn,
     .button-area .clear-btn {
-        padding: 3px 4px !important;
-        font-size: 9px !important;
+        padding: 5px 6px !important;
+        font-size: 10px !important;
     }
 }
