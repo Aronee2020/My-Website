@@ -547,3 +547,29 @@ input[readonly]{
 #postponementFields {
     display: none;
 }
+
+/* Keep all booking action buttons in one horizontal line */
+.button-area {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+
+/* Keep each button on the same line */
+.button-area button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+/* Mobile: allow horizontal scrolling instead of wrapping */
+@media (max-width: 768px) {
+    .button-area {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        -webkit-overflow-scrolling: touch;
+    }
+}
