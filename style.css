@@ -573,16 +573,24 @@ input[readonly]{
         -webkit-overflow-scrolling: touch;
     }
 }
-
-/* Reduce only Update, Delete and Clear buttons on mobile */
-@media (max-width: 768px) {
-    .button-area .update-btn,
-    .button-area .delete-btn,
-    .button-area .clear-btn {
-        padding: 8px 10px !important;
-        font-size: 12px !important;
+/* Reduce Update, Delete and Clear buttons */
+@media screen and (max-width: 768px) {
+    .button-area button.update-btn,
+    .button-area button.delete-btn,
+    .button-area button.clear-btn {
+        padding: 4px 6px !important;
+        font-size: 10px !important;
+        line-height: 1.2 !important;
         min-width: 0 !important;
-        flex: 0 0 auto !important;
+        width: auto !important;
+        flex-shrink: 1 !important;
+    }
+
+    .button-area {
+        gap: 4px !important;
+    }
+
+    .button-area button {
+        white-space: nowrap;
     }
 }
-
