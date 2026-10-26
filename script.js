@@ -1568,6 +1568,22 @@ async function updateDashboard() {
     }
 
     const today = formatLocalDate(new Date());
+    console.log("Dashboard date:", today);
+
+console.table(
+    bookings
+        .filter(b =>
+            b.cruiseDate === today ||
+            b.newCruiseDate === today
+        )
+        .map(b => ({
+            guest: b.guestName,
+            bookingId: b.bookingId,
+            status: b.bookingStatus,
+            cruiseDate: b.cruiseDate,
+            newCruiseDate: b.newCruiseDate
+        }))
+);
 
     const tomorrowDate = new Date();
     tomorrowDate.setDate(tomorrowDate.getDate() + 1);
