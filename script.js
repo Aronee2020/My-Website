@@ -1556,68 +1556,63 @@ window.goToBookingPage = goToBookingPage;
 // =====================================
 // DASHBOARD
 // =====================================
+
 async function updateDashboard() {
-    let bookings = await getBookings();
-    // Use local date instead of UTC date
+    const bookings = await getBookings();
+
     function formatLocalDate(date) {
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, "0");
         const day = String(date.getDate()).padStart(2, "0");
         return `${year}-${month}-${day}`;
     }
+
     const today = formatLocalDate(new Date());
+
     const tomorrowDate = new Date();
     tomorrowDate.setDate(tomorrowDate.getDate() + 1);
     const tomorrow = formatLocalDate(tomorrowDate);
+
     let todayCount = 0;
     let tomorrowCount = 0;
     let confirmed = 0;
     let cancelled = 0;
     let postponed = 0;
+
     bookings.forEach(function (b) {
-        const status = b.bookingStatus || "";
-        // Cancelled bookings
+        const status = (b.bookingStatus || "").trim();
+
         if (status === "Cancelled") {
             cancelled++;
             return;
         }
-        // Postponed bookings:
-        // Count against the new cruise date
+
         if (status === "Postponed") {
             postponed++;
-            if (b.newCruiseDate === today) {
-                todayCount++;
-            }
-            if (b.newCruiseDate === tomorrow) {
-                tomorrowCount++;
-            }
-            return;
+            return; // Do not include postponed bookings in Today/Tomorrow
         }
-        // Confirmed bookings
+
         if (status === "Confirmed") {
             confirmed++;
+
             if (b.cruiseDate === today) {
                 todayCount++;
             }
+
             if (b.cruiseDate === tomorrow) {
                 tomorrowCount++;
             }
         }
     });
-    // Update dashboard cards
-    document.getElementById("todayBookings").innerHTML =
-        todayCount;
-    document.getElementById("tomorrowBookings").innerHTML =
-        tomorrowCount;
-    document.getElementById("totalBookings").innerHTML =
-        bookings.length;
-    document.getElementById("confirmedBookings").innerHTML =
-        confirmed;
-    document.getElementById("cancelledBookings").innerHTML =
-        cancelled;
-    document.getElementById("postponedBookings").innerHTML =
-        postponed;
+
+    document.getElementById("todayBookings").textContent = todayCount;
+    document.getElementById("tomorrowBookings").textContent = tomorrowCount;
+    document.getElementById("totalBookings").textContent = bookings.length;
+    document.getElementById("confirmedBookings").textContent = confirmed;
+    document.getElementById("cancelledBookings").textContent = cancelled;
+    document.getElementById("postponedBookings").textContent = postponed;
 }
+
 // ============================================
 // MAKE FUNCTIONS AVAILABLE TO HTML BUTTONS
 // ============================================
