@@ -14,8 +14,8 @@ const vendorData = new Map();
 const tbody = document.getElementById("vendorTableBody");
 const status = document.getElementById("statusMessage");
 const search = document.getElementById("vendorSearch");
-const dateFilter = document.getElementById("dateFilter");
-
+const fromDate = document.getElementById("fromDate");
+const toDate = document.getElementById("toDate");
 const num = v =>
   Number.isFinite(Number(v)) ? Number(v) : 0;
 
@@ -217,7 +217,122 @@ function renderRow(b) {
     </tr>
   `;
 }
+// ============================================
+// HOUSEBOAT PROFIT AND MONTHLY REPORT
+// ============================================
 
+function formatRupees(amount) {
+
+  return "₹" + num(amount).toLocaleString("en-IN", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+
+}
+
+
+function renderSummary(rows) {
+
+  let customerTotal = 0;
+  let vendorTotal = 0;
+  let profitTotal = 0;
+
+  const monthly = {};
+
+  rows.forEach(b => {
+
+    const d = defaults(vendorData.get(b.firebaseId));
+
+    const c = calc(d);
+
+    const customerAmount =
+      num(b.totalAmount) +
+      num(d.customerAdditionalRate);
+
+    const vendorAmount = c.total;
+
+    const profit = customerAmount - vendorAmount;
+
+    customerTotal += customerAmount;
+    vendorTotal += vendorAmount;
+    profitTotal += profit;
+
+    const date = b.cruiseDate || "";
+
+    const monthKey = date.length >= 7
+      ? date.substring(0, 7)
+      : "No Date";
+
+    if (!monthly[monthKey]) {
+
+      monthly[monthKey] = {
+        bookings: 0,
+        customer: 0,
+        vendor: 0,
+        profit: 0
+      };
+
+    }
+
+    monthly[monthKey].bookings++;
+
+    monthly[monthKey].customer += customerAmount;
+
+    monthly[monthKey].vendor += vendorAmount;
+
+    monthly[monthKey].profit += profit;
+
+  });
+
+
+  document.getElementById("totalCustomerCollection")
+    .textContent = formatRupees(customerTotal);
+
+  document.getElementById("totalVendorPayment")
+    .textContent = formatRupees(vendorTotal);
+
+  document.getElementById("totalAroneeProfit")
+    .textContent = formatRupees(profitTotal);
+
+
+  const monthlyBody =
+    document.getElementById("monthlyProfitBody");
+
+  const monthKeys = Object.keys(monthly).sort();
+
+  monthlyBody.innerHTML = monthKeys.length
+    ? monthKeys.map(key => {
+
+        const m = monthly[key];
+
+        const monthName = key === "No Date"
+          ? "Date Not Available"
+          : new Date(key + "-01T00:00:00")
+              .toLocaleDateString("en-IN", {
+                month: "long",
+                year: "numeric"
+              });
+
+        return `
+          <tr>
+            <td>${esc(monthName)}</td>
+            <td>${m.bookings}</td>
+            <td>${formatRupees(m.customer)}</td>
+            <td>${formatRupees(m.vendor)}</td>
+            <td>${formatRupees(m.profit)}</td>
+          </tr>
+        `;
+
+      }).join("")
+    : `
+      <tr>
+        <td colspan="5" class="text-center">
+          No records available
+        </td>
+      </tr>
+    `;
+
+}
 
 // ============================================
 // RENDER BOOKINGS
@@ -226,15 +341,26 @@ function renderRow(b) {
 function render() {
 
   const q = search.value.trim().toLowerCase();
-  const date = dateFilter.value;
+
+  const from = fromDate.value;
+  const to = toDate.value;
 
   const rows = [...bookings.values()]
     .filter(b => {
 
-      if (date && b.cruiseDate !== date) {
+      const date = b.cruiseDate || "";
+
+      // FROM DATE FILTER
+      if (from && (!date || date < from)) {
         return false;
       }
 
+      // TO DATE FILTER
+      if (to && (!date || date > to)) {
+        return false;
+      }
+
+      // SEARCH FILTER
       if (!q) {
         return true;
       }
@@ -255,6 +381,7 @@ function render() {
         .localeCompare(String(a.cruiseDate || ""))
     );
 
+  // DISPLAY BOOKINGS
   tbody.innerHTML = rows.length
     ? rows.map(renderRow).join("")
     : `
@@ -265,11 +392,13 @@ function render() {
       </tr>
     `;
 
+  // UPDATE FINANCIAL REPORT
+  renderSummary(rows);
+
   status.textContent =
     `${rows.length} booking(s) displayed.`;
+
 }
-
-
 // ============================================
 // READ INPUT VALUES
 // ============================================
@@ -330,6 +459,7 @@ function refreshCalculations(tr) {
 
   tr.querySelector(".calc-aronee").textContent =
     money(customerTotal - c.total);
+  
 }
 // ============================================
 // SAVE VENDOR DETAILS
@@ -371,17 +501,20 @@ Object.assign(d, {
       { merge: true }
     );
 
-    vendorData.set(id, d);
+ vendorData.set(id, d);
 
-    tac.value = money(c.tac);
-    tac.dataset.userEdited = "false";
+tac.value = money(c.tac);
+tac.dataset.userEdited = "false";
 
-    refreshCalculations(tr);
+refreshCalculations(tr);
 
-    status.textContent =
-      `Saved vendor details for ${
-        bookings.get(id)?.customerId || id
-      }.`;
+// Refresh profit and monthly report after saving.
+render();
+
+status.textContent =
+  `Saved vendor details for ${
+    bookings.get(id)?.customerId || id
+  }.`;
 
   } catch (e) {
 
@@ -497,7 +630,9 @@ d.balancePayable = c.balancePayable;
 
 search.addEventListener("input", render);
 
-dateFilter.addEventListener("change", render);
+fromDate.addEventListener("change", render);
+
+toDate.addEventListener("change", render);
 
 document.getElementById("clearFilters").addEventListener("click", () => {
 
