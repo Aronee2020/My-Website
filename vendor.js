@@ -205,9 +205,9 @@ function renderRow(b) {
       </td>
 
       <!-- 26. Balance Payable -->
-      <td class="calc-balance-payable">
-        ${money(c.balance)}
-      </td>
+<td class="calc-balance-payable">
+  ${money(c.balancePayable)}
+</td>
 
       <!-- 27. Aronee -->
       <td class="calc-aronee">
@@ -436,7 +436,6 @@ function readRow(tr) {
 // ============================================
 // REFRESH CALCULATIONS
 // ============================================
-
 function refreshCalculations(tr) {
 
   const old = defaults(vendorData.get(tr.dataset.id));
@@ -444,12 +443,14 @@ function refreshCalculations(tr) {
 
   const tac = tr.querySelector('[data-field="tacAmount"]');
 
+  const tacManual =
+    old.tacManual ||
+    tac.dataset.userEdited === "true";
+
   const d = {
     ...old,
     ...values,
-    tacManual:
-      old.tacManual ||
-      tac.dataset.userEdited === "true"
+    tacManual
   };
 
   d.tacAmount = num(tac.value);
@@ -460,6 +461,11 @@ function refreshCalculations(tr) {
   const customerTotal =
     num(b.totalAmount) +
     num(d.customerAdditionalRate);
+
+  // Update TAC input automatically when not manually edited.
+  if (!tacManual) {
+    tac.value = money(c.tac);
+  }
 
   tr.querySelector(".calc-hb-balance").textContent =
     money(c.hbBalance);
@@ -472,9 +478,7 @@ function refreshCalculations(tr) {
 
   tr.querySelector(".calc-aronee").textContent =
     money(customerTotal - c.total);
-  
-}
-// ============================================
+}// ============================================
 // SAVE VENDOR DETAILS
 // ============================================
 
@@ -650,7 +654,8 @@ toDate.addEventListener("change", render);
 document.getElementById("clearFilters").addEventListener("click", () => {
 
   search.value = "";
-  dateFilter.value = "";
+  fromDate.value = "";
+  toDate.value = "";
 
   render();
 
