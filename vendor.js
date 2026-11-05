@@ -392,11 +392,24 @@ function render() {
       </tr>
     `;
 
-  // UPDATE FINANCIAL REPORT
-  renderSummary(rows);
+ // SHOW PROFIT REPORT ONLY WHEN A FILTER IS APPLIED
+const reportSection =
+  document.getElementById("profitReportSection");
 
-  status.textContent =
-    `${rows.length} booking(s) displayed.`;
+const filterApplied =
+  search.value.trim() !== "" ||
+  fromDate.value !== "" ||
+  toDate.value !== "";
+
+if (filterApplied) {
+  reportSection.style.display = "block";
+  renderSummary(rows);
+} else {
+  reportSection.style.display = "none";
+}
+
+status.textContent =
+  `${rows.length} booking(s) displayed.`;
 
 }
 // ============================================
