@@ -30,9 +30,14 @@
       </div>
 
       <div>
-        <label for="dateFilter" class="form-label">Boarding date</label>
-        <input id="dateFilter" class="form-control" type="date">
-      </div>
+  <label for="fromDate" class="form-label">From Date</label>
+  <input id="fromDate" class="form-control" type="date">
+</div>
+
+<div>
+  <label for="toDate" class="form-label">To Date</label>
+  <input id="toDate" class="form-control" type="date">
+</div>
 
       <div class="toolbar-actions">
         <button id="clearFilters" class="btn btn-secondary">Clear</button>
@@ -50,6 +55,65 @@
 <section class="card shadow-sm">
   <div class="card-header fw-bold">
     All Bookings – Customer &amp; Vendor Accounts
+    <!-- HOUSEBOAT PROFIT SUMMARY -->
+
+<section class="card shadow-sm mb-3">
+  <div class="card-header fw-bold">
+    Houseboat Profit & Vendor Payment Summary
+  </div>
+
+  <div class="card-body">
+
+    <div class="row g-3 mb-4">
+
+      <div class="col-md-4">
+        <div class="card bg-light p-3">
+          <h6>Total Customer Collection</h6>
+          <h4 id="totalCustomerCollection">₹0.00</h4>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card bg-light p-3">
+          <h6>Total Vendor Payment</h6>
+          <h4 id="totalVendorPayment">₹0.00</h4>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card bg-light p-3">
+          <h6>Total Aronee Profit</h6>
+          <h4 id="totalAroneeProfit">₹0.00</h4>
+        </div>
+      </div>
+
+    </div>
+
+    <h5>Monthly Profit Report</h5>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-sm">
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>Bookings</th>
+            <th>Customer Amount</th>
+            <th>Vendor Amount</th>
+            <th>Monthly Profit</th>
+          </tr>
+        </thead>
+
+        <tbody id="monthlyProfitBody">
+          <tr>
+            <td colspan="5">No records available</td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+
+  </div>
+</section>
   </div>
 
   <div class="card-body p-0">
