@@ -50,34 +50,33 @@ const defaults = d => ({
 
 function calc(d) {
 
-  // HB Amount is the vendor amount.
   const hbAmount = num(d.hbAmount);
-
   const extra = num(d.vendorAdditionalRate);
 
-  // TAC = 10% of HB Amount.
+  // TAC = 10% of HB Amount unless manually changed.
   const tac = d.tacManual
     ? num(d.tacAmount)
     : hbAmount * 0.10;
 
-  // Vendor Total Amount.
-  const total = hbAmount - tac + extra;
+  // HB Balance does not include Additional Rate.
+  const hbBalance = hbAmount - tac;
 
-  // Vendor Balance.
-  const balance =
+  // Additional Rate is added only to Vendor Total.
+  const total = hbBalance + extra;
+
+  // Final amount payable to the vendor.
+  const balancePayable =
     total -
     num(d.advancePaid) -
     num(d.paidCustomerToBoat);
 
   return {
     tac,
+    hbBalance,
     total,
-    balance
+    balancePayable
   };
-}
-
-
-// ============================================
+}// ============================================
 // INPUT FIELD
 // ============================================
 
