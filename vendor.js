@@ -175,9 +175,9 @@ function renderRow(b) {
       </td>
 
       <!-- 20. Vendor Balance -->
-      <td class="calc-vendor-balance">
-        ${money(c.balance)}
-      </td>
+<td class="calc-hb-balance">
+  ${money(c.hbBalance)}
+</td>
 
       <!-- 21. Additional Rate -->
       <td>
@@ -298,7 +298,6 @@ function readRow(tr) {
 function refreshCalculations(tr) {
 
   const old = defaults(vendorData.get(tr.dataset.id));
-
   const values = readRow(tr);
 
   const tac = tr.querySelector('[data-field="tacAmount"]');
@@ -314,27 +313,24 @@ function refreshCalculations(tr) {
   d.tacAmount = num(tac.value);
 
   const c = calc(d);
-
   const b = bookings.get(tr.dataset.id);
 
   const customerTotal =
     num(b.totalAmount) +
     num(d.customerAdditionalRate);
 
-  tr.querySelector(".calc-vendor-balance").textContent =
-    money(c.balance);
+  tr.querySelector(".calc-hb-balance").textContent =
+    money(c.hbBalance);
 
   tr.querySelector(".calc-vendor-total").textContent =
     money(c.total);
 
   tr.querySelector(".calc-balance-payable").textContent =
-    money(c.balance);
+    money(c.balancePayable);
 
   tr.querySelector(".calc-aronee").textContent =
     money(customerTotal - c.total);
 }
-
-
 // ============================================
 // SAVE VENDOR DETAILS
 // ============================================
@@ -359,13 +355,13 @@ async function saveRow(tr) {
 
   const c = calc(d);
 
-  Object.assign(d, {
-    tacAmount: c.tac,
-    vendorTotalAmount: c.total,
-    vendorBalance: c.balance,
-    balancePayable: c.balance,
-    updatedAt: new Date().toISOString()
-  });
+Object.assign(d, {
+  tacAmount: c.tac,
+  hbBalance: c.hbBalance,
+  vendorTotalAmount: c.total,
+  balancePayable: c.balancePayable,
+  updatedAt: new Date().toISOString()
+});
 
   try {
 
@@ -461,10 +457,10 @@ tbody.addEventListener("click", async e => {
 
   const c = calc(d);
 
-  d.tacAmount = c.tac;
-  d.vendorTotalAmount = c.total;
-  d.vendorBalance = c.balance;
-  d.balancePayable = c.balance;
+d.tacAmount = c.tac;
+d.hbBalance = c.hbBalance;
+d.vendorTotalAmount = c.total;
+d.balancePayable = c.balancePayable;
   d.updatedAt = new Date().toISOString();
 
   try {
