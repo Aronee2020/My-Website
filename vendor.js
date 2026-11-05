@@ -628,10 +628,13 @@ d.balancePayable = c.balancePayable;
     tac.value = money(c.tac);
     tac.dataset.userEdited = "false";
 
-    refreshCalculations(tr);
+  refreshCalculations(tr);
 
-    status.textContent =
-      "TAC reset to automatic 10%.";
+// Refresh the filtered profit report.
+render();
+
+status.textContent =
+  "TAC reset to automatic 10%.";
 
   } catch (err) {
 
