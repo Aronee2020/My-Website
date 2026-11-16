@@ -165,6 +165,36 @@ Your Customer ID is : <b><span id="customerId"></span></b>
 
 </div>
 
+<!-- ================= ACCOMMODATION DETAILS ================= -->
+
+<div id="accommodationVoucherSection" style="display:none;">
+
+    <h3>Accommodation Details</h3>
+
+    <table class="detailsTable">
+
+        <tr>
+            <th>Accommodation Type</th>
+            <th>Property</th>
+            <th>Check In</th>
+            <th>Check Out</th>
+            <th>Nights</th>
+            <th>Itinerary</th>
+        </tr>
+
+        <tr>
+            <td id="voucherAccommodationType"></td>
+            <td id="voucherAccommodationProperty"></td>
+            <td id="voucherAccommodationCheckIn"></td>
+            <td id="voucherAccommodationCheckOut"></td>
+            <td id="voucherAccommodationNights"></td>
+            <td id="voucherAccommodationItinerary"></td>
+        </tr>
+
+    </table>
+
+</div>
+
 <!-- ================= PAYMENT DETAILS ================= -->
 
 
@@ -200,6 +230,11 @@ Your Customer ID is : <b><span id="customerId"></span></b>
                 <span class="label">Transportation Charges</span> :
                 <span id="taxiCharges"></span>
             </p>
+
+<p id="accommodationChargesLine" style="display:none;">
+    <span class="label">Accommodation Charges</span> :
+    <span id="accommodationCharges"></span>
+</p>
 
             <p id="totalAmountLine">
                 <span class="label">Total Amount</span> :
