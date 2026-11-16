@@ -433,48 +433,67 @@ function calculateTotalPax(){
 // ------------------------
 // PAYMENT CALCULATION
 // ------------------------
+
 function calculateBalance() {
-    // Houseboat Amount
+
+    // HOUSEBOAT
     let packageAmount =
         parseFloat(document.getElementById("packageAmount").value) || 0;
-    // Houseboat Advance
+
     let houseboatAdvance =
         parseFloat(document.getElementById("advanceReceived").value) || 0;
-    // Taxi Amount
-    let taxiAmount =
-        parseFloat(document.getElementById("taxiAmount").value) || 0;
-    // Taxi Advance
-    let taxiAdvance =
-        parseFloat(document.getElementById("taxiAdvance").value) || 0;
-    // ======================================
+
+    // TAXI
+    let taxiRequired =
+        document.getElementById("taxiRequired").value;
+
+    let taxiAmount = taxiRequired === "Yes"
+        ? parseFloat(document.getElementById("taxiAmount").value) || 0
+        : 0;
+
+    let taxiAdvance = taxiRequired === "Yes"
+        ? parseFloat(document.getElementById("taxiAdvance").value) || 0
+        : 0;
+
+    // ACCOMMODATION
+    let accommodationRequired =
+        document.getElementById("accommodationRequired").value;
+
+    let accommodationAmount = accommodationRequired === "Yes"
+        ? parseFloat(document.getElementById("accommodationAmount").value) || 0
+        : 0;
+
+    let accommodationAdvance = accommodationRequired === "Yes"
+        ? parseFloat(document.getElementById("accommodationAdvance").value) || 0
+        : 0;
+
     // HOUSEBOAT BALANCE
-    // ======================================
     let houseboatBalance =
         Math.max(packageAmount - houseboatAdvance, 0);
+
     document.getElementById("balanceAmount").value =
         houseboatBalance.toFixed(2);
-    // ======================================
+
     // TOTAL AMOUNT
-    // HOUSEBOAT + TAXI
-    // ======================================
     let totalAmount =
-        packageAmount + taxiAmount;
+        packageAmount + taxiAmount + accommodationAmount;
+
     document.getElementById("totalAmount").value =
         totalAmount.toFixed(2);
-    // ======================================
+
     // TOTAL BALANCE
-    // TOTAL AMOUNT - ALL ADVANCES
-    // ======================================
-    let totalBalance =
-        Math.max(
-            totalAmount -
-            houseboatAdvance -
-            taxiAdvance,
-            0
-        );
+    let totalBalance = Math.max(
+        totalAmount -
+        houseboatAdvance -
+        taxiAdvance -
+        accommodationAdvance,
+        0
+    );
+
     document.getElementById("totalBalance").value =
         totalBalance.toFixed(2);
-}// ======================================
+}
+// ======================================
 // Mobile Number Validation
 // ======================================
 function validateMobile() {
@@ -781,6 +800,21 @@ taxiBalance: document.getElementById("taxiBalance").value,
 taxiPaymentMode: document.getElementById("taxiPaymentMode").value,
 taxiStatus: document.getElementById("taxiStatus").value,
 taxiRemarks: document.getElementById("taxiRemarks").value,
+    // ======================================
+// ACCOMMODATION DETAILS
+// ======================================
+accommodationRequired: document.getElementById("accommodationRequired").value,
+accommodationType: document.getElementById("accommodationType").value,
+accommodationProperty: document.getElementById("accommodationProperty").value,
+accommodationCheckIn: document.getElementById("accommodationCheckIn").value,
+accommodationCheckOut: document.getElementById("accommodationCheckOut").value,
+accommodationNights: document.getElementById("accommodationNights").value,
+accommodationAmount: document.getElementById("accommodationAmount").value,
+accommodationAdvance: document.getElementById("accommodationAdvance").value,
+accommodationBalance: document.getElementById("accommodationBalance").value,
+accommodationPaymentMode: document.getElementById("accommodationPaymentMode").value,
+accommodationItinerary: document.getElementById("accommodationItinerary").value,
+accommodationStatus: document.getElementById("accommodationStatus").value,
 foodMenu: document.getElementById("foodMenu").value,
 specialNote: document.getElementById("specialNote").value,
 specialInstruction: document.getElementById("specialInstruction").value
@@ -998,8 +1032,53 @@ document.getElementById("taxiRemarks").value =
 toggleTaxiSection();
 // Recalculate Taxi balance
 calculateTaxiBalance();
+    // ======================================
+// LOAD ACCOMMODATION DETAILS
+// ======================================
+document.getElementById("accommodationRequired").value =
+    booking.accommodationRequired || "No";
+
+document.getElementById("accommodationType").value =
+    booking.accommodationType || "";
+
+document.getElementById("accommodationProperty").value =
+    booking.accommodationProperty || "";
+
+document.getElementById("accommodationCheckIn").value =
+    booking.accommodationCheckIn || "";
+
+document.getElementById("accommodationCheckOut").value =
+    booking.accommodationCheckOut || "";
+
+document.getElementById("accommodationNights").value =
+    booking.accommodationNights || "";
+
+document.getElementById("accommodationAmount").value =
+    booking.accommodationAmount || "";
+
+document.getElementById("accommodationAdvance").value =
+    booking.accommodationAdvance || "";
+
+document.getElementById("accommodationBalance").value =
+    booking.accommodationBalance || "";
+
+document.getElementById("accommodationPaymentMode").value =
+    booking.accommodationPaymentMode || "";
+
+document.getElementById("accommodationItinerary").value =
+    booking.accommodationItinerary || "";
+
+document.getElementById("accommodationStatus").value =
+    booking.accommodationStatus || "";
+
+// Show / hide Accommodation section
+window.toggleAccommodationSection();
+
+// Recalculate Accommodation balance
+window.calculateAccommodationBalance();
 // Recalculate Total Amount and Total Balance
 calculateBalance();
+    
 }
 // =====================================
 // UPDATE BOOKING
@@ -1658,5 +1737,28 @@ window.toggleCustomHouseboatName =
 window.renderBookingPage = renderBookingPage;
 document.addEventListener("DOMContentLoaded", function () {
     bookingStatusChanged();
+
+    // Recalculate total when any amount changes
+    [
+        "packageAmount",
+        "advanceReceived",
+        "taxiAmount",
+        "taxiAdvance",
+        "accommodationAmount",
+        "accommodationAdvance"
+    ].forEach(function (id) {
+        const field = document.getElementById(id);
+
+        if (field) {
+            field.addEventListener("input", calculateBalance);
+        }
+    });
+
+    // Recalculate total when Taxi or Accommodation selection changes
+    document.getElementById("taxiRequired")
+        ?.addEventListener("change", calculateBalance);
+
+    document.getElementById("accommodationRequired")
+        ?.addEventListener("change", calculateBalance);
 });
 
