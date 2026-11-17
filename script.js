@@ -434,54 +434,56 @@ function calculateTotalPax(){
 // PAYMENT CALCULATION
 // ------------------------
 
+
 function calculateBalance() {
 
-    // HOUSEBOAT
+    // Houseboat Amount and Advance
     let packageAmount =
         parseFloat(document.getElementById("packageAmount").value) || 0;
 
     let houseboatAdvance =
         parseFloat(document.getElementById("advanceReceived").value) || 0;
 
-    // TAXI
+    // Check selected services
     let taxiRequired =
-        document.getElementById("taxiRequired").value;
+        document.getElementById("taxiRequired").value === "Yes";
 
-    let taxiAmount = taxiRequired === "Yes"
-        ? parseFloat(document.getElementById("taxiAmount").value) || 0
-        : 0;
-
-    let taxiAdvance = taxiRequired === "Yes"
-        ? parseFloat(document.getElementById("taxiAdvance").value) || 0
-        : 0;
-
-    // ACCOMMODATION
     let accommodationRequired =
-        document.getElementById("accommodationRequired").value;
+        document.getElementById("accommodationRequired").value === "Yes";
 
-    let accommodationAmount = accommodationRequired === "Yes"
-        ? parseFloat(document.getElementById("accommodationAmount").value) || 0
+    // Taxi Amount and Advance
+    let taxiAmount = taxiRequired
+        ? (parseFloat(document.getElementById("taxiAmount").value) || 0)
         : 0;
 
-    let accommodationAdvance = accommodationRequired === "Yes"
-        ? parseFloat(document.getElementById("accommodationAdvance").value) || 0
+    let taxiAdvance = taxiRequired
+        ? (parseFloat(document.getElementById("taxiAdvance").value) || 0)
         : 0;
 
-    // HOUSEBOAT BALANCE
+    // Accommodation Amount and Advance
+    let accommodationAmount = accommodationRequired
+        ? (parseFloat(document.getElementById("accommodationAmount").value) || 0)
+        : 0;
+
+    let accommodationAdvance = accommodationRequired
+        ? (parseFloat(document.getElementById("accommodationAdvance").value) || 0)
+        : 0;
+
+    // Houseboat Balance
     let houseboatBalance =
         Math.max(packageAmount - houseboatAdvance, 0);
 
     document.getElementById("balanceAmount").value =
         houseboatBalance.toFixed(2);
 
-    // TOTAL AMOUNT
+    // TOTAL AMOUNT: ALL THREE SERVICES
     let totalAmount =
         packageAmount + taxiAmount + accommodationAmount;
 
     document.getElementById("totalAmount").value =
         totalAmount.toFixed(2);
 
-    // TOTAL BALANCE
+    // TOTAL BALANCE: ALL THREE ADVANCES
     let totalBalance = Math.max(
         totalAmount -
         houseboatAdvance -
