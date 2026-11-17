@@ -508,7 +508,8 @@ readonly>
     <!-- Taxi Service -->
     <div class="col-md-6">
         <label>Taxi Service Required?</label>
-        <select id="taxiRequired" onchange="toggleTaxiSection()">
+        <select id="taxiRequired"
+        onchange="toggleTaxiSection(); calculateBalance()">
             <option value="No">No</option>
             <option value="Yes">Yes</option>
         </select>
@@ -517,7 +518,8 @@ readonly>
     <!-- Accommodation -->
     <div class="col-md-6">
         <label>Accommodation Required?</label>
-        <select id="accommodationRequired" onchange="toggleAccommodationSection()">
+        <select id="accommodationRequired"
+        onchange="toggleAccommodationSection(); calculateBalance()">
             <option value="No">No</option>
             <option value="Yes">Yes</option>
         </select>
@@ -742,14 +744,14 @@ readonly>
             <label>Accommodation Amount</label>
             <input type="number" id="accommodationAmount" min="0"
                    step="0.01"
-                   oninput="calculateAccommodationBalance()">
+                  oninput="calculateAccommodationBalance(); calculateBalance()"
         </div>
 
         <div class="col-md-6">
             <label>Accommodation Advance</label>
             <input type="number" id="accommodationAdvance" min="0"
                    step="0.01"
-                   oninput="calculateAccommodationBalance()">
+                   oninput="calculateAccommodationBalance(); calculateBalance()"
         </div>
 
     </div>
@@ -893,7 +895,7 @@ readonly>
 
     <div class="col-md-6">
 
-        <label>Total Amount (Houseboat + Taxi) (₹)</label>
+        <label>Total Amount (Houseboat + Taxi + Accommodation) (₹)</label>
 
         <input
             type="number"
