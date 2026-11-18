@@ -811,66 +811,76 @@ readonly>
     </div>
 
 </div>
+
 <!-- ================= PAYMENT DETAILS ================= -->
 
+<!-- FIRST ROW: PACKAGE AMOUNT, TAX AND TOTAL -->
 <div class="row mt-3">
 
-    <div class="col-md-3">
-
+    <div class="col-md-4">
         <label>Package Amount (₹)</label>
-
-     <input type="number"
-       id="packageAmount"
-       class="form-control">
-
+        <input type="number"
+               id="packageAmount"
+               class="form-control"
+               min="0"
+               step="0.01">
     </div>
-<div class="col-md-3">
-    <label>Tax (5%) (₹)</label>
-    <input type="number"
-           id="taxAmount"
-           class="form-control"
-           value="0"
-           oninput="calculateBalance()">
+
+    <div class="col-md-4">
+        <label>Tax (5%) (₹)</label>
+        <input type="number"
+               id="taxAmount"
+               class="form-control"
+               min="0"
+               step="0.01"
+               value="0"
+               oninput="calculateBalance()">
+    </div>
+
+    <div class="col-md-4">
+        <label>Total Amount (Package + Tax) (₹)</label>
+        <input type="number"
+               id="packageTotalAmount"
+               class="form-control"
+               readonly>
+    </div>
+
 </div>
-    <div class="col-md-3">
 
+<!-- SECOND ROW: ADVANCE DETAILS -->
+<div class="row mt-3">
+
+    <div class="col-md-4">
         <label>Advance Received (₹)</label>
-
-<input type="number" id="advanceReceived" class="form-control" placeholder="">
+        <input type="number"
+               id="advanceReceived"
+               class="form-control"
+               min="0"
+               step="0.01">
     </div>
 
-    <div class="col-md-3">
-
+    <div class="col-md-4">
         <label>Advance Mode</label>
+        <select id="advanceMode" class="form-select">
 
-        <select
-        id="advanceMode"
-        class="form-select">
-
-            <option value="">Select</option>
-<option value="">Select Payment Mode</option>
-                <option value="Cash">Cash</option>
-                <option value="UPI">UPI(Federal Bank)</option>
-                 <option value="UPI">UPI(HDFC Bank)</option>
-                 <option value="UPI">UPI(Devadas)</option>
-                 <option value="UPI">UPI(Sruthi)</option>
-                <option value="Bank Transfer">Bank Transfer(HDFC)</option>
-                <option value="Other">Bank Transfer(Federal)</option>
-                <option value="Card">Card</option>
+            <option value="">Select Payment Mode</option>
+            <option value="Cash">Cash</option>
+            <option value="UPI">UPI (Federal Bank)</option>
+            <option value="UPI">UPI (HDFC Bank)</option>
+            <option value="UPI">UPI (Devadas)</option>
+            <option value="UPI">UPI (Sruthi)</option>
+            <option value="Bank Transfer">Bank Transfer (HDFC)</option>
+            <option value="Other">Bank Transfer (Federal)</option>
+            <option value="Card">Card</option>
 
         </select>
-
     </div>
 
-    <div class="col-md-3">
-
+    <div class="col-md-4">
         <label>Receipt No.</label>
-
-        <input
-        type="text"
-        id="receiptNo"
-        class="form-control">
-
+        <input type="text"
+               id="receiptNo"
+               class="form-control">
     </div>
 
 </div>
