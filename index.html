@@ -822,7 +822,14 @@ readonly>
      <input type="number" id="packageAmount" class="form-control" placeholder="">
 
     </div>
-
+<div class="col-md-3">
+    <label>Tax (5%) (₹)</label>
+    <input type="number"
+           id="taxAmount"
+           class="form-control"
+           value="0"
+           oninput="calculateBalance()">
+</div>
     <div class="col-md-3">
 
         <label>Advance Received (₹)</label>
