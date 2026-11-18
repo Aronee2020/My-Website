@@ -596,3 +596,30 @@ input[readonly]{
         font-size: 10px !important;
     }
 }
+.payment-details-row {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 20px;
+    align-items: end;
+}
+
+.payment-field {
+    min-width: 0;
+}
+
+.payment-field label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.payment-field input,
+.payment-field select {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .payment-details-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
