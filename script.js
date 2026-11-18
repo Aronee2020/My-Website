@@ -1150,9 +1150,41 @@ taxiItinerary: document.getElementById("taxiItinerary").value,
 taxiAmount: document.getElementById("taxiAmount").value,
 taxiAdvance: document.getElementById("taxiAdvance").value,
 taxiBalance: document.getElementById("taxiBalance").value,
+// ======================================
+// TAXI SERVICE DETAILS
+// ======================================
+taxiRequired: document.getElementById("taxiRequired").value,
+taxiServiceType: document.getElementById("taxiServiceType").value,
+taxiVehicleType: document.getElementById("taxiVehicleType").value,
+taxiPassengers: document.getElementById("taxiPassengers").value,
+taxiItinerary: document.getElementById("taxiItinerary").value,
+taxiAmount: document.getElementById("taxiAmount").value,
+taxiAdvance: document.getElementById("taxiAdvance").value,
+taxiBalance: document.getElementById("taxiBalance").value,
 taxiPaymentMode: document.getElementById("taxiPaymentMode").value,
 taxiStatus: document.getElementById("taxiStatus").value,
-taxiRemarks: document.getElementById("taxiRemarks").value
+taxiRemarks: document.getElementById("taxiRemarks").value,
+
+// ======================================
+// ACCOMMODATION DETAILS
+// ======================================
+accommodationRequired: document.getElementById("accommodationRequired").value,
+accommodationType: document.getElementById("accommodationType").value,
+accommodationProperty: document.getElementById("accommodationProperty").value,
+accommodationCheckIn: document.getElementById("accommodationCheckIn").value,
+accommodationCheckOut: document.getElementById("accommodationCheckOut").value,
+accommodationNights: document.getElementById("accommodationNights").value,
+accommodationRooms: document.getElementById("accommodationRooms").value,
+accommodationAdults: document.getElementById("accommodationAdults").value,
+accommodationChildren: document.getElementById("accommodationChildren").value,
+accommodationRoomType: document.getElementById("accommodationRoomType").value,
+accommodationMealPlan: document.getElementById("accommodationMealPlan").value,
+accommodationAmount: document.getElementById("accommodationAmount").value,
+accommodationAdvance: document.getElementById("accommodationAdvance").value,
+accommodationBalance: document.getElementById("accommodationBalance").value,
+accommodationPaymentMode: document.getElementById("accommodationPaymentMode").value,
+accommodationItinerary: document.getElementById("accommodationItinerary").value,
+accommodationStatus: document.getElementById("accommodationStatus").value
 });
         await loadBookings();
         await updateDashboard();
