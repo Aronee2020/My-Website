@@ -496,6 +496,22 @@ function calculateBalance() {
         totalBalance.toFixed(2);
 }
 // ======================================
+// AUTOMATIC TAX CALCULATION (5%)
+// ======================================
+
+function calculateTaxAndBalance() {
+
+    const packageAmount =
+        Number(document.getElementById("packageAmount").value) || 0;
+
+    const taxAmount = packageAmount * 0.05;
+
+    document.getElementById("taxAmount").value =
+        taxAmount.toFixed(2);
+
+    calculateBalance();
+}
+// ======================================
 // Mobile Number Validation
 // ======================================
 function validateMobile() {
