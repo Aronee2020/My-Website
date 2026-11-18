@@ -433,58 +433,56 @@ function calculateTotalPax(){
 // ------------------------
 // PAYMENT CALCULATION
 // ------------------------
-
-
 function calculateBalance() {
 
-    // Houseboat Amount and Advance
-    let packageAmount =
-        parseFloat(document.getElementById("packageAmount").value) || 0;
+    const packageAmount =
+        Number(document.getElementById("packageAmount").value) || 0;
 
-    let houseboatAdvance =
-        parseFloat(document.getElementById("advanceReceived").value) || 0;
+    const taxAmount =
+        Number(document.getElementById("taxAmount").value) || 0;
 
-    // Check selected services
-    let taxiRequired =
+    const houseboatAdvance =
+        Number(document.getElementById("advanceReceived").value) || 0;
+
+    const taxiRequired =
         document.getElementById("taxiRequired").value === "Yes";
 
-    let accommodationRequired =
+    const accommodationRequired =
         document.getElementById("accommodationRequired").value === "Yes";
 
-    // Taxi Amount and Advance
-    let taxiAmount = taxiRequired
-        ? (parseFloat(document.getElementById("taxiAmount").value) || 0)
+    const taxiAmount = taxiRequired
+        ? Number(document.getElementById("taxiAmount").value) || 0
         : 0;
 
-    let taxiAdvance = taxiRequired
-        ? (parseFloat(document.getElementById("taxiAdvance").value) || 0)
+    const taxiAdvance = taxiRequired
+        ? Number(document.getElementById("taxiAdvance").value) || 0
         : 0;
 
-    // Accommodation Amount and Advance
-    let accommodationAmount = accommodationRequired
-        ? (parseFloat(document.getElementById("accommodationAmount").value) || 0)
+    const accommodationAmount = accommodationRequired
+        ? Number(document.getElementById("accommodationAmount").value) || 0
         : 0;
 
-    let accommodationAdvance = accommodationRequired
-        ? (parseFloat(document.getElementById("accommodationAdvance").value) || 0)
+    const accommodationAdvance = accommodationRequired
+        ? Number(document.getElementById("accommodationAdvance").value) || 0
         : 0;
 
-    // Houseboat Balance
-    let houseboatBalance =
-        Math.max(packageAmount - houseboatAdvance, 0);
+    // Houseboat balance including tax
+    const houseboatBalance = Math.max(
+        packageAmount + taxAmount - houseboatAdvance, 0
+    );
 
     document.getElementById("balanceAmount").value =
         houseboatBalance.toFixed(2);
 
-    // TOTAL AMOUNT: ALL THREE SERVICES
-    let totalAmount =
-        packageAmount + taxiAmount + accommodationAmount;
+    // Total amount including tax and additional services
+    const totalAmount =
+        packageAmount + taxAmount + taxiAmount + accommodationAmount;
 
     document.getElementById("totalAmount").value =
         totalAmount.toFixed(2);
 
-    // TOTAL BALANCE: ALL THREE ADVANCES
-    let totalBalance = Math.max(
+    // Total balance
+    const totalBalance = Math.max(
         totalAmount -
         houseboatAdvance -
         taxiAdvance -
@@ -792,6 +790,7 @@ checkInPoint: document.getElementById("checkInPoint").value,
     kids: document.getElementById("kids").value,
     totalPax: document.getElementById("totalPax").value,
     packageAmount: document.getElementById("packageAmount").value,
+    taxAmount: document.getElementById("taxAmount").value,
     advanceReceived: document.getElementById("advanceReceived").value,
     balanceAmount: document.getElementById("balanceAmount").value,
     totalAmount: document.getElementById("totalAmount").value,
@@ -1007,6 +1006,7 @@ document.getElementById("specialInstruction").value =
     document.getElementById("kids").value = booking.kids || "";
     calculateTotalPax();
     document.getElementById("packageAmount").value = booking.packageAmount || "";
+    document.getElementById("taxAmount").value = booking.taxAmount || "0";
     document.getElementById("advanceReceived").value = booking.advanceReceived || "";
     document.getElementById("balanceAmount").value = booking.balanceAmount || "";
     document.getElementById("advanceMode").value = booking.advanceMode || "";
@@ -1785,24 +1785,51 @@ window.toggleCustomHouseboatName =
     toggleCustomHouseboatName;
 
 window.renderBookingPage = renderBookingPage;
+
 document.addEventListener("DOMContentLoaded", function () {
+
     bookingStatusChanged();
 
-    // Recalculate total when any amount changes
+    // Automatically calculate 5% tax when Package Amount changes
+    const packageInput = document.getElementById("packageAmount");
+    const taxInput = document.getElementById("taxAmount");
+
+    if (packageInput && taxInput) {
+
+        packageInput.addEventListener("input", function () {
+            const amount = Number(packageInput.value) || 0;
+            taxInput.value = (amount * 0.05).toFixed(2);
+            calculateBalance();
+        });
+
+        // Allow manual tax changes
+        taxInput.addEventListener("input", calculateBalance);
+    }
+
+    // Recalculate totals when other amounts change
     [
-        "packageAmount",
         "advanceReceived",
         "taxiAmount",
         "taxiAdvance",
         "accommodationAmount",
         "accommodationAdvance"
     ].forEach(function (id) {
+
         const field = document.getElementById(id);
 
         if (field) {
             field.addEventListener("input", calculateBalance);
         }
     });
+
+    // Recalculate when additional services change
+    document.getElementById("taxiRequired")
+        ?.addEventListener("change", calculateBalance);
+
+    document.getElementById("accommodationRequired")
+        ?.addEventListener("change", calculateBalance);
+
+});
 
     // Recalculate total when Taxi or Accommodation selection changes
     document.getElementById("taxiRequired")
