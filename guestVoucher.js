@@ -300,6 +300,57 @@ setValue(
 
 
     // ==========================================
+    // ACCOMMODATION DETAILS
+    // ==========================================
+
+    const accommodationSection =
+        document.getElementById("accommodationVoucherSection");
+
+    if (
+        accommodationSection &&
+        booking.accommodationRequired === "Yes"
+    ) {
+
+        accommodationSection.style.display = "block";
+
+        setValue(
+            "voucherAccommodationType",
+            booking.accommodationType || ""
+        );
+
+        setValue(
+            "voucherAccommodationProperty",
+            booking.accommodationProperty || ""
+        );
+
+        setValue(
+            "voucherAccommodationCheckIn",
+            booking.accommodationCheckIn || ""
+        );
+
+        setValue(
+            "voucherAccommodationCheckOut",
+            booking.accommodationCheckOut || ""
+        );
+
+        setValue(
+            "voucherAccommodationNights",
+            booking.accommodationNights || ""
+        );
+
+        setValue(
+            "voucherAccommodationItinerary",
+            booking.accommodationItinerary || ""
+        );
+
+    } else if (accommodationSection) {
+
+        accommodationSection.style.display = "none";
+
+    }
+
+   
+    // ==========================================
     // PAYMENT DETAILS
     // ==========================================
 
@@ -311,6 +362,11 @@ setValue(
             ? parseFloat(booking.taxiAmount) || 0
             : 0;
 
+    const accommodationAmount =
+        booking.accommodationRequired === "Yes"
+            ? parseFloat(booking.accommodationAmount) || 0
+            : 0;
+
     const houseboatAdvance =
         parseFloat(booking.advanceReceived) || 0;
 
@@ -319,45 +375,38 @@ setValue(
             ? parseFloat(booking.taxiAdvance) || 0
             : 0;
 
+    const accommodationAdvance =
+        booking.accommodationRequired === "Yes"
+            ? parseFloat(booking.accommodationAdvance) || 0
+            : 0;
 
-    // Total
+    // Total of all selected services
     const totalAmount =
-        packageAmount + taxiAmount;
+        packageAmount +
+        taxiAmount +
+        accommodationAmount;
 
-
-    // Total advance
+    // Total advance received
     const totalAdvance =
-        houseboatAdvance + taxiAdvance;
-
+        houseboatAdvance +
+        taxiAdvance +
+        accommodationAdvance;
 
     // Final balance
     const finalBalance =
         totalAmount - totalAdvance;
 
-
     // Package Amount
-    setValue(
-        "packageAmount",
-        money(packageAmount)
-    );
+    setValue("packageAmount", money(packageAmount));
 
-
-    // Transportation Charges
+    // Taxi Charges
     const taxiChargesLine =
         document.getElementById("taxiChargesLine");
 
-    if (
-        taxiChargesLine &&
-        booking.taxiRequired === "Yes" &&
-        taxiAmount > 0
-    ) {
+    if (taxiChargesLine && booking.taxiRequired === "Yes" && taxiAmount > 0) {
 
         taxiChargesLine.style.display = "block";
-
-        setValue(
-            "taxiCharges",
-            money(taxiAmount)
-        );
+        setValue("taxiCharges", money(taxiAmount));
 
     } else if (taxiChargesLine) {
 
@@ -365,72 +414,63 @@ setValue(
 
     }
 
+    // Accommodation Charges
+    const accommodationChargesLine =
+        document.getElementById("accommodationChargesLine");
+
+    if (
+        accommodationChargesLine &&
+        booking.accommodationRequired === "Yes" &&
+        accommodationAmount > 0
+    ) {
+
+        accommodationChargesLine.style.display = "block";
+        setValue("accommodationCharges", money(accommodationAmount));
+
+    } else if (accommodationChargesLine) {
+
+        accommodationChargesLine.style.display = "none";
+
+    }
 
     // Total Amount
-    setValue(
-        "totalAmount",
-        money(totalAmount)
-    );
-// ==========================================
-// SHOW TOTAL AMOUNT ONLY WHEN TAXI IS USED
-// ==========================================
+    setValue("totalAmount", money(totalAmount));
 
-const totalAmountLine =
-    document.getElementById("totalAmountLine");
+    // Show Total Amount when either additional service is used
+    const totalAmountLine =
+        document.getElementById("totalAmountLine");
 
-if (totalAmountLine) {
+    if (totalAmountLine) {
 
-    if (
-        booking.taxiRequired === "Yes" &&
-        taxiAmount > 0
-    ) {
-        totalAmountLine.style.display = "block";
-    } else {
-        totalAmountLine.style.display = "none";
+        totalAmountLine.style.display =
+            (taxiAmount > 0 || accommodationAmount > 0)
+                ? "block"
+                : "none";
+
     }
-
-}
 
     // Advance Received
-    setValue(
-        "advance",
-        money(totalAdvance)
-    );
+    setValue("advance", money(totalAdvance));
 
-
-    // Payment Mode
+    // Payment Modes
     let paymentModes = [];
 
-    if (
-        houseboatAdvance > 0 &&
-        booking.advanceMode
-    ) {
-        paymentModes.push(
-            booking.advanceMode
-        );
+    if (houseboatAdvance > 0 && booking.advanceMode) {
+        paymentModes.push(booking.advanceMode);
     }
 
-    if (
-        taxiAdvance > 0 &&
-        booking.taxiPaymentMode
-    ) {
-        paymentModes.push(
-            booking.taxiPaymentMode
-        );
+    if (taxiAdvance > 0 && booking.taxiPaymentMode) {
+        paymentModes.push(booking.taxiPaymentMode);
     }
 
-    setValue(
-        "advanceMode",
-        paymentModes.join(" / ")
-    );
+    if (accommodationAdvance > 0 && booking.accommodationPaymentMode) {
+        paymentModes.push(booking.accommodationPaymentMode);
+    }
 
+    setValue("advanceMode", paymentModes.join(" / "));
 
     // Balance Amount
-    setValue(
-        "balance",
-        money(finalBalance)
-    );
-
+    setValue("balance", money(finalBalance));
 
     // ==========================================
     // PACKAGE INSTRUCTIONS & TERMS
