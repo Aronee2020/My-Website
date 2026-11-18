@@ -1830,12 +1830,3 @@ document.addEventListener("DOMContentLoaded", function () {
         ?.addEventListener("change", calculateBalance);
 
 });
-
-    // Recalculate total when Taxi or Accommodation selection changes
-    document.getElementById("taxiRequired")
-        ?.addEventListener("change", calculateBalance);
-
-    document.getElementById("accommodationRequired")
-        ?.addEventListener("change", calculateBalance);
-});
-
