@@ -530,17 +530,19 @@ readonly>
      TAXI SERVICE SECTION
 ========================================== -->
 
+
 <div id="taxiSection" style="display:none;">
 
     <div class="section-title">
-        🚕 Taxi Service Details
+        Taxi Service Details
     </div>
 
+    <!-- ROW 1: TAXI DETAILS -->
     <div class="row">
 
-        <div class="col-md-6">
+        <div class="col-md-4">
             <label>Taxi Service Type</label>
-            <select id="taxiServiceType">
+            <select id="taxiServiceType" class="form-select">
                 <option value="">Select Type</option>
                 <option value="One Way">One Way</option>
                 <option value="Round Trip">Round Trip</option>
@@ -549,9 +551,9 @@ readonly>
             </select>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
             <label>Vehicle Type</label>
-            <select id="taxiVehicleType">
+            <select id="taxiVehicleType" class="form-select">
                 <option value="">Select Vehicle</option>
                 <option value="Etios">Etios</option>
                 <option value="Innova">Innova</option>
@@ -561,51 +563,52 @@ readonly>
             </select>
         </div>
 
-    </div>
-
-    <div class="row">
-
-        <div class="col-md-6">
+        <div class="col-md-4">
             <label>No. of Passengers</label>
-            <input type="number" id="taxiPassengers" min="1">
-        </div>
-
-        <div class="col-md-6">
-            <label>Taxi Amount</label>
-<input type="number" id="taxiAmount" min="0" step="0.01"
-       oninput="calculateTaxiBalance(); calculateBalance()">
+            <input type="number" id="taxiPassengers"
+                   class="form-control" min="1">
         </div>
 
     </div>
 
-    <div class="row">
+    <!-- ROW 2: TAXI PAYMENT DETAILS -->
+    <div class="row mt-3">
 
-        <div class="col-md-6">
-            <label>Taxi Advance</label>
-<input type="number" id="taxiAdvance" min="0" step="0.01"
-       oninput="calculateTaxiBalance(); calculateBalance()">
+        <div class="col">
+            <label>Taxi Amount (₹)</label>
+            <input type="number" id="taxiAmount"
+                   class="form-control" min="0" step="0.01"
+                   oninput="calculateTaxiBalance(); calculateBalance()">
         </div>
 
-        <div class="col-md-6">
-            <label>Taxi Balance</label>
-            <input type="number" id="taxiBalance" readonly>
+        <div class="col">
+            <label>Taxi Advance (₹)</label>
+            <input type="number" id="taxiAdvance"
+                   class="form-control" min="0" step="0.01"
+                   oninput="calculateTaxiBalance(); calculateBalance()">
         </div>
 
-    </div>
+        <div class="col">
+            <label>Taxi Balance (₹)</label>
+            <input type="number" id="taxiBalance"
+                   class="form-control" readonly>
+        </div>
 
-    <div class="row">
-
-        <div class="col-md-6">
+        <div class="col">
             <label>Payment Mode</label>
-            <select id="taxiPaymentMode">
-                <option value="">Select Payment Mode</option>
-                C
+            <select id="taxiPaymentMode" class="form-select">
+                <option value="">Select Mode</option>
+                <option value="Cash">Cash</option>
+                <option value="UPI">UPI</option>
+                <option value="Bank Transfer">Bank Transfer</option>
+                <option value="Card">Card</option>
+                <option value="Other">Other</option>
             </select>
         </div>
 
-        <div class="col-md-6">
+        <div class="col">
             <label>Taxi Status</label>
-            <select id="taxiStatus">
+            <select id="taxiStatus" class="form-select">
                 <option value="Pending">Pending</option>
                 <option value="Confirmed">Confirmed</option>
                 <option value="Completed">Completed</option>
@@ -615,24 +618,23 @@ readonly>
 
     </div>
 
-    <div class="row">
+    <!-- ROW 3: ITINERARY AND REMARKS -->
+    <div class="row mt-3">
 
-        <div class="col-md-12">
+        <div class="col-md-6">
             <label>Taxi Itinerary</label>
             <textarea id="taxiItinerary"
-                      rows="5"
+                      class="form-control"
+                      rows="4"
                       placeholder="Enter complete taxi itinerary..."></textarea>
         </div>
 
-    </div>
-
-    <div class="row">
-
-        <div class="col-md-12">
+        <div class="col-md-6">
             <label>Taxi Remarks</label>
             <textarea id="taxiRemarks"
-                      rows="3"
-                      placeholder="Additional taxi details..."></textarea>
+                      class="form-control"
+                      rows="4"
+                      placeholder="Enter additional taxi details..."></textarea>
         </div>
 
     </div>
