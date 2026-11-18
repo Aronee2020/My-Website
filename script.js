@@ -441,6 +441,10 @@ function calculateBalance() {
     const taxAmount =
         Number(document.getElementById("taxAmount").value) || 0;
 
+    const packageTotal = packageAmount + taxAmount;
+
+document.getElementById("packageTotalAmount").value =
+    packageTotal.toFixed(2);
     const houseboatAdvance =
         Number(document.getElementById("advanceReceived").value) || 0;
 
