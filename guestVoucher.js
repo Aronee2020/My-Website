@@ -397,16 +397,13 @@ const taxAmount = parseFloat(booking.taxAmount) || 0;
     // Package Amount
     setValue("packageAmount", money(packageAmount));
 // Tax
-const taxAmount = parseFloat(booking.taxAmount) || 0;
-
 setValue("taxAmount", money(taxAmount));
 
 const taxLine = document.getElementById("taxLine");
 
 if (taxLine) {
     taxLine.style.display = taxAmount > 0 ? "block" : "none";
-}
-    // Taxi Charges
+}    // Taxi Charges
     const taxiChargesLine =
         document.getElementById("taxiChargesLine");
 
