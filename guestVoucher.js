@@ -402,8 +402,9 @@ setValue("taxAmount", money(taxAmount));
 const taxLine = document.getElementById("taxLine");
 
 if (taxLine) {
-    taxLine.style.display = taxAmount > 0 ? "block" : "none";
-}    // Taxi Charges
+    taxLine.style.display = taxAmount > 0 ? "grid" : "none";
+}
+    // Taxi Charges
     const taxiChargesLine =
         document.getElementById("taxiChargesLine");
 
