@@ -356,7 +356,8 @@ setValue(
 
     const packageAmount =
         parseFloat(booking.packageAmount) || 0;
-
+const taxAmount = parseFloat(booking.taxAmount) || 0;
+    
     const taxiAmount =
         booking.taxiRequired === "Yes"
             ? parseFloat(booking.taxiAmount) || 0
@@ -381,10 +382,7 @@ setValue(
             : 0;
 
     // Total of all selected services
-    const totalAmount =
-        packageAmount +
-        taxiAmount +
-        accommodationAmount;
+   const totalAmount = packageAmount + taxAmount + taxiAmount + accommodationAmount;
 
     // Total advance received
     const totalAdvance =
@@ -398,7 +396,16 @@ setValue(
 
     // Package Amount
     setValue("packageAmount", money(packageAmount));
+// Tax
+const taxAmount = parseFloat(booking.taxAmount) || 0;
 
+setValue("taxAmount", money(taxAmount));
+
+const taxLine = document.getElementById("taxLine");
+
+if (taxLine) {
+    taxLine.style.display = taxAmount > 0 ? "block" : "none";
+}
     // Taxi Charges
     const taxiChargesLine =
         document.getElementById("taxiChargesLine");
